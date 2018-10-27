@@ -1,0 +1,32 @@
+.race-list {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .race-list {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .race-list {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .race-list {
+    margin-left: 160px;
+    margin-right: 160px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .race-list {
+    margin-left: 320px;
+    margin-right: 320px;
+  }
+}

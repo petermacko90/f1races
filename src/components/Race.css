@@ -1,0 +1,53 @@
+.race {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.striped {
+  background-color: #D3D3D3;
+}
+
+.upcoming {
+  background-color: #cc6666;
+}
+
+.round {
+  display: inline-block;
+  width: 10%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.location {
+  display: inline-block;
+  width: 45%;
+}
+
+.date-time {
+  display: inline-block;
+  width: 45%;
+  padding-right: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .round {
+    display: none;
+  }
+
+  .location {
+    width: 60%;
+    padding-left: 10px;
+  }
+
+  .date-time {
+    width: 40%;
+  }
+
+  .date {
+    width: 100%;
+  }
+  
+  .time {
+    display: none;
+  }
+}
