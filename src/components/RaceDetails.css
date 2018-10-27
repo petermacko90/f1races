@@ -1,0 +1,46 @@
+.race-details {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+@media only screen and (min-width: 600px) {
+  .race-details {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .race-details {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .race-details {
+    margin-left: 160px;
+    margin-right: 160px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .race-details {
+    margin-left: 320px;
+    margin-right: 320px;
+  }
+}
+
+.back-button {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  background-color: #999933;
+  color: #FFFACD;
+}
+
+.back-button:hover {
+  background-color: #737326;
+  cursor: pointer;
+}

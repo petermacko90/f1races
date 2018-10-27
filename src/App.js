@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import RaceList from './components/RaceList';
+import RaceDetails from './components/RaceDetails';
 import './App.css';
 
 class App extends Component {
@@ -8,6 +9,7 @@ class App extends Component {
     this.state = {
       races: [],
       upcomingRace: '',
+      selectedRace: null,
       isLoading: false,
       error: null
     };
@@ -38,8 +40,15 @@ class App extends Component {
       });
   }
 
+  onSelectRace = (raceRound) => (e) => {
+    const i = this.state.races.findIndex((race) => {
+      return Number(race.round) === Number(raceRound);
+    });
+    this.setState({ selectedRace: this.state.races[i] });
+  }
+
   render() {
-    const { races, upcomingRace, isLoading, error } = this.state;
+    const { races, upcomingRace, selectedRace, isLoading, error } = this.state;
 
     return (
       <Fragment>
@@ -51,7 +60,16 @@ class App extends Component {
           error &&
             <p className='message'>An error occured while retrieving data.</p>
         }
-        <RaceList races={races} upcomingRace={upcomingRace} />
+        {
+          selectedRace ?
+            <RaceDetails race={selectedRace} selectRace={this.onSelectRace} />
+          :
+            <RaceList
+              races={races}
+              upcomingRace={upcomingRace}
+              selectRace={this.onSelectRace}
+            />
+        }
       </Fragment>
     );
   }
