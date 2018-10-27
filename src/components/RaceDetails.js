@@ -1,4 +1,6 @@
 import React from 'react';
+import LocalDate from './LocalDate';
+import LocalTime from './LocalTime';
 import './RaceDetails.css';
 
 const RaceDetails = ({ race, selectRace }) => {
@@ -12,6 +14,9 @@ const RaceDetails = ({ race, selectRace }) => {
       <p>Round: {race.round}</p>
       <p>
         Location: {race.Circuit.Location.country}, {race.Circuit.Location.locality}
+      </p>
+      <p>
+        Date and time: <LocalDate date={race.date} time={race.time} /> <LocalTime date={race.date} time={race.time} />
       </p>
     </div>
   );

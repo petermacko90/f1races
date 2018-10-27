@@ -1,5 +1,6 @@
 import React from 'react';
-import DateTime from './DateTime';
+import LocalDate from './LocalDate';
+import LocalTime from './LocalTime';
 import './Race.css';
 
 const Race = ({
@@ -14,7 +15,12 @@ const Race = ({
       <span className='round'>{round}.</span>
       <span className='location'>{country}, {locality}</span>
       <span className='date-time'>
-        <DateTime date={date} time={time} />
+        <span className='date'>
+          <LocalDate date={date} time={time} />
+        </span>
+        <span className='time'>
+          <LocalTime date={date} time={time} />
+        </span>
       </span>
     </div>
   );
