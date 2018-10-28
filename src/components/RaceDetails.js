@@ -18,6 +18,14 @@ const RaceDetails = ({ race, selectRace }) => {
       <p>
         Date and time: <LocalDate date={race.date} time={race.time} /> <LocalTime date={race.date} time={race.time} />
       </p>
+      <p>Race name: {race.raceName}</p>
+      <p>Race URL: <a href={race.url} target='_blank' rel='noopener noreferrer'>
+        {race.url}
+      </a></p>
+      <p>Circuit name: {race.Circuit.circuitName}</p>
+      <p>Circuit URL: <a href={race.Circuit.url} target='_blank' rel='noopener noreferrer'>
+        {race.Circuit.url}
+      </a></p>
     </div>
   );
 }

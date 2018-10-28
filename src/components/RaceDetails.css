@@ -1,6 +1,8 @@
 .race-details {
   padding-top: 10px;
   padding-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 @media only screen and (min-width: 600px) {
