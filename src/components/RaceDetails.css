@@ -46,3 +46,7 @@
   background-color: #737326;
   cursor: pointer;
 }
+
+.break-word {
+  word-break: break-all;
+}
