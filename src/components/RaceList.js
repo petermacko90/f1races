@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Race from './Race';
 import './RaceList.css';
 
@@ -25,5 +26,12 @@ const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
     </div>
   );
 }
+
+RaceList.propTypes = {
+  races: PropTypes.array.isRequired,
+  upcomingRace: PropTypes.string.isRequired,
+  onClickRace: PropTypes.func.isRequired,
+  onEnterRace: PropTypes.func.isRequired
+};
 
 export default RaceList;

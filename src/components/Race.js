@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
 import './Race.css';
@@ -27,5 +28,16 @@ const Race = ({
     </div>
   );
 }
+
+Race.propTypes = {
+  round: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  locality: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  upcomingRace: PropTypes.bool.isRequired,
+  onClickRace: PropTypes.func.isRequired,
+  onEnterRace: PropTypes.func.isRequired
+};
 
 export default Race;

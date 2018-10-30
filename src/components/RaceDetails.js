@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
 import './RaceDetails.css';
@@ -31,5 +32,10 @@ const RaceDetails = ({ race, onClickRace }) => {
     </div>
   );
 }
+
+RaceDetails.propTypes = {
+  race: PropTypes.object.isRequired,
+  onClickRace: PropTypes.func.isRequired
+};
 
 export default RaceDetails;
