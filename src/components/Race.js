@@ -4,14 +4,16 @@ import LocalTime from './LocalTime';
 import './Race.css';
 
 const Race = ({
-  round, country, locality, date, time, upcomingRace, selectRace
+  round, country, locality, date, time, upcomingRace,
+  onClickRace, onEnterRace
 }) => {
   const striped = Number(round) % 2 === 1 ? ' striped' : '';
   const upcoming = upcomingRace ? ' upcoming' : '';
 
   return (
-    <div className={'race unselectable' + striped + upcoming}
-    onClick={selectRace(round)} title='Show details'>
+    <div className={'race unselectable' + striped + upcoming} tabIndex='0'
+    onClick={onClickRace(round)} onKeyPress={onEnterRace(round)}
+    title='Show details'>
       <span className='round'>{round}.</span>
       <span className='location'>{country}, {locality}</span>
       <span className='date-time'>

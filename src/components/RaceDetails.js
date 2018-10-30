@@ -3,10 +3,10 @@ import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
 import './RaceDetails.css';
 
-const RaceDetails = ({ race, selectRace }) => {
+const RaceDetails = ({ race, onClickRace }) => {
   return (
     <div className='race-details'>
-      <button type='button' onClick={selectRace(null)} className='back-button'>
+      <button type='button' onClick={onClickRace(null)} className='back-button'>
         &lt; Back to all races
       </button>
       <h2>Race Details</h2>

@@ -2,7 +2,7 @@ import React from 'react';
 import Race from './Race';
 import './RaceList.css';
 
-const RaceList = ({ races, upcomingRace, selectRace }) => {
+const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
   return (
     <div className="race-list">
       {
@@ -16,7 +16,8 @@ const RaceList = ({ races, upcomingRace, selectRace }) => {
               date={race.date}
               time={race.time}
               upcomingRace={Number(race.round) === Number(upcomingRace)}
-              selectRace={selectRace}
+              onClickRace={onClickRace}
+              onEnterRace={onEnterRace}
             />
           );
         })

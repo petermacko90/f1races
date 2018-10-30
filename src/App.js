@@ -40,7 +40,17 @@ class App extends Component {
       });
   }
 
-  onSelectRace = (raceRound) => (e) => {
+  onClickRace = (raceRound) => (e) => {
+    this.selectRace(raceRound);
+  }
+
+  onEnterRace = (raceRound) => (e) => {
+    if (e.key === 'Enter') {
+      this.selectRace(raceRound);
+    }
+  }
+
+  selectRace = (raceRound) => {
     const i = this.state.races.findIndex((race) => {
       return Number(race.round) === Number(raceRound);
     });
@@ -62,12 +72,13 @@ class App extends Component {
         }
         {
           selectedRace ?
-            <RaceDetails race={selectedRace} selectRace={this.onSelectRace} />
+            <RaceDetails race={selectedRace} onClickRace={this.onClickRace} />
           :
             <RaceList
               races={races}
               upcomingRace={upcomingRace}
-              selectRace={this.onSelectRace}
+              onClickRace={this.onClickRace}
+              onEnterRace={this.onEnterRace}
             />
         }
       </Fragment>
