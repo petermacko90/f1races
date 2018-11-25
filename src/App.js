@@ -24,14 +24,19 @@ class App extends Component {
           races: data.MRData.RaceTable.Races,
           isLoading: false
         });
+        return data.MRData.RaceTable.Races;
       })
-      .then(
-        fetch('https://ergast.com/api/f1/current/next.json')
-          .then(response => response.json())
-          .then(data => {
-            this.setState({ upcomingRace: data.MRData.RaceTable.round });
-          })
-      )
+      .then(races => {
+        const lastRace = races[races.length - 1];
+        const lastRaceDate = new Date(lastRace.date + ' ' + lastRace.time);
+        if (new Date() < lastRaceDate) {
+          fetch('https://ergast.com/api/f1/current/next.json')
+            .then(response => response.json())
+            .then(data => {
+              this.setState({ upcomingRace: data.MRData.RaceTable.round });
+            });
+        }
+      })
       .catch(error => {
         this.setState({
           error,
