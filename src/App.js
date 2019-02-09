@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch('https://ergast.com/api/f1/current.json')
+    fetch('http://ergast.com/api/f1/current.json')
       .then(response => response.json())
       .then(data => {
         this.setState({
@@ -30,7 +30,7 @@ class App extends Component {
         const lastRace = races[races.length - 1];
         const lastRaceDate = new Date(lastRace.date + ' ' + lastRace.time);
         if (new Date() < lastRaceDate) {
-          fetch('https://ergast.com/api/f1/current/next.json')
+          fetch('http://ergast.com/api/f1/current/next.json')
             .then(response => response.json())
             .then(data => {
               this.setState({ upcomingRace: data.MRData.RaceTable.round });

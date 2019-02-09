@@ -6,7 +6,7 @@ import './RaceDetails.css';
 
 const RaceDetails = ({ race, onClickRace }) => {
   return (
-    <div className='race-details'>
+    <div className='race-details container'>
       <button type='button' onClick={onClickRace(null)} className='back-button'>
         &lt; Back to all races
       </button>

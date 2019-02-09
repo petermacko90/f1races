@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Race from './Race';
-import './RaceList.css';
 
 const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
   return (
-    <div className="race-list">
+    <div className='container'>
       {
         races.map(race => {
           return (
