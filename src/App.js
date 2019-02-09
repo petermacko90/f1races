@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { fetchCurrentRaces, fetchNextRace } from './api';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import './App.css';
@@ -17,8 +18,7 @@ class App extends Component {
 
   componentDidMount() {
     this.setState({ isLoading: true });
-    fetch('http://ergast.com/api/f1/current.json')
-      .then(response => response.json())
+    fetchCurrentRaces()
       .then(data => {
         this.setState({
           races: data.MRData.RaceTable.Races,
@@ -30,8 +30,7 @@ class App extends Component {
         const lastRace = races[races.length - 1];
         const lastRaceDate = new Date(lastRace.date + ' ' + lastRace.time);
         if (new Date() < lastRaceDate) {
-          fetch('http://ergast.com/api/f1/current/next.json')
-            .then(response => response.json())
+          fetchNextRace()
             .then(data => {
               this.setState({ upcomingRace: data.MRData.RaceTable.round });
             });
@@ -45,7 +44,7 @@ class App extends Component {
       });
   }
 
-  onClickRace = (raceRound) => (e) => {
+  onClickRace = (raceRound) => () => {
     this.selectRace(raceRound);
   }
 
