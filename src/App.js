@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { fetchCurrentRaces, fetchNextRace } from './api';
+import { fetchCurrentRaces, fetchNextRace, fetchRaceResults } from './api';
+import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import './App.css';
@@ -9,10 +10,12 @@ class App extends Component {
     super();
     this.state = {
       races: [],
+      isLoading: false,
+      error: null,
       upcomingRace: '',
       selectedRace: null,
-      isLoading: false,
-      error: null
+      results: {},
+      resultsError: null
     };
   }
 
@@ -44,6 +47,24 @@ class App extends Component {
       });
   }
 
+  getRaceResults = (season, round) => () => {
+    const { results } = this.state;
+
+    fetchRaceResults(season, round)
+      .then(data => {
+        let res = {
+          ['s' + season]: {
+            ['r' + round]: data.MRData.RaceTable.Races[0].Results
+          }
+        };
+        this.setState({
+          results: deepmerge(results, res),
+          resultsError: null
+        });
+      })
+      .catch(err => this.setState({ resultsError: err }));
+  }
+
   onClickRace = (raceRound) => () => {
     this.selectRace(raceRound);
   }
@@ -62,7 +83,15 @@ class App extends Component {
   }
 
   render() {
-    const { races, upcomingRace, selectedRace, isLoading, error } = this.state;
+    const {
+      races, isLoading, error, upcomingRace, selectedRace,
+      results, resultsError
+    } = this.state;
+    let raceResults;
+
+    if (selectedRace && results['s' + selectedRace.season]) {
+      raceResults = results['s' + selectedRace.season]['r' + selectedRace.round];
+    }
 
     return (
       <Fragment>
@@ -76,7 +105,13 @@ class App extends Component {
         }
         {
           selectedRace ?
-            <RaceDetails race={selectedRace} onClickRace={this.onClickRace} />
+            <RaceDetails
+              race={selectedRace}
+              results={raceResults}
+              resultsError={resultsError}
+              onClickRace={this.onClickRace}
+              getRaceResults={this.getRaceResults}
+            />
           :
             <RaceList
               races={races}

@@ -1,18 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import RaceResults from './RaceResults';
 import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
 import './RaceDetails.css';
 
-const RaceDetails = ({ race, onClickRace }) => {
+const RaceDetails = ({
+  race, results, resultsError, onClickRace, getRaceResults
+}) => {
+  const { season, round } = race;
+
   return (
     <div className='race-details container'>
       <button type='button' onClick={onClickRace(null)} className='back-button'>
         &lt; Back to all races
       </button>
       <h2>Race Details</h2>
-      <p>Season: {race.season}</p>
-      <p>Round: {race.round}</p>
+      <p>Season: {season}</p>
+      <p>Round: {round}</p>
       <p>
         Location: {race.Circuit.Location.country}, {race.Circuit.Location.locality}
       </p>
@@ -29,13 +33,18 @@ const RaceDetails = ({ race, onClickRace }) => {
       target='_blank' rel='noopener noreferrer'>
         {race.Circuit.url}
       </a></p>
+      {
+        results ?
+          <RaceResults results={results} />
+        :
+          <button type='button' onClick={getRaceResults(season, round)}
+          className='back-button'>
+            Load Results
+          </button>
+      }
+      { resultsError && <p>An error occured while retrieving results.</p> }
     </div>
   );
 }
-
-RaceDetails.propTypes = {
-  race: PropTypes.object.isRequired,
-  onClickRace: PropTypes.func.isRequired
-};
 
 export default RaceDetails;

@@ -58,3 +58,27 @@ code {
 .unselectable {
   user-select: none;
 }
+
+.responsiveTable {
+  overflow-x: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 10px;
+}
+
+th, tr:nth-child(even) {
+  background-color: #D3D3D3;
+}
+
+.position {
+  text-align: right;
+}
