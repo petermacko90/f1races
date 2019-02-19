@@ -79,6 +79,6 @@ th, tr:nth-child(even) {
   background-color: #D3D3D3;
 }
 
-.position {
+.tr {
   text-align: right;
 }
