@@ -107,6 +107,7 @@ class App extends Component {
           selectedRace ?
             <RaceDetails
               race={selectedRace}
+              raceCount={races.length}
               results={raceResults}
               resultsError={resultsError}
               onClickRace={this.onClickRace}

@@ -2,18 +2,34 @@ import React from 'react';
 import RaceResults from './RaceResults';
 import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
-import './RaceDetails.css';
 
 const RaceDetails = ({
-  race, results, resultsError, onClickRace, getRaceResults
+  race, raceCount, results, resultsError, onClickRace, getRaceResults
 }) => {
   const { season, round } = race;
+  const roundNum = Number(round);
 
   return (
     <div className='race-details container'>
-      <button type='button' onClick={onClickRace(null)} className='back-button'>
+      <button type='button' onClick={onClickRace(null)} className='button'>
         &lt; Back to all races
       </button>
+      <div className='prev-next'>
+        {
+          roundNum !== 1 &&
+            <button className='button button-left'
+            onClick={onClickRace(roundNum - 1)}>
+              &#8678; Previous Race
+            </button>
+        }
+        {
+          roundNum !== raceCount &&
+            <button className='button button-right'
+            onClick={onClickRace(roundNum + 1)}>
+              Next Race &#8680;
+            </button>
+        }
+      </div>
       <h2>Race Details</h2>
       <p>Season: {season}</p>
       <p>Round: {round}</p>
@@ -38,7 +54,7 @@ const RaceDetails = ({
           <RaceResults results={results} />
         :
           <button type='button' onClick={getRaceResults(season, round)}
-          className='back-button'>
+          className='button'>
             Load Results
           </button>
       }
