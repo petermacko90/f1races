@@ -4,12 +4,12 @@ const fetchData = (url) => {
   return fetch(url).then(response => response.json());
 }
 
-export const fetchCurrentRaces = () => {
-  return fetchData(urlBase + 'current.json');
+export const fetchRaces = (season) => {
+  return fetchData(`${urlBase}${season}.json`)
 }
 
-export const fetchNextRace = () => {
-  return fetchData(urlBase + 'current/next.json');
+export const fetchNextRace = (season) => {
+  return fetchData(`${urlBase}${season}/next.json`);
 }
 
 export const fetchRaceResults = (season, round) => {
