@@ -53,11 +53,16 @@ class App extends Component {
 
     fetchRaceResults(season, round)
       .then(data => {
+        if (data.MRData.RaceTable.Races.length === 0) {
+          throw Error('No data available');
+        }
+
         let res = {
           ['s' + season]: {
             ['r' + round]: data.MRData.RaceTable.Races[0].Results
           }
         };
+
         this.setState({
           results: deepmerge(results, res),
           resultsError: null

@@ -58,7 +58,7 @@ const RaceDetails = ({
             Load Results
           </button>
       }
-      { resultsError && <p>An error occured while retrieving results.</p> }
+      { resultsError && <p>{resultsError.message}</p> }
     </div>
   );
 }
