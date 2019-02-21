@@ -85,7 +85,10 @@ class App extends Component {
     const i = this.state.races.findIndex((race) => {
       return Number(race.round) === Number(raceRound);
     });
-    this.setState({ selectedRace: this.state.races[i] });
+    this.setState({
+      selectedRace: this.state.races[i],
+      resultsError: null
+    });
   }
 
   render() {
