@@ -58,8 +58,8 @@ class App extends Component {
         }
 
         let res = {
-          ['s' + season]: {
-            ['r' + round]: data.MRData.RaceTable.Races[0].Results
+          [season]: {
+            [round]: data.MRData.RaceTable.Races[0].Results
           }
         };
 
@@ -98,8 +98,8 @@ class App extends Component {
     } = this.state;
     let raceResults;
 
-    if (selectedRace && results['s' + selectedRace.season]) {
-      raceResults = results['s' + selectedRace.season]['r' + selectedRace.round];
+    if (selectedRace && results[selectedRace.season]) {
+      raceResults = results[selectedRace.season][selectedRace.round];
     }
 
     return (
