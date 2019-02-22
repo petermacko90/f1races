@@ -26,11 +26,4 @@ const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
   );
 }
 
-RaceList.propTypes = {
-  races: PropTypes.array.isRequired,
-  upcomingRace: PropTypes.string.isRequired,
-  onClickRace: PropTypes.func.isRequired,
-  onEnterRace: PropTypes.func.isRequired
-};
-
 export default RaceList;

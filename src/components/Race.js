@@ -28,15 +28,4 @@ const Race = ({
   );
 }
 
-Race.propTypes = {
-  round: PropTypes.string.isRequired,
-  country: PropTypes.string.isRequired,
-  locality: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  time: PropTypes.string.isRequired,
-  upcomingRace: PropTypes.bool.isRequired,
-  onClickRace: PropTypes.func.isRequired,
-  onEnterRace: PropTypes.func.isRequired
-};
-
 export default Race;
