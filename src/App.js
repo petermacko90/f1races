@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { fetchRaces, fetchNextRace, fetchRaceResults } from './api';
+import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
@@ -27,24 +27,8 @@ class App extends Component {
           races: data.MRData.RaceTable.Races,
           isLoading: false
         });
-        return data.MRData.RaceTable.Races;
       })
-      .then(races => {
-        const lastRace = races[races.length - 1];
-        const lastRaceDate = new Date(lastRace.date + ' ' + lastRace.time);
-        if (new Date() < lastRaceDate) {
-          fetchNextRace(this.state.season)
-            .then(data => {
-              this.setState({ upcomingRace: data.MRData.RaceTable.round });
-            });
-        }
-      })
-      .catch(error => {
-        this.setState({
-          error,
-          isLoading: false
-        });
-      });
+      .catch(error => this.setState({ error, isLoading: false }));
   }
 
   getRaceResults = (season, round) => () => {

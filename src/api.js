@@ -8,10 +8,6 @@ export const fetchRaces = (season) => {
   return fetchData(`${urlBase}${season}.json`)
 }
 
-export const fetchNextRace = (season) => {
-  return fetchData(`${urlBase}${season}/next.json`);
-}
-
 export const fetchRaceResults = (season, round) => {
   return fetchData(`${urlBase}${season}/${round}/results.json`);
 }
