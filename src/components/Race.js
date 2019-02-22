@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LocalDate from './LocalDate';
 import LocalTime from './LocalTime';
-import './Race.css';
 
 const Race = ({
   round, country, locality, date, time, upcomingRace,

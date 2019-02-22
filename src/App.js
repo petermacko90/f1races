@@ -3,7 +3,6 @@ import { fetchRaces, fetchNextRace, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
-import './App.css';
 
 class App extends Component {
   constructor() {
