@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Race from './Race';
 
 const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
