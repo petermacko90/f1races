@@ -22,6 +22,10 @@ class App extends Component {
     this.setState({ isLoading: true });
     fetchRaces(this.state.season)
       .then(data => {
+        if (data.MRData.RaceTable.Races.length === 0) {
+          throw Error('No data available');
+        }
+
         this.setState({
           races: data.MRData.RaceTable.Races,
           isLoading: false
@@ -100,11 +104,6 @@ class App extends Component {
         <header>
           <h1>F1 Races</h1>
         </header>
-        { isLoading && <p className='message'>Loading...</p> }
-        {
-          error &&
-            <p className='message'>An error occured while retrieving data.</p>
-        }
         {
           selectedRace ?
             <RaceDetails
@@ -119,6 +118,8 @@ class App extends Component {
             <RaceList
               races={races}
               upcomingRace={upcomingRace}
+              isLoading={isLoading}
+              error={error}
               onClickRace={this.onClickRace}
               onEnterRace={this.onEnterRace}
             />

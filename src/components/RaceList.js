@@ -1,9 +1,13 @@
 import React from 'react';
 import Race from './Race';
 
-const RaceList = ({ races, upcomingRace, onClickRace, onEnterRace }) => {
+const RaceList = ({
+  races, upcomingRace, isLoading, error, onClickRace, onEnterRace
+}) => {
   return (
     <div className='container'>
+      { isLoading && <p className='message'>Loading...</p> }
+      { error && <p className='message'>{error.message}</p> }
       {
         races.map(race => {
           return (
