@@ -1,6 +1,4 @@
 import React from 'react';
-import LocalDate from './LocalDate';
-import LocalTime from './LocalTime';
 
 const Race = ({
   round, country, locality, date, time, upcomingRace,
@@ -8,6 +6,7 @@ const Race = ({
 }) => {
   const striped = Number(round) % 2 === 1 ? ' striped' : '';
   const upcoming = upcomingRace ? ' upcoming' : '';
+  const dateTime = time ? new Date(date + ' ' + time) : new Date(date);
 
   return (
     <div className={'race unselectable' + striped + upcoming} tabIndex='0'
@@ -16,12 +15,8 @@ const Race = ({
       <span className='round'>{round}.</span>
       <span className='location'>{country}, {locality}</span>
       <span className='date-time'>
-        <span className='date'>
-          <LocalDate date={date} time={time} />
-        </span>
-        <span className='time'>
-          <LocalTime date={date} time={time} />
-        </span>
+        <span className='date'>{dateTime.toLocaleDateString()}</span>
+        <span className='time'>{ time && dateTime.toLocaleTimeString() }</span>
       </span>
     </div>
   );
