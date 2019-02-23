@@ -8,7 +8,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      races: [],
+      races: {},
       isLoading: false,
       error: null,
       season: new Date().getFullYear(),
@@ -30,8 +30,9 @@ class App extends Component {
           throw Error('No data available');
         }
 
+        const newRaces = { [season]: data.MRData.RaceTable.Races };
         this.setState({
-          races: data.MRData.RaceTable.Races,
+          races: { ...this.state.races, ...newRaces },
           isLoading: false
         });
       })
@@ -87,21 +88,24 @@ class App extends Component {
 
   setSeason = (season) => {
     this.setState({ season });
-    this.getRaces(season);
+    if (!this.state.races[season]) {
+      this.getRaces(season);
+    }
   }
 
   render() {
     const {
-      races, isLoading, error, selectedRace, results, resultsError
+      isLoading, error, selectedRace, results, resultsError
     } = this.state;
     const season = Number(this.state.season);
+    const seasonRaces = this.state.races[season];
 
     const dateNow = new Date();
     let upcomingRace = '';
-    if (races && season === dateNow.getFullYear()) {
-      for (let i = 0, l = races.length; i < l; i++) {
-        if (dateNow < new Date(races[i].date + ' ' + races[i].time)) {
-          upcomingRace = races[i].round;
+    if (seasonRaces && season === dateNow.getFullYear()) {
+      for (let i = 0, l = seasonRaces.length; i < l; i++) {
+        if (dateNow < new Date(seasonRaces[i].date + ' ' + seasonRaces[i].time)) {
+          upcomingRace = seasonRaces[i].round;
           break;
         }
       }
@@ -121,7 +125,7 @@ class App extends Component {
           selectedRace ?
             <RaceDetails
               race={selectedRace}
-              raceCount={races.length}
+              raceCount={seasonRaces.length}
               results={raceResults}
               resultsError={resultsError}
               onClickRace={this.onClickRace}
@@ -129,7 +133,7 @@ class App extends Component {
             />
           :
             <RaceList
-              races={races}
+              races={seasonRaces}
               upcomingRace={upcomingRace}
               isLoading={isLoading}
               error={error}

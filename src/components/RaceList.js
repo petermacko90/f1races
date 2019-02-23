@@ -6,6 +6,7 @@ const RaceList = ({
   races, upcomingRace, isLoading, error, season,
   onSelectSeason, onClickRace, onEnterRace
 }) => {
+  if (!races) return null;
   return (
     <div className='container'>
       <SeasonSelect season={season} onSelectSeason={onSelectSeason} />
