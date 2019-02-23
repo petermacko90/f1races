@@ -1,4 +1,5 @@
 import React from 'react';
+import { getDate } from '../helpers';
 
 const Race = ({
   round, country, locality, date, time, upcomingRace,
@@ -6,7 +7,7 @@ const Race = ({
 }) => {
   const striped = Number(round) % 2 === 1 ? ' striped' : '';
   const upcoming = upcomingRace ? ' upcoming' : '';
-  const dateTime = time ? new Date(date + ' ' + time) : new Date(date);
+  const dateTime = getDate(date, time);
 
   return (
     <div className={'race unselectable' + striped + upcoming} tabIndex='0'

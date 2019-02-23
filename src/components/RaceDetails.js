@@ -1,11 +1,12 @@
 import React from 'react';
 import RaceResults from './RaceResults';
+import { getDate } from '../helpers';
 
 const RaceDetails = ({
   race, raceCount, results, resultsError, onClickRace, getRaceResults
 }) => {
-  const { season, round, date, time } = race;
-  const dateTime = time ? new Date(date + ' ' + time) : new Date(date);
+  const { season, round } = race;
+  const dateTime = getDate(race.date, race.time);
   const roundNum = Number(round);
 
   return (
@@ -36,7 +37,7 @@ const RaceDetails = ({
         Location: {race.Circuit.Location.country}, {race.Circuit.Location.locality}
       </p>
       <p>
-        Date and time: {dateTime.toLocaleDateString()} {dateTime.toLocaleTimeString()}
+        Date and time: {dateTime.toLocaleDateString()} {race.time && dateTime.toLocaleTimeString()}
       </p>
       <p>Race name: {race.raceName}</p>
       <p>Race URL: <a href={race.url} className='break-word' target='_blank'
