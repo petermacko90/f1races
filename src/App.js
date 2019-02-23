@@ -12,7 +12,6 @@ class App extends Component {
       isLoading: false,
       error: null,
       season: new Date().getFullYear(),
-      upcomingRace: '',
       selectedRace: null,
       results: {},
       resultsError: null
@@ -76,11 +75,22 @@ class App extends Component {
 
   render() {
     const {
-      races, isLoading, error, upcomingRace, selectedRace,
-      results, resultsError
+      races, isLoading, error, selectedRace, results, resultsError
     } = this.state;
-    let raceResults;
+    const dateNow = new Date();
 
+    const season = Number(this.state.season);
+    let upcomingRace = '';
+    if (races && season === dateNow.getFullYear()) {
+      for (let i = 0, l = races.length; i < l; i++) {
+        if (dateNow < new Date(races[i].date + ' ' + races[i].time)) {
+          upcomingRace = races[i].round;
+          break;
+        }
+      }
+    }
+
+    let raceResults;
     if (selectedRace && results[selectedRace.season]) {
       raceResults = results[selectedRace.season][selectedRace.round];
     }
