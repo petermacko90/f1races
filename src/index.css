@@ -122,6 +122,10 @@ th, tr:nth-child(even) {
   padding-right: 10px;
 }
 
+.season-select {
+  margin-bottom: 10px;
+}
+
 .striped {
   background-color: #D3D3D3;
 }

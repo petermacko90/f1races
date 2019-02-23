@@ -19,8 +19,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.getRaces(this.state.season);
+  }
+
+  getRaces = (season) => {
     this.setState({ isLoading: true });
-    fetchRaces(this.state.season)
+    fetchRaces(season)
       .then(data => {
         if (data.MRData.RaceTable.Races.length === 0) {
           throw Error('No data available');
@@ -77,13 +81,22 @@ class App extends Component {
     });
   }
 
+  onSelectSeason = (e) => {
+    this.setSeason(e.target.value);
+  }
+
+  setSeason = (season) => {
+    this.setState({ season });
+    this.getRaces(season);
+  }
+
   render() {
     const {
       races, isLoading, error, selectedRace, results, resultsError
     } = this.state;
-    const dateNow = new Date();
-
     const season = Number(this.state.season);
+
+    const dateNow = new Date();
     let upcomingRace = '';
     if (races && season === dateNow.getFullYear()) {
       for (let i = 0, l = races.length; i < l; i++) {
@@ -120,6 +133,8 @@ class App extends Component {
               upcomingRace={upcomingRace}
               isLoading={isLoading}
               error={error}
+              season={season}
+              onSelectSeason={this.onSelectSeason}
               onClickRace={this.onClickRace}
               onEnterRace={this.onEnterRace}
             />
