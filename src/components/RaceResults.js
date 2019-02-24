@@ -14,6 +14,7 @@ const RaceResults = ({ results }) => {
             <th>Time</th>
             <th className='tr'>Laps</th>
             <th>Status</th>
+            <th title='Points'>Pts</th>
             <th>Fastest Lap</th>
             <th title='Average Speed'>Avg Speed</th>
           </tr>
@@ -22,7 +23,7 @@ const RaceResults = ({ results }) => {
           {
             results.map(res => {
               return (
-                <tr key={res.Driver.driverId}>
+                <tr key={res.Driver.driverId + res.position}>
                   <td className='tr'>{res.position}.</td>
                   <td className='tr'>{res.grid}.</td>
                   <td>{res.Driver.givenName} {res.Driver.familyName}</td>
@@ -30,6 +31,7 @@ const RaceResults = ({ results }) => {
                   <td>{res.Time ? res.Time.time : 'N/A'}</td>
                   <td className='tr'>{res.laps}</td>
                   <td>{res.status}</td>
+                  <td>{res.points}</td>
                   <td>{res.FastestLap ? res.FastestLap.Time.time: 'N/A'}</td>
                   <td>
                     {
