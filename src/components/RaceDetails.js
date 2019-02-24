@@ -5,9 +5,8 @@ import { getDate } from '../helpers';
 const RaceDetails = ({
   race, raceCount, results, resultsError, onClickRace, getRaceResults
 }) => {
-  const { season, round } = race;
   const dateTime = getDate(race.date, race.time);
-  const roundNum = Number(round);
+  const round = Number(race.round);
 
   return (
     <div className='race-details container'>
@@ -16,22 +15,22 @@ const RaceDetails = ({
       </button>
       <div className='prev-next'>
         {
-          roundNum !== 1 &&
+          round !== 1 &&
             <button className='button button-left'
-            onClick={onClickRace(roundNum - 1)}>
+            onClick={onClickRace(round - 1)}>
               &#8678; Previous Race
             </button>
         }
         {
-          roundNum !== raceCount &&
+          round !== raceCount &&
             <button className='button button-right'
-            onClick={onClickRace(roundNum + 1)}>
+            onClick={onClickRace(round + 1)}>
               Next Race &#8680;
             </button>
         }
       </div>
       <h2>Race Details</h2>
-      <p>Season: {season}</p>
+      <p>Season: {race.season}</p>
       <p>Round: {round}</p>
       <p>
         Location: {race.Circuit.Location.country}, {race.Circuit.Location.locality}
@@ -53,7 +52,7 @@ const RaceDetails = ({
         results ?
           <RaceResults results={results} />
         :
-          <button type='button' onClick={getRaceResults(season, round)}
+          <button type='button' onClick={getRaceResults(race.season, round)}
           className='button'>
             Load Results
           </button>

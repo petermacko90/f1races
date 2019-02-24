@@ -73,11 +73,11 @@ class App extends Component {
   }
 
   selectRace = (raceRound) => {
-    const i = this.state.races.findIndex((race) => {
+    const i = this.state.races[this.state.season].findIndex((race) => {
       return Number(race.round) === Number(raceRound);
     });
     this.setState({
-      selectedRace: this.state.races[i],
+      selectedRace: this.state.races[this.state.season][i],
       resultsError: null
     });
   }

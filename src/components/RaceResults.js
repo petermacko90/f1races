@@ -22,7 +22,7 @@ const RaceResults = ({ results }) => {
           {
             results.map(res => {
               return (
-                <tr key={res.position}>
+                <tr key={res.Driver.driverId}>
                   <td className='tr'>{res.position}.</td>
                   <td className='tr'>{res.grid}.</td>
                   <td>{res.Driver.givenName} {res.Driver.familyName}</td>
