@@ -123,6 +123,7 @@ th, tr:nth-child(even) {
 }
 
 .season-select {
+  display: inline-block;
   margin-bottom: 10px;
 }
 

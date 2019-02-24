@@ -3,6 +3,7 @@ import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
+import { FIRST_SEASON } from './constants';
 
 class App extends Component {
   constructor() {
@@ -91,6 +92,13 @@ class App extends Component {
     this.setSeason(e.target.value);
   }
 
+  onChangeSeason = (change) => () => {
+    const newSeason = Number(this.state.season) + change;
+    if (newSeason >= FIRST_SEASON && newSeason <= new Date().getFullYear()) {
+      this.setSeason(newSeason);
+    }
+  }
+
   setSeason = (season) => {
     this.setState({ season });
     if (!this.state.races[season]) {
@@ -145,6 +153,7 @@ class App extends Component {
               error={error}
               season={season}
               onSelectSeason={this.onSelectSeason}
+              onChangeSeason={this.onChangeSeason}
               onClickRace={this.onClickRace}
               onEnterRace={this.onEnterRace}
             />

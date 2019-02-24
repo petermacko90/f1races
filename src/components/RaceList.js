@@ -4,12 +4,18 @@ import SeasonSelect from './SeasonSelect';
 
 const RaceList = ({
   races, upcomingRace, isLoading, error, season,
-  onSelectSeason, onClickRace, onEnterRace
+  onSelectSeason, onChangeSeason, onClickRace, onEnterRace
 }) => {
   if (!races) return null;
   return (
     <div className='container'>
       <SeasonSelect season={season} onSelectSeason={onSelectSeason} />
+      <button onClick={onChangeSeason(-1)}>
+        Previous season
+      </button>
+      <button onClick={onChangeSeason(1)}>
+        Next season
+      </button>
       { isLoading && <p className='message'>Loading...</p> }
       { error && <p className='message'>{error.message}</p> }
       {
