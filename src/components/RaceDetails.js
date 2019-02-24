@@ -3,7 +3,8 @@ import RaceResults from './RaceResults';
 import { getDate } from '../helpers';
 
 const RaceDetails = ({
-  race, raceCount, results, resultsError, onClickRace, getRaceResults
+  race, raceCount, results, isLoadingResults, resultsError,
+  onClickRace, getRaceResults
 }) => {
   const dateTime = getDate(race.date, race.time);
   const round = Number(race.round);
@@ -57,6 +58,7 @@ const RaceDetails = ({
             Load Results
           </button>
       }
+      { isLoadingResults && <p>Loading...</p> }
       { resultsError && <p>{resultsError.message}</p> }
     </div>
   );

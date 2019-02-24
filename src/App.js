@@ -14,6 +14,7 @@ class App extends Component {
       season: new Date().getFullYear(),
       selectedRace: null,
       results: {},
+      isLoadingResults: false,
       resultsError: null
     };
   }
@@ -42,6 +43,7 @@ class App extends Component {
   getRaceResults = (season, round) => () => {
     const { results } = this.state;
 
+    this.setState({ isLoadingResults: true });
     fetchRaceResults(season, round)
       .then(data => {
         if (data.MRData.RaceTable.Races.length === 0) {
@@ -56,10 +58,13 @@ class App extends Component {
 
         this.setState({
           results: deepmerge(results, res),
+          isLoadingResults: false,
           resultsError: null
         });
       })
-      .catch(err => this.setState({ resultsError: err }));
+      .catch(error => {
+         this.setState({ resultsError: error, isLoadingResults: false });
+       });
   }
 
   onClickRace = (raceRound) => () => {
@@ -95,7 +100,7 @@ class App extends Component {
 
   render() {
     const {
-      isLoading, error, selectedRace, results, resultsError
+      isLoading, error, selectedRace, results, isLoadingResults, resultsError
     } = this.state;
     const season = Number(this.state.season);
     const seasonRaces = this.state.races[season];
@@ -127,6 +132,7 @@ class App extends Component {
               race={selectedRace}
               raceCount={seasonRaces.length}
               results={raceResults}
+              isLoadingResults={isLoadingResults}
               resultsError={resultsError}
               onClickRace={this.onClickRace}
               getRaceResults={this.getRaceResults}
