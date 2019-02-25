@@ -89,7 +89,7 @@ class App extends Component {
   }
 
   onSelectSeason = (e) => {
-    this.setSeason(e.target.value);
+    this.setSeason(Number(e.target.value));
   }
 
   onChangeSeason = (change) => () => {
@@ -108,9 +108,9 @@ class App extends Component {
 
   render() {
     const {
-      isLoading, error, selectedRace, results, isLoadingResults, resultsError
+      isLoading, error, selectedRace, season,
+      results, isLoadingResults, resultsError
     } = this.state;
-    const season = Number(this.state.season);
     const seasonRaces = this.state.races[season];
 
     const dateNow = new Date();
