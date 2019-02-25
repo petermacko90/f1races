@@ -4,6 +4,7 @@ import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import { FIRST_SEASON } from './constants';
+import { saveRaces, loadRaces } from './localStorage';
 
 class App extends Component {
   constructor() {
@@ -21,7 +22,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getRaces(this.state.season);
+    const races = loadRaces(this.state.season);
+    if (races) {
+      const newRaces = { [this.state.season]: races };
+      this.setState({ races: { ...this.state.races, ...newRaces } });
+    } else {
+      this.getRaces(this.state.season);
+    }
   }
 
   getRaces = (season) => {
@@ -106,6 +113,10 @@ class App extends Component {
     }
   }
 
+  onSaveRaces = () => {
+    saveRaces(this.state.races[this.state.season], this.state.season);
+  }
+
   render() {
     const {
       isLoading, error, selectedRace, season,
@@ -156,6 +167,7 @@ class App extends Component {
               onChangeSeason={this.onChangeSeason}
               onClickRace={this.onClickRace}
               onEnterRace={this.onEnterRace}
+              onSaveRaces={this.onSaveRaces}
             />
         }
       </Fragment>

@@ -4,7 +4,7 @@ import SeasonSelect from './SeasonSelect';
 
 const RaceList = ({
   races, upcomingRace, isLoading, error, season,
-  onSelectSeason, onChangeSeason, onClickRace, onEnterRace
+  onSelectSeason, onChangeSeason, onClickRace, onEnterRace, onSaveRaces
 }) => {
   if (!races) return null;
   return (
@@ -16,6 +16,7 @@ const RaceList = ({
       <button onClick={onChangeSeason(1)}>
         Next season
       </button>
+      <button onClick={onSaveRaces}>Save</button>
       { isLoading && <p className='message'>Loading...</p> }
       { error && <p className='message'>{error.message}</p> }
       {
