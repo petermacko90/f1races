@@ -124,6 +124,7 @@ th, tr:nth-child(even) {
 
 .season-select {
   display: inline-block;
+  margin-left: 10px;
   margin-bottom: 10px;
 }
 
@@ -161,6 +162,10 @@ th, tr:nth-child(even) {
   .container {
     margin-left: 40px;
     margin-right: 40px;
+  }
+
+  .season-select {
+    margin-left: 0;
   }
 }
 
