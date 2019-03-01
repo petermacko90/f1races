@@ -3,6 +3,7 @@ import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
+import SeasonSelect from './components/SeasonSelect';
 import { FIRST_SEASON } from './constants';
 import { saveRaces, loadRaces } from './localStorage';
 
@@ -157,18 +158,22 @@ class App extends Component {
               getRaceResults={this.getRaceResults}
             />
           :
-            <RaceList
-              races={seasonRaces}
-              upcomingRace={upcomingRace}
-              isLoading={isLoading}
-              error={error}
-              season={season}
-              onSelectSeason={this.onSelectSeason}
-              onChangeSeason={this.onChangeSeason}
-              onClickRace={this.onClickRace}
-              onEnterRace={this.onEnterRace}
-              onSaveRaces={this.onSaveRaces}
-            />
+            <div className='container'>
+              <SeasonSelect
+                season={season}
+                onSelectSeason={this.onSelectSeason}
+                onChangeSeason={this.onChangeSeason}
+              />
+              <RaceList
+                races={seasonRaces}
+                upcomingRace={upcomingRace}
+                isLoading={isLoading}
+                error={error}
+                onClickRace={this.onClickRace}
+                onEnterRace={this.onEnterRace}
+                onSaveRaces={this.onSaveRaces}
+              />
+            </div>
         }
       </Fragment>
     );

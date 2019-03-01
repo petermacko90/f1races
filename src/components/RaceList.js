@@ -1,21 +1,12 @@
 import React from 'react';
 import Race from './Race';
-import SeasonSelect from './SeasonSelect';
 
 const RaceList = ({
-  races, upcomingRace, isLoading, error, season,
-  onSelectSeason, onChangeSeason, onClickRace, onEnterRace, onSaveRaces
+  races, upcomingRace, isLoading, error, onClickRace, onEnterRace, onSaveRaces
 }) => {
   if (!races) return null;
   return (
-    <div className='container'>
-      <SeasonSelect season={season} onSelectSeason={onSelectSeason} />
-      <button onClick={onChangeSeason(-1)}>
-        Previous season
-      </button>
-      <button onClick={onChangeSeason(1)}>
-        Next season
-      </button>
+    <div>
       <button onClick={onSaveRaces}>Save</button>
       { isLoading && <p className='message'>Loading...</p> }
       { error && <p className='message'>{error.message}</p> }
