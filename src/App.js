@@ -23,30 +23,32 @@ class App extends Component {
   }
 
   componentDidMount() {
-    const races = loadRaces(this.state.season);
-    if (races) {
-      const newRaces = { [this.state.season]: races };
-      this.setState({ races: { ...this.state.races, ...newRaces } });
-    } else {
-      this.getRaces(this.state.season);
-    }
+    this.getRaces(this.state.season);
   }
 
   getRaces = (season) => {
-    this.setState({ isLoading: true });
-    fetchRaces(season)
-      .then(data => {
-        if (data.MRData.RaceTable.Races.length === 0) {
-          throw Error('No data available');
-        }
+    const races = loadRaces(season);
+    if (races) {
+      const newRaces = { [season]: races };
+      this.setState((state) => {
+        return { races: { ...state.races, ...newRaces } };
+      });
+    } else {
+      this.setState({ isLoading: true });
+      fetchRaces(season)
+        .then(data => {
+          if (data.MRData.RaceTable.Races.length === 0) {
+            throw Error('No data available');
+          }
 
-        const newRaces = { [season]: data.MRData.RaceTable.Races };
-        this.setState({
-          races: { ...this.state.races, ...newRaces },
-          isLoading: false
-        });
-      })
-      .catch(error => this.setState({ error, isLoading: false }));
+          const newRaces = { [season]: data.MRData.RaceTable.Races };
+          this.setState({
+            races: { ...this.state.races, ...newRaces },
+            isLoading: false
+          });
+        })
+        .catch(error => this.setState({ error, isLoading: false }));
+    }
   }
 
   getRaceResults = (season, round) => () => {
