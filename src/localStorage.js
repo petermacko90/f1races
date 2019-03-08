@@ -17,3 +17,28 @@ export const loadRaces = (season) => {
     return undefined;
   }
 }
+
+export const saveNotifications = (notifications) => {
+  try {
+    const serializedNotifications = JSON.stringify(notifications);
+    localStorage.setItem('notifications', serializedNotifications);
+  } catch (error) {
+    console.error('save to localStorage error', error);
+  }
+}
+
+export const loadNotifications = () => {
+  try {
+    const serializedNotifications = localStorage.getItem('notifications');
+    if (serializedNotifications === null) return undefined;
+    return JSON.parse(serializedNotifications, (key, value) => {
+      if (key === 'notificationDate' || key === 'raceDate') {
+        return new Date(value);
+      } else {
+        return value;
+      }
+    });
+  } catch (error) {
+    return undefined;
+  }
+}

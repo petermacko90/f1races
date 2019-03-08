@@ -4,7 +4,7 @@ import { getDate } from '../helpers';
 
 const RaceDetails = ({
   race, raceCount, results, isLoadingResults, resultsError,
-  onClickRace, getRaceResults
+  onClickRace, getRaceResults, addNotification
 }) => {
   const dateTime = getDate(race.date, race.time);
   const round = Number(race.round);
@@ -30,6 +30,9 @@ const RaceDetails = ({
             </button>
         }
       </div>
+      <button onClick={addNotification(race.raceName, dateTime, '1H')}>
+        Add notification
+      </button>
       <h2>Race Details</h2>
       <p>Season: {race.season}</p>
       <p>Round: {round}</p>

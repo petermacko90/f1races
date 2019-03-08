@@ -5,7 +5,9 @@ import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import SeasonSelect from './components/SeasonSelect';
 import { FIRST_SEASON } from './constants';
-import { saveRaces, loadRaces } from './localStorage';
+import {
+  saveRaces, loadRaces, saveNotifications, loadNotifications
+} from './localStorage';
 
 class App extends Component {
   constructor() {
@@ -18,12 +20,43 @@ class App extends Component {
       selectedRace: null,
       results: {},
       isLoadingResults: false,
-      resultsError: null
+      resultsError: null,
+      notifications: []
     };
   }
 
   componentDidMount() {
     this.getRaces(this.state.season);
+    const notifications = loadNotifications();
+    if (notifications) {
+      this.setState({ notifications });
+    }
+    this.interval = setInterval(this.checkNotifications, 60 * 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
+  checkNotifications = () => {
+    const { notifications } = this.state;
+    const nowTime = Math.floor(new Date().getTime() / 1000 / 60);
+
+    notifications.forEach(notification => {
+      const notificationTime = Math.floor(notification.notificationDate.getTime() / 1000 / 60);
+      if (notificationTime === nowTime && !notification.notified) {
+        new Notification(notification.title, { body: notification.body });
+        notification.notified = true;
+      } else if (notificationTime < nowTime && !notification.notified) {
+        new Notification('Missed notification: ' + notification.title, {
+          body: `At: ${notification.notificationDate.toLocaleDateString()} ${notification.notificationDate.toLocaleTimeString()}`
+        });
+        notification.notified = true;
+      }
+    });
+    
+    this.setState({ notifications });
+    saveNotifications(notifications);
   }
 
   getRaces = (season) => {
@@ -120,6 +153,52 @@ class App extends Component {
     saveRaces(this.state.races[this.state.season], this.state.season);
   }
 
+  addNotification = (raceName, raceDate, notificationWhen) => () => {
+    if (!('Notification' in window)) {
+      return;
+    }
+
+    if (raceDate < new Date()) {
+      console.log('The race is already over');
+      return;
+    }
+
+    let body = '';
+    let notificationDate = new Date(raceDate);
+
+    switch (notificationWhen) {
+      case '1H':
+        body = 'Starts in 1 Hour';
+        notificationDate.setHours(notificationDate.getHours() - 1);
+        break;
+      default:
+        body = 'Starts in 1 Hour';
+        notificationDate.setHours(notificationDate.getHours() - 1);
+    }
+
+    const notification = {
+      raceDate,
+      notificationDate,
+      notified: false,
+      title: raceName,
+      body
+    };
+
+    if (Notification.permission === 'granted') {
+      this.setState((state) => {
+        return { notifications: state.notifications.concat(notification) };
+      }, () => this.checkNotifications());
+    } else if (Notification.permission !== 'denied') {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          this.setState((state) => {
+            return { notifications: state.notifications.concat(notification) };
+          }, () => this.checkNotifications());
+        }
+      });
+    }
+  }
+
   render() {
     const {
       isLoading, error, selectedRace, season,
@@ -158,6 +237,7 @@ class App extends Component {
               resultsError={resultsError}
               onClickRace={this.onClickRace}
               getRaceResults={this.getRaceResults}
+              addNotification={this.addNotification}
             />
           :
             <div className='container'>
