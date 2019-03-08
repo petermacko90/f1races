@@ -47,16 +47,17 @@ class App extends Component {
       if (notificationTime === nowTime && !notification.notified) {
         new Notification(notification.title, { body: notification.body });
         notification.notified = true;
+        this.setState({ notifications });
+        saveNotifications(notifications);
       } else if (notificationTime < nowTime && !notification.notified) {
         new Notification('Missed notification: ' + notification.title, {
           body: `At: ${notification.notificationDate.toLocaleDateString()} ${notification.notificationDate.toLocaleTimeString()}`
         });
         notification.notified = true;
+        this.setState({ notifications });
+        saveNotifications(notifications);
       }
     });
-    
-    this.setState({ notifications });
-    saveNotifications(notifications);
   }
 
   getRaces = (season) => {
@@ -187,13 +188,13 @@ class App extends Component {
     if (Notification.permission === 'granted') {
       this.setState((state) => {
         return { notifications: state.notifications.concat(notification) };
-      }, () => this.checkNotifications());
+      }, () => saveNotifications(this.state.notifications));
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
           this.setState((state) => {
             return { notifications: state.notifications.concat(notification) };
-          }, () => this.checkNotifications());
+          }, () => saveNotifications(this.state.notifications));
         }
       });
     }
