@@ -4,6 +4,7 @@ import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import SeasonSelect from './components/SeasonSelect';
+import Toast from './components/Toast';
 import { FIRST_SEASON } from './constants';
 import {
   saveRaces, loadRaces, saveNotifications, loadNotifications
@@ -21,7 +22,9 @@ class App extends Component {
       results: {},
       isLoadingResults: false,
       resultsError: null,
-      notifications: []
+      notifications: [],
+      isShowToast: false,
+      toastText: ''
     };
   }
 
@@ -36,6 +39,16 @@ class App extends Component {
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  showToast = (text) => {
+    this.setState({
+      isShowToast: true,
+      toastText: text
+    });
+    setTimeout(() => {
+      this.setState({ isShowToast: false });
+    }, 3000);
   }
 
   checkNotifications = () => {
@@ -152,15 +165,17 @@ class App extends Component {
 
   onSaveRaces = () => {
     saveRaces(this.state.races[this.state.season], this.state.season);
+    this.showToast('Calendar saved to browser storage');
   }
 
   addNotification = (raceName, raceDate, notificationWhen) => () => {
     if (!('Notification' in window)) {
+      this.showToast('This browser does not support notifications :(');
       return;
     }
 
     if (raceDate < new Date()) {
-      console.log('The race is already over');
+      this.showToast('This race already started or is over');
       return;
     }
 
@@ -186,15 +201,27 @@ class App extends Component {
     };
 
     if (Notification.permission === 'granted') {
-      this.setState((state) => {
-        return { notifications: state.notifications.concat(notification) };
-      }, () => saveNotifications(this.state.notifications));
+      this.setState(
+        (state) => {
+          return { notifications: state.notifications.concat(notification) };
+        },
+        () => {
+          saveNotifications(this.state.notifications);
+          this.showToast('Notification saved');
+        }
+      );
     } else if (Notification.permission !== 'denied') {
       Notification.requestPermission().then((permission) => {
         if (permission === 'granted') {
-          this.setState((state) => {
-            return { notifications: state.notifications.concat(notification) };
-          }, () => saveNotifications(this.state.notifications));
+          this.setState(
+            (state) => {
+              return { notifications: state.notifications.concat(notification) };
+            },
+            () => {
+              saveNotifications(this.state.notifications);
+              this.showToast('Notification saved');
+            }
+          );
         }
       });
     }
@@ -203,7 +230,8 @@ class App extends Component {
   render() {
     const {
       isLoading, error, selectedRace, season,
-      results, isLoadingResults, resultsError
+      results, isLoadingResults, resultsError,
+      isShowToast, toastText
     } = this.state;
     const seasonRaces = this.state.races[season];
 
@@ -228,6 +256,7 @@ class App extends Component {
         <header>
           <h1>F1 Races</h1>
         </header>
+        <Toast show={isShowToast} text={toastText} />
         {
           selectedRace ?
             <RaceDetails
