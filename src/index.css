@@ -13,13 +13,27 @@ body {
 }
 
 h1 {
-  color: #FFE4E1;
+  color: white;
   margin: 0;
   padding: 10px;
 }
 
 header {
-  background-color: #993333;
+  background-color: #DC0000;
+}
+
+nav button {
+  background-color: white;
+  letter-spacing: 1px;
+  padding: 5px;
+  font-weight: bold;
+  border: 3px solid #DC0000;
+}
+
+nav button:hover, nav button.active {
+  cursor: pointer;
+  background-color: #DC0000;
+  color: white;
 }
 
 table {
@@ -89,6 +103,11 @@ th, tr:nth-child(even) {
 
 .message {
   padding: 10px;
+}
+
+.notifications {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .prev-next {
@@ -169,7 +188,7 @@ th, tr:nth-child(even) {
 }
 
 .upcoming {
-  background-color: #cc6666;
+  background-color: #ff6666;
 }
 
 @media only screen and (min-width: 600px) {

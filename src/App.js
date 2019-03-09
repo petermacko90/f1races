@@ -268,7 +268,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Header setRoute={this.setRoute} />
+        <Header setRoute={this.setRoute} route={route} />
         <Toast show={isShowToast} text={toastText} />
         { route === 'Notifications' &&
           <Notifications notifications={notifications} />

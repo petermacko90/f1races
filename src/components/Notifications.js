@@ -4,7 +4,7 @@ const Notifications = ({ notifications }) => {
   return (
     <div className='container'>
       <div className='responsiveTable'>
-        <h2>Saved Notifications</h2>
+        <h2 className='notifications'>Saved Notifications</h2>
         <table>
           <thead>
             <tr>
