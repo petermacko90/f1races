@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
+import Header from './components/Header';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
@@ -242,7 +243,7 @@ class App extends Component {
     const seasonRaces = this.state.races[season];
 
     let selectedRace = null;
-    if (selectedRaceRound > 0) {
+    if (selectedRaceRound > 0 && races[season]) {
       const i = races[season].findIndex((race) => {
         return Number(race.round) === selectedRaceRound;
       });
@@ -267,17 +268,7 @@ class App extends Component {
 
     return (
       <Fragment>
-        <header>
-          <h1>F1 Races</h1>
-        </header>
-        <nav>
-          <button onClick={this.setRoute('RaceList')}>
-            Calendar
-          </button>
-          <button onClick={this.setRoute('Notifications')}>
-            Saved Notifications
-          </button>
-        </nav>
+        <Header setRoute={this.setRoute} />
         <Toast show={isShowToast} text={toastText} />
         { route === 'Notifications' &&
           <Notifications notifications={notifications} />
