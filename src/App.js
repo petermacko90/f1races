@@ -93,6 +93,9 @@ class App extends Component {
             races: { ...this.state.races, ...newRaces },
             isLoading: false
           });
+          if (season === new Date().getFullYear()) {
+            saveRaces(data.MRData.RaceTable.Races, season);
+          }
         })
         .catch(error => this.setState({ error, isLoading: false }));
     }
