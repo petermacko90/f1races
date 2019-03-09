@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import Race from './Race';
 
 const RaceList = ({
@@ -6,8 +6,10 @@ const RaceList = ({
 }) => {
   if (!races) return null;
   return (
-    <div>
-      <button onClick={onSaveRaces}>Save</button>
+    <Fragment>
+      <button onClick={onSaveRaces} className='button ml10 mb10'>
+        Save calendar
+      </button>
       { isLoading && <p className='message'>Loading...</p> }
       { error && <p className='message'>{error.message}</p> }
       {
@@ -27,7 +29,7 @@ const RaceList = ({
           );
         })
       }
-    </div>
+    </Fragment>
   );
 }
 

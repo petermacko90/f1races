@@ -10,11 +10,11 @@ const RaceDetails = ({
   const round = Number(race.round);
 
   return (
-    <div className='race-details container'>
-      <div className='prev-next'>
+    <div className='ml10 mr10 container'>
+      <div className='prev-next mb10 mt10'>
         {
           round !== 1 &&
-            <button className='button button-left'
+            <button className='button button-left mr10'
             onClick={onClickRace(round - 1)}>
               Previous Race
             </button>

@@ -74,10 +74,6 @@ th, tr:nth-child(even) {
   float: none;
 }
 
-.button-left {
-  margin-right: 10px;
-}
-
 .container {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -105,15 +101,28 @@ th, tr:nth-child(even) {
   padding: 10px;
 }
 
-.notifications {
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.ml10 {
   margin-left: 10px;
+}
+
+.mr10 {
   margin-right: 10px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.p10 {
+  padding: 10px;
 }
 
 .prev-next {
   overflow: auto;
-  margin-top: 10px;
-  margin-bottom: 10px;
 }
 
 .race {
@@ -124,11 +133,6 @@ th, tr:nth-child(even) {
 .race:hover {
   cursor: pointer;
   background-color: #A9A9A9;
-}
-
-.race-details {
-  margin-left: 10px;
-  margin-right: 10px;
 }
 
 .responsiveTable {
@@ -142,10 +146,8 @@ th, tr:nth-child(even) {
   padding-right: 10px;
 }
 
-.season-select {
+.season {
   display: inline-block;
-  margin-left: 10px;
-  margin-bottom: 10px;
 }
 
 .striped {
@@ -206,7 +208,7 @@ th, tr:nth-child(even) {
     margin-right: 40px;
   }
 
-  .season-select {
+  .season {
     margin-left: 0;
   }
 }

@@ -8,15 +8,17 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
   }
 
   return (
-    <div className='season-select'>
-      <button onClick={onChangeSeason(-1)} title='Previous season'>
+    <div className='season ml10 mb10'>
+      <button onClick={onChangeSeason(-1)} title='Previous season'
+      className='button'>
         &lt;
       </button>
       <select value={season} onChange={onSelectSeason}
-      aria-label='Select season'>
+      className='season-select p10' aria-label='Select season'>
         {seasonOptions}
       </select>
-      <button onClick={onChangeSeason(1)} title='Next season'>
+      <button onClick={onChangeSeason(1)} title='Next season'
+      className='button'>
         &gt;
       </button>
     </div>
