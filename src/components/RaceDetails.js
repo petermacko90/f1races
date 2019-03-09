@@ -11,9 +11,6 @@ const RaceDetails = ({
 
   return (
     <div className='race-details container'>
-      <button type='button' onClick={onClickRace(null)} className='button'>
-        &lt; Back to all races
-      </button>
       <div className='prev-next'>
         {
           round !== 1 &&

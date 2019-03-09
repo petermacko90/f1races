@@ -3,6 +3,7 @@ import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
+import Notifications from './components/Notifications';
 import SeasonSelect from './components/SeasonSelect';
 import Toast from './components/Toast';
 import { FIRST_SEASON } from './constants';
@@ -18,13 +19,14 @@ class App extends Component {
       isLoading: false,
       error: null,
       season: new Date().getFullYear(),
-      selectedRace: null,
+      selectedRaceRound: 0,
       results: {},
       isLoadingResults: false,
       resultsError: null,
       notifications: [],
       isShowToast: false,
-      toastText: ''
+      toastText: '',
+      route: 'RaceList'
     };
   }
 
@@ -139,11 +141,9 @@ class App extends Component {
   }
 
   selectRace = (raceRound) => {
-    const i = this.state.races[this.state.season].findIndex((race) => {
-      return Number(race.round) === Number(raceRound);
-    });
     this.setState({
-      selectedRace: this.state.races[this.state.season][i],
+      selectedRaceRound: Number(raceRound),
+      route: 'RaceDetails',
       resultsError: null
     });
   }
@@ -230,13 +230,24 @@ class App extends Component {
     }
   }
 
+  setRoute = (route) => () => {
+    this.setState({ route });
+  }
+
   render() {
     const {
-      isLoading, error, selectedRace, season,
-      results, isLoadingResults, resultsError,
-      isShowToast, toastText
+      races, isLoading, error, season, notifications, selectedRaceRound, route,
+      results, isLoadingResults, resultsError, isShowToast, toastText
     } = this.state;
     const seasonRaces = this.state.races[season];
+
+    let selectedRace = null;
+    if (selectedRaceRound > 0) {
+      const i = races[season].findIndex((race) => {
+        return Number(race.round) === selectedRaceRound;
+      });
+      selectedRace = this.state.races[this.state.season][i];
+    }
 
     const dateNow = new Date();
     let upcomingRace = '';
@@ -259,36 +270,47 @@ class App extends Component {
         <header>
           <h1>F1 Races</h1>
         </header>
+        <nav>
+          <button onClick={this.setRoute('RaceList')}>
+            Calendar
+          </button>
+          <button onClick={this.setRoute('Notifications')}>
+            Saved Notifications
+          </button>
+        </nav>
         <Toast show={isShowToast} text={toastText} />
-        {
-          selectedRace ?
-            <RaceDetails
-              race={selectedRace}
-              raceCount={seasonRaces.length}
-              results={raceResults}
-              isLoadingResults={isLoadingResults}
-              resultsError={resultsError}
-              onClickRace={this.onClickRace}
-              getRaceResults={this.getRaceResults}
-              addNotification={this.addNotification}
+        { route === 'Notifications' &&
+          <Notifications notifications={notifications} />
+        }
+        { route === 'RaceDetails' &&
+          <RaceDetails
+            race={selectedRace}
+            raceCount={seasonRaces.length}
+            results={raceResults}
+            isLoadingResults={isLoadingResults}
+            resultsError={resultsError}
+            onClickRace={this.onClickRace}
+            getRaceResults={this.getRaceResults}
+            addNotification={this.addNotification}
+          />
+        }
+        { route === 'RaceList' &&
+          <div className='container'>
+            <SeasonSelect
+              season={season}
+              onSelectSeason={this.onSelectSeason}
+              onChangeSeason={this.onChangeSeason}
             />
-          :
-            <div className='container'>
-              <SeasonSelect
-                season={season}
-                onSelectSeason={this.onSelectSeason}
-                onChangeSeason={this.onChangeSeason}
-              />
-              <RaceList
-                races={seasonRaces}
-                upcomingRace={upcomingRace}
-                isLoading={isLoading}
-                error={error}
-                onClickRace={this.onClickRace}
-                onEnterRace={this.onEnterRace}
-                onSaveRaces={this.onSaveRaces}
-              />
-            </div>
+            <RaceList
+              races={seasonRaces}
+              upcomingRace={upcomingRace}
+              isLoading={isLoading}
+              error={error}
+              onClickRace={this.onClickRace}
+              onEnterRace={this.onEnterRace}
+              onSaveRaces={this.onSaveRaces}
+            />
+          </div>
         }
       </Fragment>
     );
