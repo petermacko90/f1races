@@ -16,18 +16,19 @@ const RaceDetails = ({
           round !== 1 &&
             <button className='button button-left'
             onClick={onClickRace(round - 1)}>
-              &#8678; Previous Race
+              Previous Race
             </button>
         }
         {
           round !== raceCount &&
             <button className='button button-right'
             onClick={onClickRace(round + 1)}>
-              Next Race &#8680;
+              Next Race
             </button>
         }
       </div>
-      <button onClick={addNotification(race.raceName, dateTime, '1H')}>
+      <button onClick={addNotification(race.raceName, dateTime, '1H')}
+      className='button'>
         Add notification
       </button>
       <h2>Race Details</h2>

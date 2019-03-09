@@ -58,16 +58,16 @@ th, tr:nth-child(even) {
 
 .button {
   padding: 10px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   border: none;
-  background-color: #999933;
-  color: #FFFACD;
+  background-color: #DC0000;
+  color: white;
 }
 
 .button:hover {
-  background-color: #737326;
   cursor: pointer;
+  background-color: #ff6666;
 }
 
 .button-left, .button-right {
@@ -113,6 +113,7 @@ th, tr:nth-child(even) {
 .prev-next {
   overflow: auto;
   margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .race {
