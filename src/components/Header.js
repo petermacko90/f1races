@@ -3,7 +3,7 @@ import React from 'react';
 const Header = ({ setRoute, route }) => {
   return (
     <header>
-      <h1>F1 Races</h1>
+      <h1 className='p10'>F1 Races</h1>
       <nav>
         <button onClick={setRoute('RaceList')}
         className={route === 'RaceList' ? 'active' : ''}>

@@ -14,7 +14,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
         &lt;
       </button>
       <select value={season} onChange={onSelectSeason}
-      className='season-select p10' aria-label='Select season'>
+      className='p10 season-select' aria-label='Select season'>
         {seasonOptions}
       </select>
       <button onClick={onChangeSeason(1)} title='Next season'

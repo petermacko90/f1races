@@ -10,8 +10,8 @@ const RaceList = ({
       <button onClick={onSaveRaces} className='button ml10 mb10'>
         Save calendar
       </button>
-      { isLoading && <p className='message'>Loading...</p> }
-      { error && <p className='message'>{error.message}</p> }
+      { isLoading && <p className='p10'>Loading...</p> }
+      { error && <p className='p10'>{error.message}</p> }
       {
         races.map(race => {
           return (
