@@ -7,6 +7,7 @@ import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
 import SeasonSelect from './components/SeasonSelect';
 import Toast from './components/Toast';
+import { ThemeProvider } from './ThemeContext';
 import { FIRST_SEASON } from './constants';
 import {
   saveRaces, loadRaces, saveNotifications, loadNotifications
@@ -27,7 +28,8 @@ class App extends Component {
       notifications: [],
       isShowToast: false,
       toastText: '',
-      route: 'RaceList'
+      route: 'RaceList',
+      theme: 'ferrari'
     };
   }
 
@@ -276,46 +278,48 @@ class App extends Component {
     }
 
     return (
-      <Fragment>
-        <Header setRoute={this.setRoute} route={route} />
-        <Toast show={isShowToast} text={toastText} />
-        { route === 'Notifications' &&
-          <Notifications
-            notifications={notifications}
-            deleteNotification={this.deleteNotification}
-          />
-        }
-        { route === 'RaceDetails' &&
-          <RaceDetails
-            race={selectedRace}
-            raceCount={seasonRaces.length}
-            results={raceResults}
-            isLoadingResults={isLoadingResults}
-            resultsError={resultsError}
-            onClickRace={this.onClickRace}
-            getRaceResults={this.getRaceResults}
-            addNotification={this.addNotification}
-          />
-        }
-        { route === 'RaceList' &&
-          <div className='container'>
-            <SeasonSelect
-              season={season}
-              onSelectSeason={this.onSelectSeason}
-              onChangeSeason={this.onChangeSeason}
+      <ThemeProvider value={this.state.theme}>
+        <Fragment>
+          <Header setRoute={this.setRoute} route={route} />
+          <Toast show={isShowToast} text={toastText} />
+          { route === 'Notifications' &&
+            <Notifications
+              notifications={notifications}
+              deleteNotification={this.deleteNotification}
             />
-            <RaceList
-              races={seasonRaces}
-              upcomingRace={upcomingRace}
-              isLoading={isLoading}
-              error={error}
+          }
+          { route === 'RaceDetails' &&
+            <RaceDetails
+              race={selectedRace}
+              raceCount={seasonRaces.length}
+              results={raceResults}
+              isLoadingResults={isLoadingResults}
+              resultsError={resultsError}
               onClickRace={this.onClickRace}
-              onEnterRace={this.onEnterRace}
-              onSaveRaces={this.onSaveRaces}
+              getRaceResults={this.getRaceResults}
+              addNotification={this.addNotification}
             />
-          </div>
-        }
-      </Fragment>
+          }
+          { route === 'RaceList' &&
+            <div className='container'>
+              <SeasonSelect
+                season={season}
+                onSelectSeason={this.onSelectSeason}
+                onChangeSeason={this.onChangeSeason}
+              />
+              <RaceList
+                races={seasonRaces}
+                upcomingRace={upcomingRace}
+                isLoading={isLoading}
+                error={error}
+                onClickRace={this.onClickRace}
+                onEnterRace={this.onEnterRace}
+                onSaveRaces={this.onSaveRaces}
+              />
+            </div>
+          }
+        </Fragment>
+      </ThemeProvider>
     );
   }
 }

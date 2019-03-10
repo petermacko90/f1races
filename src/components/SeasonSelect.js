@@ -1,5 +1,6 @@
 import React from 'react';
 import { FIRST_SEASON } from '../constants';
+import { ThemeConsumer } from '../ThemeContext';
 
 const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
   let seasonOptions = [];
@@ -8,20 +9,24 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
   }
 
   return (
-    <div className='season ml10 mb10'>
-      <button onClick={onChangeSeason(-1)} title='Previous season'
-      className='button'>
-        &lt;
-      </button>
-      <select value={season} onChange={onSelectSeason}
-      className='p10 season-select' aria-label='Select season'>
-        {seasonOptions}
-      </select>
-      <button onClick={onChangeSeason(1)} title='Next season'
-      className='button'>
-        &gt;
-      </button>
-    </div>
+    <ThemeConsumer>
+      {theme =>
+        <div className='season ml10 mb10'>
+          <button onClick={onChangeSeason(-1)} title='Previous season'
+          className={'button ' + theme}>
+            &lt;
+          </button>
+          <select value={season} onChange={onSelectSeason}
+          className={'p10 season-select ' + theme} aria-label='Select season'>
+            {seasonOptions}
+          </select>
+          <button onClick={onChangeSeason(1)} title='Next season'
+          className={'button ' + theme}>
+            &gt;
+          </button>
+        </div>
+      }
+    </ThemeConsumer>
   );
 }
 

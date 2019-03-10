@@ -23,8 +23,37 @@ h1 {
   margin: 0;
 }
 
+h1.ferrari {
+  color: white;
+}
+
+h1.mercedes {
+  color: black;
+}
+
 header {
-  background-color: #DC0000;
+  background-color: rgb(220,0,0);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header.ferrari {
+  background-color: rgb(220,0,0);
+}
+
+header.mercedes {
+  background-color: rgb(0,210,190);
+}
+
+nav {
+  background-color: white;
+}
+
+nav.ferrari {
+  background-color: white;
+}
+
+nav.mercedes {
+  background-color: white;
 }
 
 nav button {
@@ -32,13 +61,23 @@ nav button {
   letter-spacing: 1px;
   padding: 5px;
   font-weight: bold;
-  border: 3px solid #DC0000;
+  border: none;
 }
 
 nav button:hover, nav button.active {
   cursor: pointer;
-  background-color: #DC0000;
+  background-color: rgb(220,0,0);
   color: white;
+}
+
+nav button.ferrari:hover, nav button.ferrari.active {
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+nav button.mercedes:hover, nav button.mercedes.active {
+  background-color: rgb(0,210,190);
+  color: black;
 }
 
 table {
@@ -65,14 +104,34 @@ th, tr:nth-child(even) {
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  border: 1px solid #DC0000;
-  background-color: #DC0000;
+  border: 1px solid rgb(220,0,0);
+  background-color: rgb(220,0,0);
   color: white;
+}
+
+.button.ferrari {
+  border: 1px solid rgb(220,0,0);
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+.button.mercedes {
+  border: 1px solid rgb(0,210,190);
+  background-color: rgb(0,210,190);
+  color: black;
 }
 
 .button:hover {
   cursor: pointer;
-  background-color: #ff6666;
+  background-color: rgba(220,0,0,0.5);
+}
+
+.button.ferrari:hover {
+  background-color: rgba(220,0,0,0.5);
+}
+
+.button.mercedes:hover {
+  background-color: rgba(0,210,190,0.5);
 }
 
 .button-left, .button-right {
@@ -152,8 +211,16 @@ th, tr:nth-child(even) {
 }
 
 .season-select {
-  border: 1px solid #DC0000;
+  border: 1px solid rgb(220,0,0);
   padding-top: 12px;
+}
+
+.season-select.ferrari {
+  border: 1px solid rgb(220,0,0);
+}
+
+.season-select.mercedes {
+  border: 1px solid rgb(0,210,190);;
 }
 
 .striped {
@@ -197,7 +264,15 @@ th, tr:nth-child(even) {
 }
 
 .upcoming {
-  background-color: #ff6666;
+  background-color: rgba(220,0,0,0.5);
+}
+
+.upcoming.ferrari {
+  background-color: rgba(220,0,0,0.5);
+}
+
+.upcoming.mercedes {
+  background-color: rgba(0,210,190,0.5);
 }
 
 @media only screen and (min-width: 600px) {
