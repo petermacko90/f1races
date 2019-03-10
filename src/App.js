@@ -231,6 +231,15 @@ class App extends Component {
     }
   }
 
+  deleteNotification = (i) => () => {
+    if (window.confirm('Are you sure you want to delete this notification?')) {
+      const notifications = this.state.notifications;
+      notifications.splice(i, 1);
+      this.setState({ notifications });
+      saveNotifications(notifications);
+    }
+  }
+
   setRoute = (route) => () => {
     this.setState({ route });
   }
@@ -271,7 +280,10 @@ class App extends Component {
         <Header setRoute={this.setRoute} route={route} />
         <Toast show={isShowToast} text={toastText} />
         { route === 'Notifications' &&
-          <Notifications notifications={notifications} />
+          <Notifications
+            notifications={notifications}
+            deleteNotification={this.deleteNotification}
+          />
         }
         { route === 'RaceDetails' &&
           <RaceDetails
