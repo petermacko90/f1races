@@ -11,9 +11,40 @@ export const saveRaces = (races, season) => {
 
 export const loadRaces = (season) => {
   try {
+    const locationObject = Joi.object().keys({
+      lat: Joi.string(),
+      long: Joi.string(),
+      locality: Joi.string().required(),
+      country: Joi.string().required()
+    });
+    const circuitObject = Joi.object().keys({
+      circuitId: Joi.string(),
+      url: Joi.string().required(),
+      circuitName: Joi.string().required(),
+      Location: locationObject
+    });
+    const raceObject = Joi.object().keys({
+      season: Joi.string().required(),
+      round: Joi.string().required(),
+      url: Joi.string().required(),
+      raceName: Joi.string().required(),
+      Circuit: circuitObject,
+      date: Joi.string().required(),
+      time: Joi.string()
+    });
+    const schema = Joi.array().items(raceObject);
+
     const serializedRaces = localStorage.getItem('calendar_' + season);
     if (serializedRaces === null) return undefined;
-    return JSON.parse(serializedRaces);
+    const races = JSON.parse(serializedRaces);
+
+    const test = Joi.validate(races, schema);
+    if (test.error) {
+      localStorage.removeItem('calendar_' + season);
+      return undefined;
+    } else {
+      return races;
+    }
   } catch (error) {
     console.error('load from localStorage error', error);
     return undefined;
