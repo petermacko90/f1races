@@ -6,7 +6,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
   } else {
     return (
       <div className='container'>
-        <div className='responsiveTable'>
+        <div className='responsive-table'>
           <h2 className='ml10 mr10'>Saved Notifications</h2>
           <table>
             <thead>

@@ -1,4 +1,5 @@
 import Joi from 'joi';
+import { teams } from './constants';
 
 export const saveRaces = (races, season) => {
   try {
@@ -90,5 +91,28 @@ export const loadNotifications = () => {
     }
   } catch (error) {
     return undefined;
+  }
+}
+
+export const saveTheme = (theme) => {
+  try {
+    localStorage.setItem('theme', theme);
+  } catch (error) {
+    console.error('save to localStorage error', error);
+  }
+}
+
+export const loadTheme = () => {
+  try {
+    const theme = localStorage.getItem('theme');
+    for (let i = 0, l = teams.length; i < l; i++) {
+      if (teams[i].id === theme) {
+        return theme;
+      }
+    }
+    return 'ferrari';
+  } catch (error) {
+    console.error('load from localStorage error', error);
+    return 'ferrari';
   }
 }

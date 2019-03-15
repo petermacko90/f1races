@@ -10,7 +10,8 @@ import Toast from './components/Toast';
 import { ThemeProvider } from './ThemeContext';
 import { FIRST_SEASON } from './constants';
 import {
-  saveRaces, loadRaces, saveNotifications, loadNotifications
+  saveRaces, loadRaces, saveNotifications, loadNotifications,
+  saveTheme, loadTheme
 } from './localStorage';
 
 class App extends Component {
@@ -29,7 +30,7 @@ class App extends Component {
       isShowToast: false,
       toastText: '',
       route: 'RaceList',
-      theme: 'ferrari'
+      theme: ''
     };
   }
 
@@ -39,11 +40,18 @@ class App extends Component {
     if (notifications) {
       this.setState({ notifications });
     }
+    const theme = loadTheme();
+    this.setState({ theme });
     this.interval = setInterval(this.checkNotifications, 60 * 1000);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
+  }
+
+  setTheme = (e) => {
+    this.setState({ theme: e.target.value });
+    saveTheme(e.target.value);
   }
 
   showToast = (text) => {
@@ -280,7 +288,11 @@ class App extends Component {
     return (
       <ThemeProvider value={this.state.theme}>
         <Fragment>
-          <Header setRoute={this.setRoute} route={route} />
+          <Header
+            setRoute={this.setRoute}
+            route={route}
+            setTheme={this.setTheme}
+          />
           <Toast show={isShowToast} text={toastText} />
           { route === 'Notifications' &&
             <Notifications

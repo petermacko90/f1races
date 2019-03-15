@@ -13,7 +13,7 @@ const RaceDetails = ({
   return (
     <ThemeConsumer>
       {theme =>
-        <div className='ml10 mr10 container'>
+        <div className='container p10'>
           <div className='prev-next mb10 mt10'>
             {
               round !== 1 &&

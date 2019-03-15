@@ -2,7 +2,7 @@ import React from 'react';
 
 const RaceResults = ({ results }) => {
   return (
-    <div className='responsiveTable'>
+    <div className='responsive-table'>
       <h2>Results</h2>
       <table>
         <thead>

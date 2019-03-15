@@ -1,3 +1,5 @@
+/* Application-wide styles */
+
 * {
   box-sizing: border-box;
 }
@@ -18,68 +20,6 @@ button, select {
     sans-serif;
 }
 
-h1 {
-  color: white;
-  margin: 0;
-}
-
-h1.ferrari {
-  color: white;
-}
-
-h1.mercedes {
-  color: black;
-}
-
-header {
-  background-color: rgb(220,0,0);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-header.ferrari {
-  background-color: rgb(220,0,0);
-}
-
-header.mercedes {
-  background-color: rgb(0,210,190);
-}
-
-nav {
-  background-color: white;
-}
-
-nav.ferrari {
-  background-color: white;
-}
-
-nav.mercedes {
-  background-color: white;
-}
-
-nav button {
-  background-color: white;
-  letter-spacing: 1px;
-  padding: 5px;
-  font-weight: bold;
-  border: none;
-}
-
-nav button:hover, nav button.active {
-  cursor: pointer;
-  background-color: rgb(220,0,0);
-  color: white;
-}
-
-nav button.ferrari:hover, nav button.ferrari.active {
-  background-color: rgb(220,0,0);
-  color: white;
-}
-
-nav button.mercedes:hover, nav button.mercedes.active {
-  background-color: rgb(0,210,190);
-  color: black;
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
@@ -96,20 +36,10 @@ th, tr:nth-child(even) {
   background-color: #D3D3D3;
 }
 
-.break-word {
-  word-break: break-all;
-}
-
 .button {
   padding: 10px;
   font-size: 16px;
   font-weight: bold;
-  border: 1px solid rgb(220,0,0);
-  background-color: rgb(220,0,0);
-  color: white;
-}
-
-.button.ferrari {
   border: 1px solid rgb(220,0,0);
   background-color: rgb(220,0,0);
   color: white;
@@ -121,12 +51,54 @@ th, tr:nth-child(even) {
   color: black;
 }
 
-.button:hover {
-  cursor: pointer;
-  background-color: rgba(220,0,0,0.5);
+.button.redbull {
+  border: 1px solid rgb(30,65,255);
+  background-color: rgb(30,65,255);
 }
 
-.button.ferrari:hover {
+.button.renault {
+  border: 1px solid rgb(255,245,0);
+  background-color: rgb(255,245,0);
+  color: black;
+}
+
+.button.haas {
+  border: 1px solid rgb(240,215,135);
+  background-color: rgb(240,215,135);
+  color: black;
+}
+
+.button.racingpoint {
+  border: 1px solid rgb(245,150,200);
+  background-color: rgb(245,150,200);
+  color: black;
+}
+
+.button.tororosso {
+  border: 1px solid rgb(70,155,255);
+  background-color: rgb(70,155,255);
+  color: black;
+}
+
+.button.mclaren {
+  border: 1px solid rgb(255,135,0);
+  background-color: rgb(255,135,0);
+  color: black;
+}
+
+.button.alfaromeo {
+  border: 1px solid rgb(155,0,0);
+  background-color: rgb(155,0,0);
+}
+
+.button.williams {
+  border: 1px solid black;
+  background-color: rgb(255,255,255);
+  color: black
+}
+
+.button:hover {
+  cursor: pointer;
   background-color: rgba(220,0,0,0.5);
 }
 
@@ -134,8 +106,36 @@ th, tr:nth-child(even) {
   background-color: rgba(0,210,190,0.5);
 }
 
-.button-left, .button-right {
-  float: none;
+.button.redbull:hover {
+  background-color: rgba(30,65,255,0.5);
+}
+
+.button.renault:hover {
+  background-color: rgba(255,245,0,0.5);
+}
+
+.button.haas:hover {
+  background-color: rgba(240,215,135,0.5);
+}
+
+.button.racingpoint:hover {
+  background-color: rgba(245,150,200,0.5);
+}
+
+.button.tororosso:hover {
+  background-color: rgba(70,155,255,0.5);
+}
+
+.button.tororosso:hover {
+  background-color: rgba(255,135,0,0.5);
+}
+
+.button.alfaromeo:hover {
+  background-color: rgba(155,0,0,0.5);
+}
+
+.button.williams:hover {
+  background-color: rgba(204,204,204);
 }
 
 .container {
@@ -143,154 +143,10 @@ th, tr:nth-child(even) {
   padding-bottom: 10px;
 }
 
-.date {
-  display: inline-block;
-  width: 50%;
-  text-align: right;
-  padding-right: 10px;
-}
-
-.date-time {
-  display: inline-block;
-  width: 45%;
-  padding-right: 10px;
-}
-
-.location {
-  display: inline-block;
-  width: 45%;
-}
-
-.mb10 {
-  margin-bottom: 10px;
-}
-
-.ml10 {
-  margin-left: 10px;
-}
-
-.mr10 {
-  margin-right: 10px;
-}
-
-.mt10 {
-  margin-top: 10px;
-}
-
-.p10 {
-  padding: 10px;
-}
-
-.prev-next {
-  overflow: auto;
-}
-
-.race {
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-
-.race:hover {
-  cursor: pointer;
-  background-color: #A9A9A9;
-}
-
-.responsiveTable {
-  overflow-x: auto;
-}
-
-.round {
-  display: inline-block;
-  width: 10%;
-  text-align: right;
-  padding-right: 10px;
-}
-
-.season {
-  display: inline-block;
-}
-
-.season-select {
-  border: 1px solid rgb(220,0,0);
-  padding-top: 12px;
-}
-
-.season-select.ferrari {
-  border: 1px solid rgb(220,0,0);
-}
-
-.season-select.mercedes {
-  border: 1px solid rgb(0,210,190);;
-}
-
-.striped {
-  background-color: #D3D3D3;
-}
-
-.time {
-  display: inline-block;
-  width: 50%;
-  text-align: right;
-}
-
-.toast {
-  position: fixed;
-  z-index: 3;
-  width: 16rem;
-  left: 50%;
-  margin-left: -8rem;
-  padding: 1rem;
-  background-color: #19a974;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
-  text-align: center;
-  transition: 0.5s;
-  bottom: 0;
-  opacity: 0;
-  visibility: hidden;
-}
-
-.toast.show {
-  bottom: 3rem;
-  opacity: 1;
-  visibility: visible;
-}
-
-.tr {
-  text-align: right;
-}
-
-.unselectable {
-  user-select: none;
-}
-
-.upcoming {
-  background-color: rgba(220,0,0,0.5);
-}
-
-.upcoming.ferrari {
-  background-color: rgba(220,0,0,0.5);
-}
-
-.upcoming.mercedes {
-  background-color: rgba(0,210,190,0.5);
-}
-
 @media only screen and (min-width: 600px) {
-  .button-left {
-    float: left;
-  }
-
-  .button-right {
-    float: right;
-  }
-
   .container {
     margin-left: 40px;
     margin-right: 40px;
-  }
-
-  .season {
-    margin-left: 0;
   }
 }
 
@@ -315,22 +171,401 @@ th, tr:nth-child(even) {
   }
 }
 
-@media only screen and (max-width: 600px) {
-  .date {
-    width: 100%;
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mr10 {
+  margin-right: 10px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.p10 {
+  padding: 10px;
+}
+
+.responsive-table {
+  overflow-x: auto;
+}
+
+/* Header component styles */
+
+header {
+  background-color: rgb(220,0,0);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header.mercedes {
+  background-color: rgb(0,210,190);
+}
+
+header.redbull {
+  background-color: rgb(30,65,255);
+}
+
+header.renault {
+  background-color: rgb(255,245,0);
+}
+
+header.haas {
+  background-color: rgb(240,215,135);
+}
+
+header.racingpoint {
+  background-color: rgb(245,150,200);
+}
+
+header.tororosso {
+  background-color: rgb(70,155,255);
+}
+
+header.mclaren {
+  background-color: rgb(255,135,0);
+}
+
+header.alfaromeo {
+  background-color: rgb(155,0,0);
+}
+
+header.williams {
+  background-color: rgb(255,255,255);
+}
+
+h1 {
+  color: white;
+  margin: 0;
+}
+
+h1.mercedes, h1.renault, h1.haas, h1.racingpoint, h1.tororosso, h1.mclaren, h1.williams {
+  color: black;
+}
+
+option[value=ferrari] {
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+option[value=mercedes] {
+  background-color: rgb(0,210,190);
+}
+
+option[value=redbull] {
+  background-color: rgb(30,65,255);
+  color: white;
+}
+
+option[value=renault] {
+  background-color: rgb(255,245,0);
+}
+
+option[value=haas] {
+  background-color: rgb(240,215,135);
+}
+
+option[value=racingpoint] {
+  background-color: rgb(245,150,200);
+}
+
+option[value=tororosso] {
+  background-color: rgb(70,155,255);
+}
+
+option[value=mclaren] {
+  background-color: rgb(255,135,0);
+}
+
+option[value=alfaromeo] {
+  background-color: rgb(155,0,0);
+  color: white;
+}
+
+
+nav {
+  background-color: white;
+}
+
+nav button {
+  background-color: white;
+  letter-spacing: 1px;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+}
+
+nav button:hover, nav button.active {
+  cursor: pointer;
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+nav button.mercedes:hover, nav button.mercedes.active {
+  background-color: rgb(0,210,190);
+  color: black;
+}
+
+nav button.redbull:hover, nav button.redbull.active {
+  background-color: rgb(30,65,255);
+}
+
+nav button.renault:hover, nav button.renault.active {
+  background-color: rgb(255,245,0);
+  color: black;
+}
+
+nav button.haas:hover, nav button.haas.active {
+  background-color: rgb(240,215,135);
+  color: black;
+}
+
+nav button.racingpoint:hover, nav button.racingpoint.active {
+  background-color: rgb(245,150,200);
+  color: black;
+}
+
+nav button.tororosso:hover, nav button.tororosso.active {
+  background-color: rgb(70,155,255);
+  color: black;
+}
+
+nav button.mclaren:hover, nav button.mclaren.active {
+  background-color: rgb(255,135,0);
+  color: black;
+}
+
+nav button.alfaromeo:hover, nav button.alfaromeo.active {
+  background-color: rgb(155,0,0);
+}
+
+nav button.williams:hover, nav button.williams.active {
+  background-color: rgb(204,204,204);
+  color: black;
+}
+
+.dib {
+  display: inline-block;
+}
+
+/* Toast component styles */
+
+.toast {
+  position: fixed;
+  z-index: 3;
+  width: 16rem;
+  left: 50%;
+  margin-left: -8rem;
+  padding: 1rem;
+  background-color: #19a974;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: 0.5s;
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.toast.show {
+  bottom: 3rem;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* RaceDetails component styles */
+
+.break-word {
+  word-break: break-all;
+}
+
+.button-left, .button-right {
+  float: none;
+}
+
+@media only screen and (min-width: 600px) {
+  .button-left {
+    float: left;
   }
 
-  .date-time {
-    width: 40%;
+  .button-right {
+    float: right;
+  }
+}
+
+.prev-next {
+  overflow: auto;
+}
+
+/* RaceResults component styles */
+
+.tr {
+  text-align: right;
+}
+
+/* SeasonSelect component styles */
+
+.season {
+  display: inline-block;
+}
+
+@media only screen and (min-width: 600px) {
+  .season {
+    margin-left: 0;
+  }
+}
+
+.season-select {
+  border: 1px solid rgb(220,0,0);
+  padding-top: 12px;
+}
+
+.season-select.mercedes {
+  border: 1px solid rgb(0,210,190);;
+}
+
+.season-select.redbull {
+  border: 1px solid rgb(30,65,255);
+}
+
+.season-select.renault {
+  border: 1px solid rgb(255,245,0);
+}
+
+.season-select.haas {
+  border: 1px solid rgb(240,215,135);
+}
+
+.season-select.racingpoint {
+  border: 1px solid rgb(245,150,200);
+}
+
+.season-select.tororosso {
+  border: 1px solid rgb(70,155,255);
+}
+
+.season-select.mclaren {
+  border: 1px solid rgb(255,135,0);
+}
+
+.season-select.alfaromeo {
+  border: 1px solid rgb(155,0,0);
+}
+
+.season-select.williams {
+  border: 1px solid black;
+}
+
+/* Race component styles */
+
+.race {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.race:hover {
+  cursor: pointer;
+  background-color: #A9A9A9;
+}
+
+.unselectable {
+  user-select: none;
+}
+
+.striped {
+  background-color: #D3D3D3;
+}
+
+.upcoming {
+  background-color: rgba(220,0,0,0.5);
+}
+
+.upcoming.mercedes {
+  background-color: rgba(0,210,190,0.5);
+}
+
+.upcoming.redbull {
+  background-color: rgba(30,65,255,0.5);
+}
+
+.upcoming.renault {
+  background-color: rgba(255,245,0,0.5);
+}
+
+.upcoming.haas {
+  background-color: rgba(240,215,135,0.5);
+}
+
+.upcoming.racingpoint {
+  background-color: rgba(245,150,200,0.5);
+}
+
+.upcoming.tororosso {
+  background-color: rgba(70,155,255,0.5);
+}
+
+.upcoming.mclaren {
+  background-color: rgba(255,135,0,0.5);
+}
+
+.upcoming.alfaromeo {
+  background-color: rgba(155,0,0,0.5);
+}
+
+.upcoming.williams {
+  background-color: #A9A9A9;
+}
+
+.round {
+  display: inline-block;
+  width: 10%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.location {
+  display: inline-block;
+  width: 45%;
+}
+
+.date-time {
+  display: inline-block;
+  width: 45%;
+  padding-right: 10px;
+}
+
+.date {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+  padding-right: 10px;
+}
+
+.time {
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+}
+
+@media only screen and (max-width: 600px) {
+  .round {
+    display: none;
   }
 
   .location {
     width: 60%;
     padding-left: 10px;
   }
-  
-  .round {
-    display: none;
+
+  .date-time {
+    width: 40%;
+  }
+
+  .date {
+    width: 100%;
   }
 
   .time {
