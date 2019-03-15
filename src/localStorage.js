@@ -7,6 +7,7 @@ export const saveRaces = (races, season) => {
     localStorage.setItem('calendar_' + season, serializedRaces);
   } catch (error) {
     console.error('save to localStorage error', error);
+    return error;
   }
 }
 
@@ -58,12 +59,14 @@ export const saveNotifications = (notifications) => {
     localStorage.setItem('notifications', serializedNotifications);
   } catch (error) {
     console.error('save to localStorage error', error);
+    return error;
   }
 }
 
 export const loadNotifications = () => {
   try {
     const notificationObject = Joi.object().keys({
+      id: Joi.string().required(),
       body: Joi.string().required(),
       raceDate: Joi.date().required(),
       notificationDate: Joi.date().required(),

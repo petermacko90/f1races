@@ -29,6 +29,7 @@ class App extends Component {
       notifications: [],
       isShowToast: false,
       toastText: '',
+      toastType: '',
       route: 'RaceList',
       theme: ''
     };
@@ -54,13 +55,17 @@ class App extends Component {
     saveTheme(e.target.value);
   }
 
-  showToast = (text) => {
+  showToast = (text, type = 'success') => {
     this.setState({
       isShowToast: true,
-      toastText: text
+      toastText: text,
+      toastType: type
     });
     setTimeout(() => {
-      this.setState({ isShowToast: false });
+      this.setState({
+        isShowToast: false,
+        toastType: ''
+      });
     }, 3000);
   }
 
@@ -178,18 +183,22 @@ class App extends Component {
   }
 
   onSaveRaces = () => {
-    saveRaces(this.state.races[this.state.season], this.state.season);
-    this.showToast('Calendar saved to browser storage');
+    const error = saveRaces(this.state.races[this.state.season], this.state.season);
+    if (error) {
+      this.showToast('Error - calendar was not saved :(', 'error');
+    } else {
+      this.showToast('Calendar saved to browser storage');
+    }
   }
 
   addNotification = (raceName, raceDate, notificationWhen) => () => {
     if (!('Notification' in window)) {
-      this.showToast('This browser does not support notifications :(');
+      this.showToast('This browser does not support notifications :(', 'error');
       return;
     }
 
     if (raceDate < new Date()) {
-      this.showToast('This race already started or is over');
+      this.showToast('This race already started or is over', 'error');
       return;
     }
 
@@ -206,7 +215,16 @@ class App extends Component {
         notificationDate.setHours(notificationDate.getHours() - 1);
     }
 
+    const id = notificationDate.getTime();
+    for (let i = 0, l = this.state.notifications.length; i < l; i++) {
+      if (this.state.notifications[i].id === id) {
+        this.showToast('Notification already exists', 'error');
+        return;
+      }
+    }
+
     const notification = {
+      id,
       raceDate,
       notificationDate,
       notified: false,
@@ -220,8 +238,12 @@ class App extends Component {
           return { notifications: state.notifications.concat(notification) };
         },
         () => {
-          saveNotifications(this.state.notifications);
-          this.showToast('Notification saved');
+          const error = saveNotifications(this.state.notifications);
+          if (error) {
+            this.showToast('Error - notification was not saved :(', 'error');
+          } else {
+            this.showToast('Notification saved to browser storage');
+          }
         }
       );
     } else if (Notification.permission !== 'denied') {
@@ -232,8 +254,12 @@ class App extends Component {
               return { notifications: state.notifications.concat(notification) };
             },
             () => {
-              saveNotifications(this.state.notifications);
-              this.showToast('Notification saved');
+              const error = saveNotifications(this.state.notifications);
+              if (error) {
+                this.showToast('Error - notification was not saved :(', 'error');
+              } else {
+                this.showToast('Notification saved to browser storage');
+              }
             }
           );
         }
@@ -241,12 +267,17 @@ class App extends Component {
     }
   }
 
-  deleteNotification = (i) => () => {
+  deleteNotification = (id) => () => {
     if (window.confirm('Are you sure you want to delete this notification?')) {
-      const notifications = this.state.notifications;
-      notifications.splice(i, 1);
-      this.setState({ notifications });
-      saveNotifications(notifications);
+      const notifications = this.state.notifications.filter(notification => {
+        return notification.id !== id;
+      });
+      const error = saveNotifications(notifications);
+      if (error) {
+        this.showToast('Error - Unable to delete notification :(', 'error');
+      } else {
+        this.setState({ notifications });
+      }
     }
   }
 
@@ -257,7 +288,8 @@ class App extends Component {
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
-      results, isLoadingResults, resultsError, isShowToast, toastText
+      results, isLoadingResults, resultsError,
+      isShowToast, toastText, toastType
     } = this.state;
     const seasonRaces = this.state.races[season];
 
@@ -293,7 +325,7 @@ class App extends Component {
             route={route}
             setTheme={this.setTheme}
           />
-          <Toast show={isShowToast} text={toastText} />
+          <Toast show={isShowToast} text={toastText} type={toastType} />
           { route === 'Notifications' &&
             <Notifications
               notifications={notifications}

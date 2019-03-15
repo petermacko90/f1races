@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Toast = ({ show, text }) => {
+const Toast = ({ show, text, type }) => {
   return (
-    <div className={"toast" + (show ? ' show' : '')}>
+    <div className={`toast ${show ? 'show' : ''} ${type}`}>
       {text}
     </div>
   );

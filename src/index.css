@@ -361,13 +361,20 @@ nav button.williams:hover, nav button.williams.active {
   left: 50%;
   margin-left: -8rem;
   padding: 1rem;
-  background-color: #19a974;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.2);
   text-align: center;
   transition: 0.5s;
   bottom: 0;
   opacity: 0;
   visibility: hidden;
+}
+
+.toast.success {
+  background-color: #19a974;
+}
+
+.toast.error {
+  background-color: #e44e4e;
 }
 
 .toast.show {

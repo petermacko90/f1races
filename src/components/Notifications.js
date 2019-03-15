@@ -20,14 +20,14 @@ const Notifications = ({ notifications, deleteNotification }) => {
             </thead>
             <tbody>
               {
-                notifications.map((notification, i) => {
+                notifications.map(notification => {
                   const {
-                    title, notified, raceDate, notificationDate
+                    id, title, notified, raceDate, notificationDate
                   } = notification;
                   return (
-                    <tr key={i}>
+                    <tr key={id}>
                       <td>
-                        <button onClick={deleteNotification(i)}
+                        <button onClick={deleteNotification(id)}
                         className='button' title='Delete Notification'>
                           &times;
                         </button>
