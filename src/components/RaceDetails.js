@@ -1,5 +1,6 @@
 import React from 'react';
 import RaceResults from './RaceResults';
+import AddNotification from './AddNotification';
 import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
 
@@ -30,10 +31,11 @@ const RaceDetails = ({
                 </button>
             }
           </div>
-          <button onClick={addNotification(race.raceName, dateTime, '1H')}
-          className={'button ' + theme}>
-            Add notification
-          </button>
+          <AddNotification
+            addNotification={addNotification}
+            raceName={race.raceName}
+            dateTime={dateTime}
+          />
           <h2>Race Details</h2>
           <p>Season: {race.season}</p>
           <p>Round: {round}</p>

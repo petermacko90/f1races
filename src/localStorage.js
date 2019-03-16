@@ -66,7 +66,7 @@ export const saveNotifications = (notifications) => {
 export const loadNotifications = () => {
   try {
     const notificationObject = Joi.object().keys({
-      id: Joi.string().required(),
+      id: Joi.number().required(),
       body: Joi.string().required(),
       raceDate: Joi.date().required(),
       notificationDate: Joi.date().required(),
