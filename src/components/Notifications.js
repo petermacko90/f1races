@@ -1,6 +1,9 @@
 import React from 'react';
 
 const Notifications = ({ notifications, deleteNotification }) => {
+  const sortedNotifications = notifications.sort((a, b) => {
+    return a.notificationDate - b.notificationDate;
+  });
   if (notifications.length === 0) {
     return <p className='p10'>No saved notifications</p>;
   } else {
@@ -20,7 +23,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
             </thead>
             <tbody>
               {
-                notifications.map(notification => {
+                sortedNotifications.map(notification => {
                   const {
                     id, title, notified, raceDate, notificationDate
                   } = notification;
