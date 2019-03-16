@@ -5,8 +5,8 @@ import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
 
 const RaceDetails = ({
-  race, raceCount, results, isLoadingResults, resultsError,
-  onClickRace, getRaceResults, addNotification
+  race, raceCount, results, isLoadingResults, resultsError, onClickRace,
+  getRaceResults, addNotification, notificationWhen, setNotificationWhen
 }) => {
   const dateTime = getDate(race.date, race.time);
   const round = Number(race.round);
@@ -35,6 +35,8 @@ const RaceDetails = ({
             addNotification={addNotification}
             raceName={race.raceName}
             dateTime={dateTime}
+            notificationWhen={notificationWhen}
+            setNotificationWhen={setNotificationWhen}
           />
           <h2>Race Details</h2>
           <p>Season: {race.season}</p>

@@ -8,7 +8,7 @@ import Notifications from './components/Notifications';
 import SeasonSelect from './components/SeasonSelect';
 import Toast from './components/Toast';
 import { ThemeProvider } from './ThemeContext';
-import { FIRST_SEASON } from './constants';
+import { FIRST_SEASON, notificationOptions } from './constants';
 import {
   saveRaces, loadRaces, saveNotifications, loadNotifications,
   saveTheme, loadTheme
@@ -27,6 +27,7 @@ class App extends Component {
       isLoadingResults: false,
       resultsError: null,
       notifications: [],
+      notificationWhen: '60',
       isShowToast: false,
       toastText: '',
       toastType: '',
@@ -202,18 +203,11 @@ class App extends Component {
       return;
     }
 
-    let body = '';
     let notificationDate = new Date(raceDate);
+    notificationDate.setMinutes(notificationDate.getMinutes() - (Number(notificationWhen) ? notificationWhen : 60));
 
-    switch (notificationWhen) {
-      case '1H':
-        body = 'Starts in 1 Hour';
-        notificationDate.setHours(notificationDate.getHours() - 1);
-        break;
-      default:
-        body = 'Starts in 1 Hour';
-        notificationDate.setHours(notificationDate.getHours() - 1);
-    }
+    let body = 'Race Starts in ';
+    body += notificationOptions[notificationWhen] ? notificationOptions[notificationWhen] : notificationOptions['60'];
 
     const id = notificationDate.getTime();
     for (let i = 0, l = this.state.notifications.length; i < l; i++) {
@@ -281,6 +275,10 @@ class App extends Component {
     }
   }
 
+  setNotificationWhen = (e) => {
+    this.setState({ notificationWhen: e.target.value });
+  }
+
   setRoute = (route) => () => {
     this.setState({ route });
   }
@@ -288,7 +286,7 @@ class App extends Component {
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
-      results, isLoadingResults, resultsError,
+      results, isLoadingResults, resultsError, notificationWhen,
       isShowToast, toastText, toastType
     } = this.state;
     const seasonRaces = this.state.races[season];
@@ -342,6 +340,8 @@ class App extends Component {
               onClickRace={this.onClickRace}
               getRaceResults={this.getRaceResults}
               addNotification={this.addNotification}
+              notificationWhen={notificationWhen}
+              setNotificationWhen={this.setNotificationWhen}
             />
           }
           { route === 'RaceList' &&
