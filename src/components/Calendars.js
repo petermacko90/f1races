@@ -23,12 +23,12 @@ class Calendars extends Component {
   render() {
     return (
       <div className='container'>
-        <h2>Saved Calendars</h2>
+        <h2 className='ml10 mr10'>Saved Calendars</h2>
         {
           this.state.calendars.length === 0 ?
             <p className='p10'>No saved calendars</p>
           :
-            <ul>
+            <ul className='ml10 mr10'>
               {
                 this.state.calendars.map(calendar => {
                   return (
