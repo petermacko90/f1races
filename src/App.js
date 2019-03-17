@@ -28,7 +28,7 @@ class App extends Component {
       isLoadingResults: false,
       resultsError: null,
       notifications: [],
-      notificationWhen: '60',
+      notificationWhen: '10',
       isShowToast: false,
       toastText: '',
       toastType: '',
@@ -276,8 +276,8 @@ class App extends Component {
     }
   }
 
-  setNotificationWhen = (e) => {
-    this.setState({ notificationWhen: e.target.value });
+  setNotificationWhen = (notificationWhen) => {
+    this.setState({ notificationWhen });
   }
 
   setRoute = (route) => () => {
