@@ -383,6 +383,13 @@ nav button.williams:hover, nav button.williams.active {
   visibility: visible;
 }
 
+/* Calendars component styles */
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
 /* RaceDetails component styles */
 
 .break-word {

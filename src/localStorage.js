@@ -1,6 +1,21 @@
 import Joi from 'joi';
 import { teams } from './constants';
 
+export const getCalendars = () => {
+  try {
+    let calendars = [];
+    for (let i = 0, l = localStorage.length; i < l; i++) {
+      if (/^calendar_\d{4}$/.test(localStorage.key(i))) {
+        calendars.push(localStorage.key(i));
+      }
+    }
+    return calendars;
+  } catch (error) {
+    console.error('load from localStorage error', error);
+    return [];
+  }
+}
+
 export const saveRaces = (races, season) => {
   try {
     const serializedRaces = JSON.stringify(races);

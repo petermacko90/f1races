@@ -29,6 +29,10 @@ const Header = ({ setRoute, route, setTheme }) => {
             className={`${route === 'Notifications' ? 'active' : ''} ${theme}`}>
               Saved Notifications
             </button>
+            <button onClick={setRoute('Calendars')}
+            className={`${route === 'Calendars' ? 'active' : ''} ${theme}`}>
+              Saved Calendars
+            </button>
           </nav>
         </header>
       }

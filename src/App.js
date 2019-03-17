@@ -5,6 +5,7 @@ import Header from './components/Header';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
+import Calendars from './components/Calendars';
 import SeasonSelect from './components/SeasonSelect';
 import Toast from './components/Toast';
 import { ThemeProvider } from './ThemeContext';
@@ -330,6 +331,7 @@ class App extends Component {
               deleteNotification={this.deleteNotification}
             />
           }
+          { route === 'Calendars' && <Calendars /> }
           { route === 'RaceDetails' &&
             <RaceDetails
               race={selectedRace}
