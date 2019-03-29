@@ -38,14 +38,14 @@ export const loadRaces = (season) => {
       circuitId: Joi.string(),
       url: Joi.string().required(),
       circuitName: Joi.string().required(),
-      Location: locationObject
+      Location: locationObject.required()
     });
     const raceObject = Joi.object().keys({
       season: Joi.string().required(),
       round: Joi.string().required(),
       url: Joi.string().required(),
       raceName: Joi.string().required(),
-      Circuit: circuitObject,
+      Circuit: circuitObject.required(),
       date: Joi.string().required(),
       time: Joi.string()
     });
