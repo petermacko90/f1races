@@ -1,13 +1,13 @@
-const urlBase = 'http://ergast.com/api/f1/';
+const urlBase = 'http://ergast.com/api/f1';
 
 const fetchData = (url) => {
   return fetch(url).then(response => response.json());
 }
 
 export const fetchRaces = (season) => {
-  return fetchData(`${urlBase}${season}.json`)
+  return fetchData(`${urlBase}/${season}.json`);
 }
 
 export const fetchRaceResults = (season, round) => {
-  return fetchData(`${urlBase}${season}/${round}/results.json`);
+  return fetchData(`${urlBase}/${season}/${round}/results.json`);
 }

@@ -180,7 +180,10 @@ class App extends Component {
   }
 
   setSeason = (season) => {
-    this.setState({ season });
+    this.setState({
+      season,
+      error: null
+    });
     if (!this.state.races[season]) {
       this.getRaces(season);
     }

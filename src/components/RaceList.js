@@ -5,18 +5,19 @@ import { ThemeConsumer } from '../ThemeContext';
 const RaceList = ({
   races, upcomingRace, isLoading, error, onClickRace, onEnterRace, onSaveRaces
 }) => {
-  if (!races) return null;
   return (
     <ThemeConsumer>
       {theme =>
         <Fragment>
-          <button onClick={onSaveRaces}
-          className={'button ml10 mb10 ' + theme}>
-            Save calendar
-          </button>
+          { !error && !isLoading &&
+            <button onClick={onSaveRaces}
+            className={'button ml10 mb10 ' + theme}>
+              Save calendar
+            </button>
+          }
           { isLoading && <p className='p10'>Loading...</p> }
           { error && <p className='p10'>{error.message}</p> }
-          {
+          { races &&
             races.map(race => {
               return (
                 <Race
