@@ -1,14 +1,13 @@
 import React from 'react';
-import CustomSelect from './CustomSelect';
 import { ThemeConsumer } from '../ThemeContext';
 import { notificationOptions } from '../constants';
 
 const AddNotification = ({
   addNotification, raceName, dateTime, notificationWhen, setNotificationWhen
 }) => {
-  const options = [];
+  let options = [];
   for (const [key, value] of Object.entries(notificationOptions)) {
-    options.push({id: key, text: value + ' Before' });
+    options.push(<option key={key} value={key}>{value + ' Before'}</option>);
   }
 
   return (
@@ -19,11 +18,9 @@ const AddNotification = ({
           onClick={addNotification(raceName, dateTime, notificationWhen)}>
             Add notification
           </button>
-          <CustomSelect
-            value={notificationOptions[notificationWhen] + ' Before'}
-            onChange={setNotificationWhen}
-            options={options}
-          />
+          <select value={notificationWhen} onChange={setNotificationWhen}>
+            {options}
+          </select>
         </div>
       }
     </ThemeConsumer>
