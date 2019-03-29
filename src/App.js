@@ -305,11 +305,10 @@ class App extends Component {
       selectedRace = this.state.races[this.state.season][i];
     }
 
-    const dateNow = new Date();
     let upcomingRace = '';
-    if (seasonRaces && season === dateNow.getFullYear()) {
-      for (let i = 0, l = seasonRaces.length; i < l; i++) {
-        if (dateNow < new Date(seasonRaces[i].date + 'T' + seasonRaces[i].time)) {
+    if (seasonRaces && season === CURRENT_SEASON) {
+      for (let i = 0, l = seasonRaces.length, d = new Date(); i < l; i++) {
+        if (d < new Date(seasonRaces[i].date + 'T' + seasonRaces[i].time)) {
           upcomingRace = seasonRaces[i].round;
           break;
         }
