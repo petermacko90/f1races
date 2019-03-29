@@ -9,7 +9,9 @@ import Calendars from './components/Calendars';
 import SeasonSelect from './components/SeasonSelect';
 import Toast from './components/Toast';
 import { ThemeProvider } from './ThemeContext';
-import { FIRST_SEASON, notificationOptions } from './constants';
+import {
+  FIRST_SEASON, CURRENT_SEASON, notificationOptions
+} from './constants';
 import {
   saveRaces, loadRaces, saveNotifications, loadNotifications,
   saveTheme, loadTheme
@@ -22,7 +24,7 @@ class App extends Component {
       races: {},
       isLoading: false,
       error: null,
-      season: new Date().getFullYear(),
+      season: CURRENT_SEASON,
       selectedRaceRound: 0,
       results: {},
       isLoadingResults: false,
@@ -113,7 +115,7 @@ class App extends Component {
             races: { ...this.state.races, ...newRaces },
             isLoading: false
           });
-          if (season === new Date().getFullYear()) {
+          if (season === CURRENT_SEASON) {
             saveRaces(data.MRData.RaceTable.Races, season);
           }
         })
@@ -172,7 +174,7 @@ class App extends Component {
 
   onChangeSeason = (change) => () => {
     const newSeason = Number(this.state.season) + change;
-    if (newSeason >= FIRST_SEASON && newSeason <= new Date().getFullYear()) {
+    if (newSeason >= FIRST_SEASON && newSeason <= CURRENT_SEASON) {
       this.setSeason(newSeason);
     }
   }
@@ -304,7 +306,7 @@ class App extends Component {
     let upcomingRace = '';
     if (seasonRaces && season === dateNow.getFullYear()) {
       for (let i = 0, l = seasonRaces.length; i < l; i++) {
-        if (dateNow < new Date(seasonRaces[i].date + ' ' + seasonRaces[i].time)) {
+        if (dateNow < new Date(seasonRaces[i].date + 'T' + seasonRaces[i].time)) {
           upcomingRace = seasonRaces[i].round;
           break;
         }
