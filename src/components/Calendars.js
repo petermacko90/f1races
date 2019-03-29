@@ -21,6 +21,10 @@ class Calendars extends Component {
   }
 
   render() {
+    const sortedCalendars = this.state.calendars.slice().sort((a, b) => {
+      return a.slice(-4) - b.slice(-4);
+    });
+
     return (
       <div className='container'>
         <h2 className='ml10 mr10'>Saved Calendars</h2>
@@ -30,10 +34,11 @@ class Calendars extends Component {
           :
             <ul className='ml10 mr10'>
               {
-                this.state.calendars.map(calendar => {
+                sortedCalendars.map(calendar => {
                   return (
                     <li key={calendar}>
-                      <button className='button mr10 mb10' title='Delete Calendar'
+                      <button className='button mr10 mb10'
+                      title='Delete Calendar'
                       onClick={this.deleteCalendar(calendar)}>
                         &times;
                       </button>

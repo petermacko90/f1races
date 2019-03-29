@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Notifications = ({ notifications, deleteNotification }) => {
-  const sortedNotifications = notifications.sort((a, b) => {
+  const sortedNotifications = notifications.slice().sort((a, b) => {
     return a.notificationDate - b.notificationDate;
   });
 
