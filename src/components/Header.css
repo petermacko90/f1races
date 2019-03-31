@@ -151,3 +151,14 @@ nav button.williams:hover, nav button.williams.active {
 .dib {
   display: inline-block;
 }
+
+@media only screen and (min-width: 600px) {
+  .flex {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.select-wrapper {
+  margin: 15px;
+}

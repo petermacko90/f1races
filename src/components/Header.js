@@ -8,18 +8,21 @@ const Header = ({ setRoute, route, setTheme }) => {
     <ThemeConsumer>
       {theme =>
         <header className={theme}>
-          <div>
+          <div className='flex'>
             <h1 className={'dib p10 ' + theme}>F1 Races</h1>
-            <select value={theme} onChange={setTheme} className={theme}>
-              {
-                teams.map(team => {
-                  return (
-                    <option key={team.id} value={team.id}>{team.name}</option>
-                  );
-                })
-              }
-              
-            </select>
+            <div className='select-wrapper'>
+              <select value={theme} onChange={setTheme} className={theme}>
+                {
+                  teams.map(team => {
+                    return (
+                      <option key={team.id} value={team.id}>
+                        {team.name}
+                      </option>
+                    );
+                  })
+                }
+              </select>
+            </div>
           </div>
           <nav className={theme}>
             <button onClick={setRoute('RaceList')}
