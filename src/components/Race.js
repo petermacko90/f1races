@@ -1,4 +1,5 @@
 import React from 'react';
+import './Race.css';
 import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
 

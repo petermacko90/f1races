@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Calendars.css';
 import { getCalendars } from '../localStorage';
 
 class Calendars extends Component {

@@ -1,4 +1,5 @@
 import React from 'react';
+import './SeasonSelect.css';
 import { FIRST_SEASON, CURRENT_SEASON } from '../constants';
 import { ThemeConsumer } from '../ThemeContext';
 

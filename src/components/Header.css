@@ -1,0 +1,153 @@
+header {
+  background-color: rgb(220,0,0);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+header.mercedes {
+  background-color: rgb(0,210,190);
+}
+
+header.redbull {
+  background-color: rgb(30,65,255);
+}
+
+header.renault {
+  background-color: rgb(255,245,0);
+}
+
+header.haas {
+  background-color: rgb(240,215,135);
+}
+
+header.racingpoint {
+  background-color: rgb(245,150,200);
+}
+
+header.tororosso {
+  background-color: rgb(70,155,255);
+}
+
+header.mclaren {
+  background-color: rgb(255,135,0);
+}
+
+header.alfaromeo {
+  background-color: rgb(155,0,0);
+}
+
+header.williams {
+  background-color: rgb(255,255,255);
+}
+
+h1 {
+  color: white;
+  margin: 0;
+}
+
+h1.mercedes, h1.renault, h1.haas, h1.racingpoint, h1.tororosso, h1.mclaren, h1.williams {
+  color: black;
+}
+
+option[value=ferrari] {
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+option[value=mercedes] {
+  background-color: rgb(0,210,190);
+}
+
+option[value=redbull] {
+  background-color: rgb(30,65,255);
+  color: white;
+}
+
+option[value=renault] {
+  background-color: rgb(255,245,0);
+}
+
+option[value=haas] {
+  background-color: rgb(240,215,135);
+}
+
+option[value=racingpoint] {
+  background-color: rgb(245,150,200);
+}
+
+option[value=tororosso] {
+  background-color: rgb(70,155,255);
+}
+
+option[value=mclaren] {
+  background-color: rgb(255,135,0);
+}
+
+option[value=alfaromeo] {
+  background-color: rgb(155,0,0);
+  color: white;
+}
+
+nav {
+  background-color: white;
+}
+
+nav button {
+  background-color: white;
+  letter-spacing: 1px;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+}
+
+nav button:hover, nav button.active {
+  cursor: pointer;
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+nav button.mercedes:hover, nav button.mercedes.active {
+  background-color: rgb(0,210,190);
+  color: black;
+}
+
+nav button.redbull:hover, nav button.redbull.active {
+  background-color: rgb(30,65,255);
+}
+
+nav button.renault:hover, nav button.renault.active {
+  background-color: rgb(255,245,0);
+  color: black;
+}
+
+nav button.haas:hover, nav button.haas.active {
+  background-color: rgb(240,215,135);
+  color: black;
+}
+
+nav button.racingpoint:hover, nav button.racingpoint.active {
+  background-color: rgb(245,150,200);
+  color: black;
+}
+
+nav button.tororosso:hover, nav button.tororosso.active {
+  background-color: rgb(70,155,255);
+  color: black;
+}
+
+nav button.mclaren:hover, nav button.mclaren.active {
+  background-color: rgb(255,135,0);
+  color: black;
+}
+
+nav button.alfaromeo:hover, nav button.alfaromeo.active {
+  background-color: rgb(155,0,0);
+}
+
+nav button.williams:hover, nav button.williams.active {
+  background-color: rgb(204,204,204);
+  color: black;
+}
+
+.dib {
+  display: inline-block;
+}

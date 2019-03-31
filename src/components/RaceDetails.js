@@ -1,4 +1,5 @@
 import React from 'react';
+import './RaceDetails.css';
 import RaceResults from './RaceResults';
 import AddNotification from './AddNotification';
 import { getDate } from '../helpers';

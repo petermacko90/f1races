@@ -1,4 +1,5 @@
 import React from 'react';
+import './Toast.css';
 
 const Toast = ({ show, text, type }) => {
   return (
