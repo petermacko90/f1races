@@ -20,7 +20,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
             </button>
           }
           <select value={season} onChange={onSelectSeason}
-          className={'season-select ' + theme} aria-label='Select season'>
+          className={theme} aria-label='Select season'>
             {seasonOptions}
           </select>
           { season !== CURRENT_SEASON &&

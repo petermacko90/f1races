@@ -192,3 +192,45 @@ th, tr:nth-child(even) {
 .responsive-table {
   overflow-x: auto;
 }
+
+select {
+  border: 1px solid rgb(220,0,0);
+  font-size: 16px;
+  padding: 4px;
+}
+
+select.mercedes {
+  border: 1px solid rgb(0,210,190);
+}
+
+select.redbull {
+  border: 1px solid rgb(30,65,255);
+}
+
+select.renault {
+  border: 1px solid rgb(255,245,0);
+}
+
+select.haas {
+  border: 1px solid rgb(240,215,135);
+}
+
+select.racingpoint {
+  border: 1px solid rgb(245,150,200);
+}
+
+select.tororosso {
+  border: 1px solid rgb(70,155,255);
+}
+
+select.mclaren {
+  border: 1px solid rgb(255,135,0);
+}
+
+select.alfaromeo {
+  border: 1px solid rgb(155,0,0);
+}
+
+select.williams {
+  border: 1px solid black;
+}

@@ -18,7 +18,8 @@ const AddNotification = ({
           onClick={addNotification(raceName, dateTime, notificationWhen)}>
             Add notification
           </button>
-          <select value={notificationWhen} onChange={setNotificationWhen}>
+          <select value={notificationWhen} onChange={setNotificationWhen}
+          className={theme}>
             {options}
           </select>
         </div>
