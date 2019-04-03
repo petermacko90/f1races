@@ -4,6 +4,10 @@ import RaceResults from './RaceResults';
 import AddNotification from './AddNotification';
 import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faExternalLinkAlt, faAngleLeft, faAngleRight
+} from '@fortawesome/free-solid-svg-icons';
 
 const RaceDetails = ({
   race, raceCount, results, isLoadingResults, resultsError, onClickRace,
@@ -21,14 +25,14 @@ const RaceDetails = ({
               round !== 1 &&
                 <button className={'button button-left mr10 ' + theme}
                 onClick={onClickRace(round - 1)}>
-                  Previous Race
+                  <FontAwesomeIcon icon={faAngleLeft} /> Previous Race
                 </button>
             }
             {
               round !== raceCount &&
                 <button className={'button button-right ' + theme}
                 onClick={onClickRace(round + 1)}>
-                  Next Race
+                  Next Race <FontAwesomeIcon icon={faAngleRight} />
                 </button>
             }
           </div>
@@ -40,24 +44,22 @@ const RaceDetails = ({
             setNotificationWhen={setNotificationWhen}
           />
           <h2>Race Details</h2>
+          <p>Race: <a href={race.url} className='break-word'
+          target='_blank' rel='noopener noreferrer'>
+            {race.raceName} <FontAwesomeIcon icon={faExternalLinkAlt} />
+          </a></p>
           <p>Season: {race.season}</p>
           <p>Round: {round}</p>
           <p>
             Location: {race.Circuit.Location.country}, {race.Circuit.Location.locality}
           </p>
+          <p>Circuit: <a href={race.Circuit.url} className='break-word'
+          target='_blank' rel='noopener noreferrer'>
+            {race.Circuit.circuitName} <FontAwesomeIcon icon={faExternalLinkAlt} />
+          </a></p>
           <p>
             Date and time: {dateTime.toLocaleDateString()} {race.time && dateTime.toLocaleTimeString()}
           </p>
-          <p>Race name: {race.raceName}</p>
-          <p>Race URL: <a href={race.url} className='break-word'
-          target='_blank' rel='noopener noreferrer'>
-            {race.url}
-          </a></p>
-          <p>Circuit name: {race.Circuit.circuitName}</p>
-          <p>Circuit URL: <a href={race.Circuit.url} className='break-word'
-          target='_blank' rel='noopener noreferrer'>
-            {race.Circuit.url}
-          </a></p>
           {
             results ?
               <RaceResults results={results} />
