@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
 import AddNotification from './AddNotification';
@@ -6,7 +6,7 @@ import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faExternalLinkAlt, faAngleLeft, faAngleRight
+  faExternalLinkAlt, faAngleLeft, faAngleRight, faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 
 const RaceDetails = ({
@@ -65,11 +65,17 @@ const RaceDetails = ({
               <RaceResults results={results} />
             :
               <button onClick={getRaceResults(race.season, round)}
-              className={'button ' + theme}>
-                Load Results
+              className={'button ' + theme} disabled={isLoadingResults}>
+                {
+                  isLoadingResults ?
+                    <Fragment>
+                      <FontAwesomeIcon icon={faSpinner} spin={true} /> {'Loading...'}
+                    </Fragment>
+                  :
+                    <Fragment>Load Results</Fragment>
+                }
               </button>
           }
-          { isLoadingResults && <p>Loading...</p> }
           { resultsError && <p>{resultsError.message}</p> }
         </div>
       }
