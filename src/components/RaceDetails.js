@@ -6,7 +6,7 @@ import { getDate } from '../helpers';
 import { ThemeConsumer } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faExternalLinkAlt, faAngleLeft, faAngleRight, faSpinner
+  faExternalLinkAlt, faChevronLeft, faChevronRight, faSpinner
 } from '@fortawesome/free-solid-svg-icons';
 
 const RaceDetails = ({
@@ -25,14 +25,14 @@ const RaceDetails = ({
               round !== 1 &&
                 <button className={'button button-left mr10 ' + theme}
                 onClick={onClickRace(round - 1)}>
-                  <FontAwesomeIcon icon={faAngleLeft} /> Previous Race
+                  <FontAwesomeIcon icon={faChevronLeft} /> Previous Race
                 </button>
             }
             {
               round !== raceCount &&
                 <button className={'button button-right ' + theme}
                 onClick={onClickRace(round + 1)}>
-                  Next Race <FontAwesomeIcon icon={faAngleRight} />
+                  Next Race <FontAwesomeIcon icon={faChevronRight} />
                 </button>
             }
           </div>

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import Race from './Race';
 import { ThemeConsumer } from '../ThemeContext';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-solid-svg-icons';
 const RaceList = ({
   races, upcomingRace, isLoading, error, onClickRace, onEnterRace, onSaveRaces
 }) => {
@@ -12,7 +13,7 @@ const RaceList = ({
           { !error && !isLoading &&
             <button onClick={onSaveRaces}
             className={'button ml10 mb10 ' + theme}>
-              Save calendar
+              <FontAwesomeIcon icon={faSave} /> Save calendar
             </button>
           }
           { isLoading && <p className='p10'>Loading...</p> }

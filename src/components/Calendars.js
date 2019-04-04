@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './Calendars.css';
 import { getCalendars } from '../localStorage';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 class Calendars extends Component {
   constructor() {
@@ -41,7 +43,7 @@ class Calendars extends Component {
                       <button className='button mr10 mb10'
                       title='Delete Calendar'
                       onClick={this.deleteCalendar(calendar)}>
-                        &times;
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </button>
                       <span>{calendar.slice(-4)}</span>
                     </li>

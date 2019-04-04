@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Notifications = ({ notifications, deleteNotification }) => {
   const sortedNotifications = notifications.slice().sort((a, b) => {
@@ -34,7 +36,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
                         <td>
                           <button onClick={deleteNotification(id)}
                           className='button' title='Delete Notification'>
-                            &times;
+                            <FontAwesomeIcon icon={faTrashAlt} />
                           </button>
                         </td>
                         <td>{title}</td>

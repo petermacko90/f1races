@@ -1,6 +1,8 @@
 import React from 'react';
 import { ThemeConsumer } from '../ThemeContext';
 import { notificationOptions } from '../constants';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const AddNotification = ({
   addNotification, raceName, dateTime, notificationWhen, setNotificationWhen
@@ -16,7 +18,7 @@ const AddNotification = ({
         <div>
           <button className={'button ' + theme}
           onClick={addNotification(raceName, dateTime, notificationWhen)}>
-            Add notification
+            <FontAwesomeIcon icon={faBell} /> Add notification
           </button>
           <select value={notificationWhen} onChange={setNotificationWhen}
           className={theme}>
