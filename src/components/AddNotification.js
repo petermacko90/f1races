@@ -21,7 +21,7 @@ const AddNotification = ({
             <FontAwesomeIcon icon={faBell} /> Add notification
           </button>
           <select value={notificationWhen} onChange={setNotificationWhen}
-          className={theme}>
+          className={theme} aria-label='Select notification time'>
             {options}
           </select>
         </div>

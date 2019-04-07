@@ -18,6 +18,10 @@ button, select {
     sans-serif;
 }
 
+select {
+  background-color: white;
+}
+
 table {
   border-collapse: collapse;
   border-spacing: 0;

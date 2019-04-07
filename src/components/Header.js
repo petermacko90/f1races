@@ -11,7 +11,8 @@ const Header = ({ setRoute, route, setTheme }) => {
           <div className='flex'>
             <h1 className={'dib p10 ' + theme}>F1 Races</h1>
             <div className='select-wrapper'>
-              <select value={theme} onChange={setTheme} className={theme}>
+              <select value={theme} onChange={setTheme} className={theme}
+              aria-label='Select theme'>
                 {
                   teams.map(team => {
                     return (

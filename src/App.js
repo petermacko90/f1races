@@ -7,6 +7,7 @@ import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
 import Calendars from './components/Calendars';
 import SeasonSelect from './components/SeasonSelect';
+import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ThemeProvider } from './ThemeContext';
@@ -257,16 +258,14 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   deleteNotification = (id) => () => {
-    if (window.confirm('Are you sure you want to delete this notification?')) {
-      const notifications = this.state.notifications.filter(notification => {
-        return notification.id !== id;
-      });
-      const error = saveNotifications(notifications);
-      if (error) {
-        toast.error('Error - Unable to delete notification :(');
-      } else {
-        this.setState({ notifications });
-      }
+    const notifications = this.state.notifications.filter(notification => {
+      return notification.id !== id;
+    });
+    const error = saveNotifications(notifications);
+    if (error) {
+      toast.error('Error - Unable to delete notification :(');
+    } else {
+      this.setState({ notifications });
     }
   }
 
@@ -366,6 +365,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
               />
             </div>
           }
+          <Footer />
         </Fragment>
       </ThemeProvider>
     );
