@@ -1,0 +1,15 @@
+{
+  "main.css": "/f1races/static/css/main.e5098fbf.chunk.css",
+  "main.js": "/f1races/static/js/main.6b2d2d41.chunk.js",
+  "main.js.map": "/f1races/static/js/main.6b2d2d41.chunk.js.map",
+  "runtime~main.js": "/f1races/static/js/runtime~main.d1915ec3.js",
+  "runtime~main.js.map": "/f1races/static/js/runtime~main.d1915ec3.js.map",
+  "static/css/2.a9c6c121.chunk.css": "/f1races/static/css/2.a9c6c121.chunk.css",
+  "static/js/2.9d9e22ea.chunk.js": "/f1races/static/js/2.9d9e22ea.chunk.js",
+  "static/js/2.9d9e22ea.chunk.js.map": "/f1races/static/js/2.9d9e22ea.chunk.js.map",
+  "index.html": "/f1races/index.html",
+  "precache-manifest.e329ae9aab29b53b85744751681d73f2.js": "/f1races/precache-manifest.e329ae9aab29b53b85744751681d73f2.js",
+  "service-worker.js": "/f1races/service-worker.js",
+  "static/css/2.a9c6c121.chunk.css.map": "/f1races/static/css/2.a9c6c121.chunk.css.map",
+  "static/css/main.e5098fbf.chunk.css.map": "/f1races/static/css/main.e5098fbf.chunk.css.map"
+}
