@@ -7,7 +7,8 @@ import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
 import Calendars from './components/Calendars';
 import SeasonSelect from './components/SeasonSelect';
-import Toast from './components/Toast';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 import { ThemeProvider } from './ThemeContext';
 import {
   FIRST_SEASON, CURRENT_SEASON, notificationOptions
@@ -31,9 +32,6 @@ class App extends Component {
       resultsError: null,
       notifications: [],
       notificationWhen: '60',
-      isShowToast: false,
-      toastText: '',
-      toastType: '',
       route: 'RaceList',
       theme: ''
     };
@@ -57,20 +55,6 @@ class App extends Component {
   setTheme = (e) => {
     this.setState({ theme: e.target.value });
     saveTheme(e.target.value);
-  }
-
-  showToast = (text, type = 'success') => {
-    this.setState({
-      isShowToast: true,
-      toastText: text,
-      toastType: type
-    });
-    setTimeout(() => {
-      this.setState({
-        isShowToast: false,
-        toastType: ''
-      });
-    }, 3000);
   }
 
   checkNotifications = () => {
@@ -192,20 +176,20 @@ class App extends Component {
   onSaveRaces = () => {
     const error = saveRaces(this.state.races[this.state.season], this.state.season);
     if (error) {
-      this.showToast('Error - calendar was not saved :(', 'error');
+      toast.error('Error - calendar was not saved :(');
     } else {
-      this.showToast('Calendar saved to browser storage');
+      toast.success('Calendar saved to browser storage');
     }
   }
 
   addNotification = (raceName, raceDate, notificationWhen) => () => {
     if (!('Notification' in window)) {
-      this.showToast('This browser does not support notifications :(', 'error');
+      toast.error('This browser does not support notifications :(');
       return;
     }
 
     if (raceDate < new Date()) {
-      this.showToast('This race already started or is over', 'error');
+      toast.error('This race already started or is over');
       return;
     }
 
@@ -218,7 +202,7 @@ class App extends Component {
     const id = notificationDate.getTime();
     for (let i = 0, l = this.state.notifications.length; i < l; i++) {
       if (this.state.notifications[i].id === id) {
-        this.showToast('Notification already exists', 'error');
+        toast.error('Notification already exists');
         return;
       }
     }
@@ -240,9 +224,9 @@ class App extends Component {
         () => {
           const error = saveNotifications(this.state.notifications);
           if (error) {
-            this.showToast('Error - notification was not saved :(', 'error');
+            toast.error('Error - notification was not saved :(');
           } else {
-            this.showToast('Notification saved to browser storage');
+            toast.success('Notification saved to browser storage');
           }
         }
       );
@@ -256,9 +240,9 @@ class App extends Component {
             () => {
               const error = saveNotifications(this.state.notifications);
               if (error) {
-                this.showToast('Error - notification was not saved :(', 'error');
+                toast.error('Error - notification was not saved :(');
               } else {
-                this.showToast('Notification saved to browser storage');
+                toast.success('Notification saved to browser storage');
               }
             }
           );
@@ -274,7 +258,7 @@ class App extends Component {
       });
       const error = saveNotifications(notifications);
       if (error) {
-        this.showToast('Error - Unable to delete notification :(', 'error');
+        toast.error('Error - Unable to delete notification :(');
       } else {
         this.setState({ notifications });
       }
@@ -292,8 +276,7 @@ class App extends Component {
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
-      results, isLoadingResults, resultsError, notificationWhen,
-      isShowToast, toastText, toastType
+      results, isLoadingResults, resultsError, notificationWhen
     } = this.state;
     const seasonRaces = this.state.races[season];
 
@@ -328,7 +311,17 @@ class App extends Component {
             route={route}
             setTheme={this.setTheme}
           />
-          <Toast show={isShowToast} text={toastText} type={toastType} />
+          <ToastContainer
+            position='bottom-center'
+            autoClose={5000}
+            hideProgressBar
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnVisibilityChange
+            draggable={false}
+            pauseOnHover
+          />
           { route === 'Notifications' &&
             <Notifications
               notifications={notifications}
