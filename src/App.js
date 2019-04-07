@@ -62,15 +62,18 @@ class App extends Component {
     const nowTime = Math.floor(new Date().getTime() / 1000 / 60);
 
     notifications.forEach(notification => {
-      const notificationTime = Math.floor(notification.notificationDate.getTime() / 1000 / 60);
+      const { notificationDate, raceDate, title, body } = notification;
+      const notificationTime = Math.floor(notificationDate.getTime() / 1000 / 60);
+
       if (notificationTime === nowTime && !notification.notified) {
-        new Notification(notification.title, { body: notification.body });
+        new Notification(title, { body: body });
         notification.notified = true;
         this.setState({ notifications });
         saveNotifications(notifications);
       } else if (notificationTime < nowTime && !notification.notified) {
-        new Notification('Missed notification: ' + notification.title, {
-          body: `At: ${notification.notificationDate.toLocaleDateString()} ${notification.notificationDate.toLocaleTimeString()}`
+        new Notification('Missed notification: ' + title, {
+          body: `Notification time: ${notificationDate.toLocaleDateString()} ${notificationDate.toLocaleTimeString()}
+Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         });
         notification.notified = true;
         this.setState({ notifications });
@@ -227,6 +230,7 @@ class App extends Component {
             toast.error('Error - notification was not saved :(');
           } else {
             toast.success('Notification saved to browser storage');
+            this.checkNotifications();
           }
         }
       );
@@ -243,6 +247,7 @@ class App extends Component {
                 toast.error('Error - notification was not saved :(');
               } else {
                 toast.success('Notification saved to browser storage');
+                this.checkNotifications();
               }
             }
           );
