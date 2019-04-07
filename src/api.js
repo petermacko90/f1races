@@ -1,4 +1,4 @@
-const urlBase = 'http://ergast.com/api/f1';
+const urlBase = 'https://ergast.com/api/f1';
 
 const fetchData = (url) => {
   return fetch(url).then(response => response.json());
