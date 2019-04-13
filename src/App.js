@@ -112,8 +112,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   getRaceResults = (season, round) => () => {
-    const { results } = this.state;
-
     this.setState({ isLoadingResults: true });
     fetchRaceResults(season, round)
       .then(data => {
@@ -121,21 +119,23 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           throw Error('No data available');
         }
 
-        let res = {
+        let newResults = {
           [season]: {
             [round]: data.MRData.RaceTable.Races[0].Results
           }
         };
 
-        this.setState({
-          results: deepmerge(results, res),
-          isLoadingResults: false,
-          resultsError: null
+        this.setState(prevState => {
+          return {
+            results: deepmerge(prevState.results, newResults),
+            isLoadingResults: false,
+            resultsError: null
+          };
         });
       })
       .catch(error => {
-         this.setState({ resultsError: error, isLoadingResults: false });
-       });
+        this.setState({ resultsError: error, isLoadingResults: false });
+      });
   }
 
   onClickRace = (raceRound) => () => {
