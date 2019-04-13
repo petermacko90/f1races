@@ -26,7 +26,9 @@ const RaceResults = ({ results }) => {
               return (
                 <tr key={res.Driver.driverId + res.position}>
                   <td className='tr'>{res.position}.</td>
-                  <td className='tr'>{res.grid}.</td>
+                  <td className='tr'>
+                    {res.grid === '0' ? 'Pit Lane' : (res.grid + '.')}
+                  </td>
                   <td>{res.Driver.givenName} {res.Driver.familyName}</td>
                   <td>{res.Constructor.name}</td>
                   <td>{res.Time ? res.Time.time : 'N/A'}</td>
