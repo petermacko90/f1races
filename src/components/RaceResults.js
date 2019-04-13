@@ -33,11 +33,14 @@ const RaceResults = ({ results }) => {
                   <td className='tr'>{res.laps}</td>
                   <td>{res.status}</td>
                   <td className='tr'>{res.points}</td>
-                  <td>{res.FastestLap ? res.FastestLap.Time.time: 'N/A'}</td>
+                  <td
+                    className={res.FastestLap && res.FastestLap.rank === '1' ? 'fastest' : ''}
+                  >
+                    {res.FastestLap ? res.FastestLap.Time.time: 'N/A'}
+                  </td>
                   <td>
-                    {
-                      res.FastestLap ?
-                        `${res.FastestLap.AverageSpeed.speed} ${res.FastestLap.AverageSpeed.units}`
+                    { res.FastestLap
+                      ? `${res.FastestLap.AverageSpeed.speed} ${res.FastestLap.AverageSpeed.units}`
                       : 'N/A'
                     }
                   </td>
