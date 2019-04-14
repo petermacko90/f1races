@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { fetchRaces, fetchRaceResults } from './api';
 import * as deepmerge from 'deepmerge';
 import Header from './components/Header';
+import Navigation from './components/Navigation';
 import RaceList from './components/RaceList';
 import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
@@ -318,11 +319,8 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     return (
       <ThemeProvider value={this.state.theme}>
         <Fragment>
-          <Header
-            setRoute={this.setRoute}
-            route={route}
-            setTheme={this.setTheme}
-          />
+          <Header setTheme={this.setTheme} />
+          <Navigation setRoute={this.setRoute} route={route} />
           <ToastContainer
             position='bottom-center'
             autoClose={5000}

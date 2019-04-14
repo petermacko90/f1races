@@ -1,0 +1,61 @@
+nav {
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+nav button {
+  background-color: white;
+  letter-spacing: 1px;
+  padding: 5px;
+  font-weight: bold;
+  border: none;
+}
+
+nav button:hover, nav button.active {
+  cursor: pointer;
+  background-color: rgb(220,0,0);
+  color: white;
+}
+
+nav button.mercedes:hover, nav button.mercedes.active {
+  background-color: rgb(0,210,190);
+  color: black;
+}
+
+nav button.redbull:hover, nav button.redbull.active {
+  background-color: rgb(30,65,255);
+}
+
+nav button.renault:hover, nav button.renault.active {
+  background-color: rgb(255,245,0);
+  color: black;
+}
+
+nav button.haas:hover, nav button.haas.active {
+  background-color: rgb(240,215,135);
+  color: black;
+}
+
+nav button.racingpoint:hover, nav button.racingpoint.active {
+  background-color: rgb(245,150,200);
+  color: black;
+}
+
+nav button.tororosso:hover, nav button.tororosso.active {
+  background-color: rgb(70,155,255);
+  color: black;
+}
+
+nav button.mclaren:hover, nav button.mclaren.active {
+  background-color: rgb(255,135,0);
+  color: black;
+}
+
+nav button.alfaromeo:hover, nav button.alfaromeo.active {
+  background-color: rgb(155,0,0);
+}
+
+nav button.williams:hover, nav button.williams.active {
+  background-color: rgb(204,204,204);
+  color: black;
+}
