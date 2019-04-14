@@ -197,6 +197,10 @@ th, tr:nth-child(even) {
   overflow-x: auto;
 }
 
+.tr {
+  text-align: right;
+}
+
 select {
   border: 1px solid rgb(220,0,0);
   font-size: 16px;

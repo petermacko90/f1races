@@ -14,6 +14,12 @@ const Navigation = ({ setRoute, route }) => {
             Calendar
           </button>
           <button
+            onClick={setRoute('Standings')}
+            className={`${route === 'Standings' ? 'active' : ''} ${theme}`}
+          >
+            Standings
+          </button>
+          <button
             onClick={setRoute('Notifications')}
             className={`${route === 'Notifications' ? 'active' : ''} ${theme}`}
           >

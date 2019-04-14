@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from 'react';
-import { fetchRaces, fetchRaceResults } from './api';
+import { fetchRaces, fetchRaceResults, fetchDriverStandings } from './api';
 import * as deepmerge from 'deepmerge';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
 import RaceList from './components/RaceList';
+import Standings from './components/Standings/Standings';
 import RaceDetails from './components/RaceDetails';
 import Notifications from './components/Notifications';
 import Calendars from './components/Calendars';
@@ -35,7 +36,10 @@ class App extends Component {
       notifications: [],
       notificationWhen: '60',
       route: 'RaceList',
-      theme: ''
+      theme: '',
+      driverStandings: {},
+      isLoadingDrivers: false,
+      errorDrivers: null
     };
   }
 
@@ -139,6 +143,25 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       });
   }
 
+  getDriverStandings = (season) => {
+    this.setState({ isLoadingDrivers: true });
+    fetchDriverStandings(season)
+      .then(data => {
+        this.setState(prevState => {
+          const newStandings = {
+            [season]: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
+          };
+          return {
+            driverStandings: { ...prevState.driverStandings, ...newStandings },
+            isLoadingDrivers: false
+          };
+        });
+      })
+      .catch(error => {
+        this.setState({ isLoadingDrivers: false, errorDrivers: error })
+      });
+  }
+
   onClickRace = (raceRound) => () => {
     this.selectRace(raceRound);
   }
@@ -169,12 +192,16 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   setSeason = (season) => {
+    const { route, races, driverStandings } = this.state;
     this.setState({
       season,
       error: null
     });
-    if (!this.state.races[season]) {
+    if (!races[season] && route === 'RaceList') {
       this.getRaces(season);
+    }
+    if (!driverStandings[season] && route === 'Standings') {
+      this.getDriverStandings(season);
     }
   }
 
@@ -276,12 +303,16 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
   setRoute = (route) => () => {
     this.setState({ route });
+    if (route === 'RaceList' || route === 'Standings') {
+      this.setState({ season: CURRENT_SEASON });
+    }
   }
 
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
-      results, isLoadingResults, resultsError, notificationWhen
+      results, isLoadingResults, resultsError, notificationWhen,
+      driverStandings, isLoadingDrivers, errorDrivers
     } = this.state;
     const seasonRaces = this.state.races[season];
 
@@ -362,6 +393,16 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
               onClickRace={this.onClickRace}
               onEnterRace={this.onEnterRace}
               onSaveRaces={this.onSaveRaces}
+              seasonSelect={seasonSelect}
+            />
+          }
+          { route === 'Standings' &&
+            <Standings
+              season={season}
+              driverStandings={driverStandings}
+              isLoadingDrivers={isLoadingDrivers}
+              errorDrivers={errorDrivers}
+              getDriverStandings={this.getDriverStandings}
               seasonSelect={seasonSelect}
             />
           }
