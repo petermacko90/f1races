@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
-import { fetchRaces, fetchRaceResults, fetchDriverStandings } from './api';
+import {
+  fetchRaces, fetchRaceResults, fetchDriverStandings, fetchConstructorStandings
+} from './api';
 import * as deepmerge from 'deepmerge';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
@@ -39,7 +41,10 @@ class App extends Component {
       theme: '',
       driverStandings: {},
       isLoadingDrivers: false,
-      errorDrivers: null
+      errorDrivers: null,
+      constructorStandings: {},
+      isLoadingConstructors: false,
+      errorConstructors: null
     };
   }
 
@@ -162,6 +167,30 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       });
   }
 
+  getConstructorStandings = (season) => {
+    this.setState({ isLoadingConstructors: true });
+    fetchConstructorStandings(season)
+      .then(data => {
+        this.setState(prevState => {
+          const newStandings = {
+            [season]: data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
+          };
+          return {
+            constructorStandings: {
+              ...prevState.constructorStandings, ...newStandings
+            },
+            isLoadingConstructors: false
+          };
+        });
+      })
+      .catch(error => {
+        this.setState({
+          isLoadingConstructors: false,
+          errorConstructors: error
+        });
+      });
+  }
+
   onClickRace = (raceRound) => () => {
     this.selectRace(raceRound);
   }
@@ -202,6 +231,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
     if (!driverStandings[season] && route === 'Standings') {
       this.getDriverStandings(season);
+      this.getConstructorStandings(season);
     }
   }
 
@@ -312,7 +342,8 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
       results, isLoadingResults, resultsError, notificationWhen,
-      driverStandings, isLoadingDrivers, errorDrivers
+      driverStandings, isLoadingDrivers, errorDrivers,
+      constructorStandings, isLoadingConstructors, errorConstructors
     } = this.state;
     const seasonRaces = this.state.races[season];
 
@@ -403,6 +434,10 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
               isLoadingDrivers={isLoadingDrivers}
               errorDrivers={errorDrivers}
               getDriverStandings={this.getDriverStandings}
+              constructorStandings={constructorStandings}
+              isLoadingConstructors={isLoadingConstructors}
+              errorConstructors={errorConstructors}
+              getConstructorStandings={this.getConstructorStandings}
               seasonSelect={seasonSelect}
             />
           }

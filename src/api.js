@@ -15,3 +15,7 @@ export const fetchRaceResults = (season, round) => {
 export const fetchDriverStandings = (season) => {
   return fetchData(`${urlBase}/${season}/driverStandings.json`);
 }
+
+export const fetchConstructorStandings = (season) => {
+  return fetchData(`${urlBase}/${season}/constructorStandings.json`);
+}

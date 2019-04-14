@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
 import DriverStandings from './DriverStandings';
+import ConstructorStandings from './ConstructorStandings';
 
 class Standings extends Component {
   componentDidMount() {
-    if (!this.props.driverStandings[this.props.season]) {
-      this.props.getDriverStandings(this.props.season);
+    const { season } = this.props;
+    if (!this.props.driverStandings[season]) {
+      this.props.getDriverStandings(season);
+    }
+    if (!this.props.constructorStandings[season]) {
+      this.props.getConstructorStandings(season);
     }
   }
 
   render() {
     const {
-      season, driverStandings, isLoadingDrivers, errorDrivers
+      season, driverStandings, isLoadingDrivers, errorDrivers,
+      constructorStandings, isLoadingConstructors, errorConstructors
     } = this.props;
 
     return (
@@ -20,6 +26,11 @@ class Standings extends Component {
           standings={driverStandings[season]}
           isLoading={isLoadingDrivers}
           error={errorDrivers}
+        />
+        <ConstructorStandings
+          standings={constructorStandings[season]}
+          isLoading={isLoadingConstructors}
+          error={errorConstructors}
         />
       </div>
     );
