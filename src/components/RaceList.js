@@ -1,15 +1,17 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Race from './Race';
 import { ThemeConsumer } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 const RaceList = ({
-  races, upcomingRace, isLoading, error, onClickRace, onEnterRace, onSaveRaces
+  races, upcomingRace, isLoading, error, onClickRace, onEnterRace, onSaveRaces,
+  seasonSelect
 }) => {
   return (
     <ThemeConsumer>
       {theme =>
-        <Fragment>
+        <div className='container'>
+          {seasonSelect}
           { !error && !isLoading &&
             <button onClick={onSaveRaces}
             className={'button ml10 mb10 ' + theme}>
@@ -35,7 +37,7 @@ const RaceList = ({
               );
             })
           }
-        </Fragment>
+        </div>
       }
     </ThemeConsumer>
   );

@@ -307,6 +307,14 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       raceResults = results[selectedRace.season][selectedRace.round];
     }
 
+    const seasonSelect = (
+      <SeasonSelect
+        season={season}
+        onSelectSeason={this.onSelectSeason}
+        onChangeSeason={this.onChangeSeason}
+      />
+    );
+
     return (
       <ThemeProvider value={this.state.theme}>
         <Fragment>
@@ -348,22 +356,16 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             />
           }
           { route === 'RaceList' &&
-            <div className='container'>
-              <SeasonSelect
-                season={season}
-                onSelectSeason={this.onSelectSeason}
-                onChangeSeason={this.onChangeSeason}
-              />
-              <RaceList
-                races={seasonRaces}
-                upcomingRace={upcomingRace}
-                isLoading={isLoading}
-                error={error}
-                onClickRace={this.onClickRace}
-                onEnterRace={this.onEnterRace}
-                onSaveRaces={this.onSaveRaces}
-              />
-            </div>
+            <RaceList
+              races={seasonRaces}
+              upcomingRace={upcomingRace}
+              isLoading={isLoading}
+              error={error}
+              onClickRace={this.onClickRace}
+              onEnterRace={this.onEnterRace}
+              onSaveRaces={this.onSaveRaces}
+              seasonSelect={seasonSelect}
+            />
           }
           <Footer />
         </Fragment>
