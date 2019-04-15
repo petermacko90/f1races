@@ -341,18 +341,18 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
-      results, isLoadingResults, resultsError, notificationWhen,
+      results, isLoadingResults, resultsError, notificationWhen, theme,
       driverStandings, isLoadingDrivers, errorDrivers,
       constructorStandings, isLoadingConstructors, errorConstructors
     } = this.state;
-    const seasonRaces = this.state.races[season];
+    const seasonRaces = races[season];
 
     let selectedRace = null;
     if (selectedRaceRound > 0 && races[season]) {
       const i = races[season].findIndex((race) => {
         return Number(race.round) === selectedRaceRound;
       });
-      selectedRace = this.state.races[this.state.season][i];
+      selectedRace = races[season][i];
     }
 
     let upcomingRace = '';
@@ -379,7 +379,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     );
 
     return (
-      <ThemeProvider value={this.state.theme}>
+      <ThemeProvider value={theme}>
         <Fragment>
           <Header setTheme={this.setTheme} />
           <Navigation setRoute={this.setRoute} route={route} />

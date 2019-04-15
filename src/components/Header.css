@@ -90,13 +90,20 @@ option[value=alfaromeo] {
   display: inline-block;
 }
 
+.select-wrapper {
+  margin-left: 10px;
+  margin-bottom: 0;
+  padding-bottom: 10px;
+}
+
 @media only screen and (min-width: 600px) {
   .flex {
     display: flex;
     justify-content: space-between;
   }
-}
 
-.select-wrapper {
-  margin: 15px;
+  .select-wrapper {
+    margin: 15px;
+    padding-bottom: 0;
+  }
 }
