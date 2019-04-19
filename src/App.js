@@ -5,11 +5,11 @@ import {
 import * as deepmerge from 'deepmerge';
 import Header from './components/Header';
 import Navigation from './components/Navigation';
-import RaceList from './components/RaceList';
+import RaceList from './components/RaceList/RaceList';
 import Standings from './components/Standings/Standings';
-import RaceDetails from './components/RaceDetails';
-import Notifications from './components/Notifications';
-import Calendars from './components/Calendars';
+import RaceDetails from './components/RaceDetails/RaceDetails';
+import Notifications from './components/SavedData/Notifications';
+import Calendars from './components/SavedData/Calendars';
 import SeasonSelect from './components/SeasonSelect';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';

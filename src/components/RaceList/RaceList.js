@@ -1,6 +1,6 @@
 import React from 'react';
 import Race from './Race';
-import { ThemeConsumer } from '../ThemeContext';
+import { ThemeConsumer } from '../../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 const RaceList = ({

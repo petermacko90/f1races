@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Calendars.css';
-import { getCalendars } from '../localStorage';
+import { getCalendars } from '../../localStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 

@@ -2,8 +2,8 @@ import React, { Fragment } from 'react';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
 import AddNotification from './AddNotification';
-import { getDate } from '../helpers';
-import { ThemeConsumer } from '../ThemeContext';
+import { getDate } from '../../helpers';
+import { ThemeConsumer } from '../../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faExternalLinkAlt, faChevronLeft, faChevronRight, faSpinner

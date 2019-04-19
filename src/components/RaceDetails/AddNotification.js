@@ -1,6 +1,6 @@
 import React from 'react';
-import { ThemeConsumer } from '../ThemeContext';
-import { notificationOptions } from '../constants';
+import { ThemeConsumer } from '../../ThemeContext';
+import { notificationOptions } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 

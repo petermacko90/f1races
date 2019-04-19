@@ -1,7 +1,7 @@
 import React from 'react';
 import './Race.css';
-import { getDate } from '../helpers';
-import { ThemeConsumer } from '../ThemeContext';
+import { getDate } from '../../helpers';
+import { ThemeConsumer } from '../../ThemeContext';
 
 const Race = ({
   round, country, locality, date, time, upcomingRace,
