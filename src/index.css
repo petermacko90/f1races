@@ -1,3 +1,16 @@
+:root {
+  --ferrari: rgb(220,0,0);
+  --mercedes: rgb(0,210,190);
+  --redbull: rgb(30,65,255);
+  --renault: rgb(255,245,0);
+  --haas: rgb(240,215,135);
+  --racingpoint: rgb(245,150,200);
+  --tororosso: rgb(70,155,255);
+  --mclaren: rgb(255,135,0);
+  --alfaromeo: rgb(155,0,0);
+  --williams: rgb(255,255,255);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -19,7 +32,7 @@ button, select {
 }
 
 select {
-  background-color: white;
+  background-color: white!important;
 }
 
 table {
@@ -42,60 +55,60 @@ th, tr:nth-child(even) {
   padding: 5px 10px;
   font-size: 16px;
   font-weight: bold;
-  border: 1px solid rgb(220,0,0);
-  background-color: rgb(220,0,0);
+  border: 1px solid var(--ferrari);
+  background-color: var(--ferrari);
   color: white;
 }
 
 .button.mercedes {
-  border: 1px solid rgb(0,210,190);
-  background-color: rgb(0,210,190);
+  border: 1px solid var(--mercedes);
+  background-color: var(--mercedes);
   color: black;
 }
 
 .button.redbull {
-  border: 1px solid rgb(30,65,255);
-  background-color: rgb(30,65,255);
+  border: 1px solid var(--redbull);
+  background-color: var(--redbull);
 }
 
 .button.renault {
-  border: 1px solid rgb(255,245,0);
-  background-color: rgb(255,245,0);
+  border: 1px solid var(--renault);
+  background-color: var(--renault);
   color: black;
 }
 
 .button.haas {
-  border: 1px solid rgb(240,215,135);
-  background-color: rgb(240,215,135);
+  border: 1px solid var(--haas);
+  background-color: var(--haas);
   color: black;
 }
 
 .button.racingpoint {
-  border: 1px solid rgb(245,150,200);
-  background-color: rgb(245,150,200);
+  border: 1px solid var(--racingpoint);
+  background-color: var(--racingpoint);
   color: black;
 }
 
 .button.tororosso {
-  border: 1px solid rgb(70,155,255);
-  background-color: rgb(70,155,255);
+  border: 1px solid var(--tororosso);
+  background-color: var(--tororosso);
   color: black;
 }
 
 .button.mclaren {
-  border: 1px solid rgb(255,135,0);
-  background-color: rgb(255,135,0);
+  border: 1px solid var(--mclaren);
+  background-color: var(--mclaren);
   color: black;
 }
 
 .button.alfaromeo {
-  border: 1px solid rgb(155,0,0);
-  background-color: rgb(155,0,0);
+  border: 1px solid var(--alfaromeo);
+  background-color: var(--alfaromeo);
 }
 
 .button.williams {
   border: 1px solid black;
-  background-color: rgb(255,255,255);
+  background-color: var(--williams);
   color: black
 }
 
@@ -202,41 +215,41 @@ th, tr:nth-child(even) {
 }
 
 select {
-  border: 1px solid rgb(220,0,0);
+  border: 1px solid var(--ferrari);
   font-size: 16px;
   padding: 4px;
 }
 
 select.mercedes {
-  border: 1px solid rgb(0,210,190);
+  border: 1px solid var(--mercedes);
 }
 
 select.redbull {
-  border: 1px solid rgb(30,65,255);
+  border: 1px solid var(--redbull);
 }
 
 select.renault {
-  border: 1px solid rgb(255,245,0);
+  border: 1px solid var(--renault);
 }
 
 select.haas {
-  border: 1px solid rgb(240,215,135);
+  border: 1px solid var(--haas);
 }
 
 select.racingpoint {
-  border: 1px solid rgb(245,150,200);
+  border: 1px solid var(--racingpoint);
 }
 
 select.tororosso {
-  border: 1px solid rgb(70,155,255);
+  border: 1px solid var(--tororosso);
 }
 
 select.mclaren {
-  border: 1px solid rgb(255,135,0);
+  border: 1px solid var(--mclaren);
 }
 
 select.alfaromeo {
-  border: 1px solid rgb(155,0,0);
+  border: 1px solid var(--alfaromeo);
 }
 
 select.williams {

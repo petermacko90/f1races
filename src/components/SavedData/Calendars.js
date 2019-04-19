@@ -40,9 +40,11 @@ class Calendars extends Component {
                 sortedCalendars.map(calendar => {
                   return (
                     <li key={calendar}>
-                      <button className='button mr10 mb10'
-                      title='Delete Calendar'
-                      onClick={this.deleteCalendar(calendar)}>
+                      <button
+                        className='button ferrari mr10 mb10'
+                        title='Delete Calendar'
+                        onClick={this.deleteCalendar(calendar)}
+                      >
                         <FontAwesomeIcon icon={faTrashAlt} />
                       </button>
                       <span>{calendar.slice(-4)}</span>

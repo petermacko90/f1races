@@ -6,7 +6,7 @@ const Navigation = ({ setRoute, route }) => {
   return (
     <ThemeConsumer>
       {theme =>
-        <nav className={theme}>
+        <nav>
           <button
             onClick={setRoute('RaceList')}
             className={`${route === 'RaceList' ? 'active' : ''} ${theme}`}

@@ -1,41 +1,41 @@
 header {
-  background-color: rgb(220,0,0);
+  background-color: var(--ferrari);
 }
 
 header.mercedes {
-  background-color: rgb(0,210,190);
+  background-color: var(--mercedes);
 }
 
 header.redbull {
-  background-color: rgb(30,65,255);
+  background-color: var(--redbull);
 }
 
 header.renault {
-  background-color: rgb(255,245,0);
+  background-color: var(--renault);
 }
 
 header.haas {
-  background-color: rgb(240,215,135);
+  background-color: var(--haas);
 }
 
 header.racingpoint {
-  background-color: rgb(245,150,200);
+  background-color: var(--racingpoint);
 }
 
 header.tororosso {
-  background-color: rgb(70,155,255);
+  background-color: var(--tororosso);
 }
 
 header.mclaren {
-  background-color: rgb(255,135,0);
+  background-color: var(--mclaren);
 }
 
 header.alfaromeo {
-  background-color: rgb(155,0,0);
+  background-color: var(--alfaromeo);
 }
 
 header.williams {
-  background-color: rgb(255,255,255);
+  background-color: var(--williams);
 }
 
 h1 {
@@ -48,41 +48,41 @@ h1.mercedes, h1.renault, h1.haas, h1.racingpoint, h1.tororosso, h1.mclaren, h1.w
 }
 
 option[value=ferrari] {
-  background-color: rgb(220,0,0);
+  background-color: var(--ferrari);
   color: white;
 }
 
 option[value=mercedes] {
-  background-color: rgb(0,210,190);
+  background-color: var(--mercedes);
 }
 
 option[value=redbull] {
-  background-color: rgb(30,65,255);
+  background-color: var(--redbull);
   color: white;
 }
 
 option[value=renault] {
-  background-color: rgb(255,245,0);
+  background-color: var(--renault);
 }
 
 option[value=haas] {
-  background-color: rgb(240,215,135);
+  background-color: var(--haas);
 }
 
 option[value=racingpoint] {
-  background-color: rgb(245,150,200);
+  background-color: var(--racingpoint);
 }
 
 option[value=tororosso] {
-  background-color: rgb(70,155,255);
+  background-color: var(--tororosso);
 }
 
 option[value=mclaren] {
-  background-color: rgb(255,135,0);
+  background-color: var(--mclaren);
 }
 
 option[value=alfaromeo] {
-  background-color: rgb(155,0,0);
+  background-color: var(--alfaromeo);
   color: white;
 }
 

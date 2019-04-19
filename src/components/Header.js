@@ -20,7 +20,11 @@ const Header = ({ setTheme }) => {
                 {
                   teams.map(team => {
                     return (
-                      <option key={team.id} value={team.id}>
+                      <option
+                        key={team.id}
+                        value={team.id}
+                        className={team.id}
+                      >
                         {team.name}
                       </option>
                     );

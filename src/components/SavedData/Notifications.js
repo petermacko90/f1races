@@ -34,15 +34,22 @@ const Notifications = ({ notifications, deleteNotification }) => {
                     return (
                       <tr key={id}>
                         <td>
-                          <button onClick={deleteNotification(id)}
-                          className='button' title='Delete Notification'>
+                          <button
+                            onClick={deleteNotification(id)}
+                            className='button ferrari'
+                            title='Delete Notification'
+                          >
                             <FontAwesomeIcon icon={faTrashAlt} />
                           </button>
                         </td>
                         <td>{title}</td>
                         <td>{notified ? 'Yes': 'No'}</td>
-                        <td>{raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()}</td>
-                        <td>{notificationDate.toLocaleDateString()} {notificationDate.toLocaleTimeString()}</td>
+                        <td>
+                          {raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()}
+                        </td>
+                        <td>
+                          {notificationDate.toLocaleDateString()} {notificationDate.toLocaleTimeString()}
+                        </td>
                       </tr>
                     );
                   })
@@ -53,7 +60,6 @@ const Notifications = ({ notifications, deleteNotification }) => {
       }
     </div>
   );
-  
 }
 
 export default Notifications;
