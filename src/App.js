@@ -4,7 +4,7 @@ import {
 } from './api';
 import * as deepmerge from 'deepmerge';
 import Header from './components/Header';
-import Navigation from './components/Navigation';
+import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
 import Standings from './components/Standings/Standings';
 import RaceDetails from './components/RaceDetails/RaceDetails';

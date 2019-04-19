@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThemeConsumer } from '../ThemeContext'
+import { ThemeConsumer } from '../../ThemeContext';
 
 const NavItem = ({ setRoute, route, active, children }) => {
   return (
