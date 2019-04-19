@@ -16,12 +16,18 @@ const AddNotification = ({
     <ThemeConsumer>
       {theme =>
         <div>
-          <button className={'button ' + theme}
-          onClick={addNotification(raceName, dateTime, notificationWhen)}>
+          <button
+            className={`button bg-${theme} b-${theme}`}
+            onClick={addNotification(raceName, dateTime, notificationWhen)}
+          >
             <FontAwesomeIcon icon={faBell} /> Add notification
           </button>
-          <select value={notificationWhen} onChange={setNotificationWhen}
-          className={theme} aria-label='Select notification time'>
+          <select
+            value={notificationWhen}
+            onChange={setNotificationWhen}
+            className={'b-' + theme}
+            aria-label='Select notification time'
+          >
             {options}
           </select>
         </div>

@@ -16,18 +16,28 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
       {theme =>
         <div className='season ml10 mb10'>
           { season !== FIRST_SEASON &&
-            <button onClick={onChangeSeason(-1)} title='Previous season'
-            className={'button ' + theme}>
+            <button
+              onClick={onChangeSeason(-1)}
+              title='Previous season'
+              className={`button bg-${theme} b-${theme}`}
+            >
               <FontAwesomeIcon icon={faChevronLeft} />
             </button>
           }
-          <select value={season} onChange={onSelectSeason}
-          className={theme} aria-label='Select season'>
+          <select
+            value={season}
+            onChange={onSelectSeason}
+            className={'b-' + theme}
+            aria-label='Select season'
+          >
             {seasonOptions}
           </select>
           { season !== CURRENT_SEASON &&
-            <button onClick={onChangeSeason(1)} title='Next season'
-            className={'button ' + theme}>
+            <button
+              onClick={onChangeSeason(1)}
+              title='Next season'
+              className={`button bg-${theme} b-${theme}`}
+            >
               <FontAwesomeIcon icon={faChevronRight} />
             </button>
           }

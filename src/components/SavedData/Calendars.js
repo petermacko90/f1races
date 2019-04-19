@@ -41,7 +41,7 @@ class Calendars extends Component {
                   return (
                     <li key={calendar}>
                       <button
-                        className='button ferrari mr10 mb10'
+                        className='button bg-ferrari b-ferrari mr10 mb10'
                         title='Delete Calendar'
                         onClick={this.deleteCalendar(calendar)}
                       >

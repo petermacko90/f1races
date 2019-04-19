@@ -13,8 +13,10 @@ const RaceList = ({
         <div className='container'>
           {seasonSelect}
           { !error && !isLoading &&
-            <button onClick={onSaveRaces}
-            className={'button ml10 mb10 ' + theme}>
+            <button
+              onClick={onSaveRaces}
+              className={`button ml10 mb10 bg-${theme} b-${theme}`}
+            >
               <FontAwesomeIcon icon={faSave} /> Save calendar
             </button>
           }

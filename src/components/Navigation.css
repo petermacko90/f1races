@@ -1,5 +1,4 @@
 nav {
-  background-color: white;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -9,56 +8,11 @@ nav button {
   padding: 5px;
   font-weight: bold;
   border: none;
-}
-
-nav button:hover, nav button.active {
   cursor: pointer;
+}
+
+nav button.h-ferrari:hover, nav button.bg-ferrari.active,
+nav button.h-redbull:hover, nav button.bg-redbull.active,
+nav button.h-alfaromeo:hover, nav button.bg-alfaromeo.active {
   color: white;
-}
-
-nav button.ferrari:hover, nav button.ferrari.active {
-  background-color: var(--ferrari);
-}
-
-nav button.mercedes:hover, nav button.mercedes.active {
-  background-color: var(--mercedes);
-  color: black;
-}
-
-nav button.redbull:hover, nav button.redbull.active {
-  background-color: var(--redbull);
-}
-
-nav button.renault:hover, nav button.renault.active {
-  background-color: var(--renault);
-  color: black;
-}
-
-nav button.haas:hover, nav button.haas.active {
-  background-color: var(--haas);
-  color: black;
-}
-
-nav button.racingpoint:hover, nav button.racingpoint.active {
-  background-color: var(--racingpoint);
-  color: black;
-}
-
-nav button.tororosso:hover, nav button.tororosso.active {
-  background-color: var(--tororosso);
-  color: black;
-}
-
-nav button.mclaren:hover, nav button.mclaren.active {
-  background-color: var(--mclaren);
-  color: black;
-}
-
-nav button.alfaromeo:hover, nav button.alfaromeo.active {
-  background-color: var(--alfaromeo);
-}
-
-nav button.williams:hover, nav button.williams.active {
-  background-color: rgb(204,204,204);
-  color: black;
 }

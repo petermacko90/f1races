@@ -7,14 +7,14 @@ const Header = ({ setTheme }) => {
   return (
     <ThemeConsumer>
       {theme =>
-        <header className={theme}>
+        <header className={'bg-' + theme}>
           <div className='flex'>
             <h1 className={'dib p10 ' + theme}>F1 Races</h1>
             <div className='select-wrapper'>
               <select
                 value={theme}
                 onChange={setTheme}
-                className={theme}
+                className={'b-' + theme}
                 aria-label='Select theme'
               >
                 {
@@ -23,7 +23,7 @@ const Header = ({ setTheme }) => {
                       <option
                         key={team.id}
                         value={team.id}
-                        className={team.id}
+                        className={'bg-' + team.id}
                       >
                         {team.name}
                       </option>

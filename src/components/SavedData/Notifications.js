@@ -36,7 +36,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
                         <td>
                           <button
                             onClick={deleteNotification(id)}
-                            className='button ferrari'
+                            className='button bg-ferrari b-ferrari'
                             title='Delete Notification'
                           >
                             <FontAwesomeIcon icon={faTrashAlt} />
