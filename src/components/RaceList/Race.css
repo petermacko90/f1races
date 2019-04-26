@@ -32,7 +32,7 @@
   width: 45%;
 }
 
-.date-time {
+.date-time, .date {
   padding-right: 10px;
 }
 
@@ -40,10 +40,6 @@
   display: inline-block;
   width: 50%;
   text-align: right;
-}
-
-.date {
-  padding-right: 10px;
 }
 
 @media only screen and (max-width: 600px) {
@@ -62,5 +58,6 @@
 
   .date {
     width: 100%;
+    padding-right: 0;
   }
 }
