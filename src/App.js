@@ -76,19 +76,23 @@ class App extends Component {
       const { notificationDate, raceDate, title, body } = notification;
       const notificationTime = Math.floor(notificationDate.getTime() / 1000 / 60);
 
-      if (notificationTime === nowTime && !notification.notified) {
+      const showNotification = (title, body) => {
         new Notification(title, { body: body });
         notification.notified = true;
-        this.setState({ notifications });
-        saveNotifications(notifications);
+        const error = saveNotifications(notifications);
+        if (!error) {
+          this.setState({ notifications });
+        }
+      }
+
+      if (notificationTime === nowTime && !notification.notified) {
+        showNotification(title, body);
       } else if (notificationTime < nowTime && !notification.notified) {
-        new Notification('Missed notification: ' + title, {
-          body: `Notification time: ${notificationDate.toLocaleDateString()} ${notificationDate.toLocaleTimeString()}
+        showNotification(
+          'Missed notification: ' + title,
+          `Notification time: ${notificationDate.toLocaleDateString()} ${notificationDate.toLocaleTimeString()}
 Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
-        });
-        notification.notified = true;
-        this.setState({ notifications });
-        saveNotifications(notifications);
+        );
       }
     });
   }
@@ -97,8 +101,8 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     const races = loadRaces(season);
     if (races) {
       const newRaces = { [season]: races };
-      this.setState((state) => {
-        return { races: { ...state.races, ...newRaces } };
+      this.setState(prevState => {
+        return { races: { ...prevState.races, ...newRaces } };
       });
     } else {
       this.setState({ isLoading: true });
@@ -109,10 +113,13 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           }
 
           const newRaces = { [season]: data.MRData.RaceTable.Races };
-          this.setState({
-            races: { ...this.state.races, ...newRaces },
-            isLoading: false
+          this.setState(prevState => {
+            return {
+              races: { ...prevState.races, ...newRaces },
+              isLoading: false
+            };
           });
+
           if (season === CURRENT_SEASON) {
             saveRaces(data.MRData.RaceTable.Races, season);
           }
@@ -163,7 +170,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         });
       })
       .catch(error => {
-        this.setState({ isLoadingDrivers: false, errorDrivers: error })
+        this.setState({ isLoadingDrivers: false, errorDrivers: error });
       });
   }
 
@@ -258,9 +265,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     let notificationDate = new Date(raceDate);
     notificationDate.setMinutes(notificationDate.getMinutes() - (Number(notificationWhen) ? notificationWhen : 60));
 
-    let body = 'Race Starts in ';
-    body += notificationOptions[notificationWhen] ? notificationOptions[notificationWhen] : notificationOptions['60'];
-
     const id = notificationDate.getTime();
     for (let i = 0, l = this.state.notifications.length; i < l; i++) {
       if (this.state.notifications[i].id === id) {
@@ -269,47 +273,36 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       }
     }
 
-    const notification = {
-      id,
-      raceDate,
-      notificationDate,
-      notified: false,
-      title: raceName,
-      body
-    };
+    const createNotification = () => {
+      let body = 'Race Starts in ';
+      body += notificationOptions[notificationWhen] ? notificationOptions[notificationWhen] : notificationOptions['60'];
+
+      const notification = {
+        id,
+        raceDate,
+        notificationDate,
+        notified: false,
+        title: raceName,
+        body
+      };
+
+      const error = saveNotifications(this.state.notifications.concat(notification));
+      if (error) {
+        toast.error('Error - notification was not saved :(');
+      } else {
+        toast.success('Notification saved to browser storage');
+        this.setState(state => {
+          return { notifications: state.notifications.concat(notification) };
+        }, () => this.checkNotifications());
+      }
+    }
 
     if (Notification.permission === 'granted') {
-      this.setState(
-        (state) => {
-          return { notifications: state.notifications.concat(notification) };
-        },
-        () => {
-          const error = saveNotifications(this.state.notifications);
-          if (error) {
-            toast.error('Error - notification was not saved :(');
-          } else {
-            toast.success('Notification saved to browser storage');
-            this.checkNotifications();
-          }
-        }
-      );
+      createNotification();
     } else if (Notification.permission !== 'denied') {
-      Notification.requestPermission().then((permission) => {
+      Notification.requestPermission().then(permission => {
         if (permission === 'granted') {
-          this.setState(
-            (state) => {
-              return { notifications: state.notifications.concat(notification) };
-            },
-            () => {
-              const error = saveNotifications(this.state.notifications);
-              if (error) {
-                toast.error('Error - notification was not saved :(');
-              } else {
-                toast.success('Notification saved to browser storage');
-                this.checkNotifications();
-              }
-            }
-          );
+          createNotification();
         }
       });
     }
