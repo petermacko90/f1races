@@ -9,6 +9,7 @@ nav button {
   font-weight: bold;
   border: none;
   cursor: pointer;
+  height: 48px;
 }
 
 nav button.h-ferrari:hover, nav button.bg-ferrari.active,
