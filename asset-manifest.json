@@ -1,15 +1,17 @@
 {
-  "main.css": "/f1races/static/css/main.bc064c97.chunk.css",
-  "main.js": "/f1races/static/js/main.b044fad9.chunk.js",
-  "main.js.map": "/f1races/static/js/main.b044fad9.chunk.js.map",
-  "runtime~main.js": "/f1races/static/js/runtime~main.d1915ec3.js",
-  "runtime~main.js.map": "/f1races/static/js/runtime~main.d1915ec3.js.map",
-  "static/css/2.a9c6c121.chunk.css": "/f1races/static/css/2.a9c6c121.chunk.css",
-  "static/js/2.af80dfa9.chunk.js": "/f1races/static/js/2.af80dfa9.chunk.js",
-  "static/js/2.af80dfa9.chunk.js.map": "/f1races/static/js/2.af80dfa9.chunk.js.map",
-  "index.html": "/f1races/index.html",
-  "precache-manifest.9e551f107ee8a71eca758ed2d87d7fb3.js": "/f1races/precache-manifest.9e551f107ee8a71eca758ed2d87d7fb3.js",
-  "service-worker.js": "/f1races/service-worker.js",
-  "static/css/2.a9c6c121.chunk.css.map": "/f1races/static/css/2.a9c6c121.chunk.css.map",
-  "static/css/main.bc064c97.chunk.css.map": "/f1races/static/css/main.bc064c97.chunk.css.map"
+  "files": {
+    "main.css": "/f1races/static/css/main.c45dfe00.chunk.css",
+    "main.js": "/f1races/static/js/main.d509c333.chunk.js",
+    "main.js.map": "/f1races/static/js/main.d509c333.chunk.js.map",
+    "runtime~main.js": "/f1races/static/js/runtime~main.d1915ec3.js",
+    "runtime~main.js.map": "/f1races/static/js/runtime~main.d1915ec3.js.map",
+    "static/css/2.f4948e68.chunk.css": "/f1races/static/css/2.f4948e68.chunk.css",
+    "static/js/2.fcca089e.chunk.js": "/f1races/static/js/2.fcca089e.chunk.js",
+    "static/js/2.fcca089e.chunk.js.map": "/f1races/static/js/2.fcca089e.chunk.js.map",
+    "index.html": "/f1races/index.html",
+    "precache-manifest.08a7c60fe2280a231cb2b52c54aa7fac.js": "/f1races/precache-manifest.08a7c60fe2280a231cb2b52c54aa7fac.js",
+    "service-worker.js": "/f1races/service-worker.js",
+    "static/css/2.f4948e68.chunk.css.map": "/f1races/static/css/2.f4948e68.chunk.css.map",
+    "static/css/main.c45dfe00.chunk.css.map": "/f1races/static/css/main.c45dfe00.chunk.css.map"
+  }
 }
