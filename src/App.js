@@ -105,6 +105,11 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         return { races: { ...prevState.races, ...newRaces } };
       });
     } else {
+      if (!navigator.onLine) {
+        toast.error('You are offline :(');
+        return;
+      }
+
       this.setState({ isLoading: true });
       fetchRaces(season)
         .then(data => {
@@ -129,6 +134,11 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   getRaceResults = (season, round) => () => {
+    if (!navigator.onLine) {
+      toast.error('You are offline :(');
+      return;
+    }
+
     this.setState({ isLoadingResults: true });
     fetchRaceResults(season, round)
       .then(data => {
@@ -156,6 +166,11 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   getDriverStandings = (season) => {
+    if (!navigator.onLine) {
+      toast.error('You are offline :(');
+      return;
+    }
+
     this.setState({ isLoadingDrivers: true });
     fetchDriverStandings(season)
       .then(data => {
@@ -175,6 +190,10 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   getConstructorStandings = (season) => {
+    if (!navigator.onLine) {
+      return;
+    }
+
     this.setState({ isLoadingConstructors: true });
     fetchConstructorStandings(season)
       .then(data => {
