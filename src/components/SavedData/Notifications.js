@@ -35,7 +35,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
                       <tr key={id}>
                         <td>
                           <button
-                            onClick={deleteNotification(id)}
+                            onClick={() => deleteNotification(id)}
                             className='button bg-ferrari b-ferrari'
                             title='Delete Notification'
                           >

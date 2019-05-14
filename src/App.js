@@ -52,7 +52,10 @@ class App extends Component {
     this.getRaces(this.state.season);
     const notifications = loadNotifications();
     if (notifications) {
-      this.setState({ notifications });
+      this.setState(
+        { notifications },
+        () => this.checkNotifications()
+      );
     }
     const theme = loadTheme();
     this.setState({ theme });
@@ -79,10 +82,7 @@ class App extends Component {
       const showNotification = (title, body) => {
         new Notification(title, { body: body });
         notification.notified = true;
-        const error = saveNotifications(notifications);
-        if (!error) {
-          this.setState({ notifications });
-        }
+        this.deleteNotification(notification.id);
       }
 
       if (notificationTime === nowTime && !notification.notified) {
@@ -93,6 +93,8 @@ class App extends Component {
           `Notification time: ${notificationDate.toLocaleDateString()} ${notificationDate.toLocaleTimeString()}
 Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         );
+      } else if (notification.notified) {
+        this.deleteNotification(notification.id);
       }
     });
   }
@@ -327,7 +329,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  deleteNotification = (id) => () => {
+  deleteNotification = (id) => {
     const notifications = this.state.notifications.filter(notification => {
       return notification.id !== id;
     });
