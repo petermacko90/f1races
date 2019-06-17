@@ -3,7 +3,7 @@ import './RaceResults.css';
 
 const RaceResults = ({ results }) => {
   return (
-    <div className='responsive-table'>
+    <div className='results responsive-table'>
       <h2>Results</h2>
       <table>
         <thead>

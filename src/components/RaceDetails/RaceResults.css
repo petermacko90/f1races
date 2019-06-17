@@ -1,3 +1,43 @@
 .fastest {
   color: crimson;
 }
+
+.results {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 992px) {
+  .results {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .results {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+}
+
+@media only screen and (min-width: 1366px) {
+  .results {
+    margin-left: 80px;
+    margin-right: 80px;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .results {
+    margin-left: 160px;
+    margin-right: 160px;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .results {
+    margin-left: 320px;
+    margin-right: 320px;
+  }
+}
