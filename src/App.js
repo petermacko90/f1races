@@ -114,12 +114,8 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
       this.setState({ isLoading: true });
       fetchRaces(season)
-        .then(data => {
-          if (data.MRData.RaceTable.Races.length === 0) {
-            throw Error('No data available');
-          }
-
-          const newRaces = { [season]: data.MRData.RaceTable.Races };
+        .then(races => {
+          const newRaces = { [season]: races };
           this.setState(prevState => {
             return {
               races: { ...prevState.races, ...newRaces },
@@ -128,7 +124,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           });
 
           if (season === CURRENT_SEASON) {
-            saveRaces(data.MRData.RaceTable.Races, season);
+            saveRaces(races, season);
           }
         })
         .catch(error => this.setState({ error, isLoading: false }));
@@ -143,14 +139,10 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
     this.setState({ isLoadingResults: true });
     fetchRaceResults(season, round)
-      .then(data => {
-        if (data.MRData.RaceTable.Races.length === 0) {
-          throw Error('No data available');
-        }
-
+      .then(results => {
         let newResults = {
           [season]: {
-            [round]: data.MRData.RaceTable.Races[0].Results
+            [round]: results
           }
         };
 
@@ -175,11 +167,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
     this.setState({ isLoadingDrivers: true });
     fetchDriverStandings(season)
-      .then(data => {
+      .then(standings => {
         this.setState(prevState => {
-          const newStandings = {
-            [season]: data.MRData.StandingsTable.StandingsLists[0].DriverStandings
-          };
+          const newStandings = { [season]: standings };
           return {
             driverStandings: { ...prevState.driverStandings, ...newStandings },
             isLoadingDrivers: false
@@ -198,11 +188,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
     this.setState({ isLoadingConstructors: true });
     fetchConstructorStandings(season)
-      .then(data => {
+      .then(standings => {
         this.setState(prevState => {
-          const newStandings = {
-            [season]: data.MRData.StandingsTable.StandingsLists[0].ConstructorStandings
-          };
+          const newStandings = { [season]: standings };
           return {
             constructorStandings: {
               ...prevState.constructorStandings, ...newStandings
