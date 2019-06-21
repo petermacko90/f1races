@@ -1,8 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import {
   fetchRaces, fetchRaceResults, fetchDriverStandings, fetchConstructorStandings
 } from './api';
-import * as deepmerge from 'deepmerge';
+import deepmerge from 'deepmerge';
 import Header from './components/Header';
 import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
@@ -57,8 +57,7 @@ class App extends Component {
         () => this.checkNotifications()
       );
     }
-    const theme = loadTheme();
-    this.setState({ theme });
+    this.setState({ theme: loadTheme() });
     this.interval = setInterval(this.checkNotifications, 60 * 1000);
   }
 
@@ -382,69 +381,67 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
     return (
       <ThemeProvider value={theme}>
-        <Fragment>
-          <Header setTheme={this.setTheme} />
-          <Navigation setRoute={this.setRoute} route={route} />
-          <ToastContainer
-            position='bottom-center'
-            autoClose={5000}
-            hideProgressBar
-            newestOnTop={false}
-            closeOnClick={false}
-            rtl={false}
-            pauseOnVisibilityChange
-            draggable={false}
-            pauseOnHover
+        <Header setTheme={this.setTheme} />
+        <Navigation setRoute={this.setRoute} route={route} />
+        <ToastContainer
+          position='bottom-center'
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick={false}
+          rtl={false}
+          pauseOnVisibilityChange
+          draggable={false}
+          pauseOnHover
+        />
+        { route === 'Notifications' &&
+          <Notifications
+            notifications={notifications}
+            deleteNotification={this.deleteNotification}
           />
-          { route === 'Notifications' &&
-            <Notifications
-              notifications={notifications}
-              deleteNotification={this.deleteNotification}
-            />
-          }
-          { route === 'Calendars' && <Calendars /> }
-          { route === 'RaceDetails' &&
-            <RaceDetails
-              race={selectedRace}
-              raceCount={seasonRaces.length}
-              results={raceResults}
-              isLoadingResults={isLoadingResults}
-              resultsError={resultsError}
-              onClickRace={this.onClickRace}
-              getRaceResults={this.getRaceResults}
-              addNotification={this.addNotification}
-              notificationWhen={notificationWhen}
-              setNotificationWhen={this.setNotificationWhen}
-            />
-          }
-          { route === 'RaceList' &&
-            <RaceList
-              races={seasonRaces}
-              upcomingRace={upcomingRace}
-              isLoading={isLoading}
-              error={error}
-              onClickRace={this.onClickRace}
-              onEnterRace={this.onEnterRace}
-              onSaveRaces={this.onSaveRaces}
-              seasonSelect={seasonSelect}
-            />
-          }
-          { route === 'Standings' &&
-            <Standings
-              season={season}
-              driverStandings={driverStandings}
-              isLoadingDrivers={isLoadingDrivers}
-              errorDrivers={errorDrivers}
-              getDriverStandings={this.getDriverStandings}
-              constructorStandings={constructorStandings}
-              isLoadingConstructors={isLoadingConstructors}
-              errorConstructors={errorConstructors}
-              getConstructorStandings={this.getConstructorStandings}
-              seasonSelect={seasonSelect}
-            />
-          }
-          <Footer />
-        </Fragment>
+        }
+        { route === 'Calendars' && <Calendars /> }
+        { route === 'RaceDetails' &&
+          <RaceDetails
+            race={selectedRace}
+            raceCount={seasonRaces.length}
+            results={raceResults}
+            isLoadingResults={isLoadingResults}
+            resultsError={resultsError}
+            onClickRace={this.onClickRace}
+            getRaceResults={this.getRaceResults}
+            addNotification={this.addNotification}
+            notificationWhen={notificationWhen}
+            setNotificationWhen={this.setNotificationWhen}
+          />
+        }
+        { route === 'RaceList' &&
+          <RaceList
+            races={seasonRaces}
+            upcomingRace={upcomingRace}
+            isLoading={isLoading}
+            error={error}
+            onClickRace={this.onClickRace}
+            onEnterRace={this.onEnterRace}
+            onSaveRaces={this.onSaveRaces}
+            seasonSelect={seasonSelect}
+          />
+        }
+        { route === 'Standings' &&
+          <Standings
+            season={season}
+            driverStandings={driverStandings}
+            isLoadingDrivers={isLoadingDrivers}
+            errorDrivers={errorDrivers}
+            getDriverStandings={this.getDriverStandings}
+            constructorStandings={constructorStandings}
+            isLoadingConstructors={isLoadingConstructors}
+            errorConstructors={errorConstructors}
+            getConstructorStandings={this.getConstructorStandings}
+            seasonSelect={seasonSelect}
+          />
+        }
+        <Footer />
       </ThemeProvider>
     );
   }
