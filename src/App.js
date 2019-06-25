@@ -22,6 +22,7 @@ import {
   saveRaces, loadRaces, saveNotifications, loadNotifications,
   saveTheme, loadTheme
 } from './localStorage';
+import { getDate } from './helpers';
 
 class App extends Component {
   constructor() {
@@ -117,8 +118,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           const newRaces = { [season]: races };
           this.setState(prevState => {
             return {
-              races: { ...prevState.races, ...newRaces },
-              isLoading: false
+              races: { ...prevState.races, ...newRaces }
             };
           });
 
@@ -126,7 +126,8 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             saveRaces(races, season);
           }
         })
-        .catch(error => this.setState({ error, isLoading: false }));
+        .catch(error => this.setState({ error }))
+        .finally(() => this.setState({ isLoading: false }));
     }
   }
 
@@ -148,14 +149,12 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         this.setState(prevState => {
           return {
             results: deepmerge(prevState.results, newResults),
-            isLoadingResults: false,
             resultsError: null
           };
         });
       })
-      .catch(error => {
-        this.setState({ resultsError: error, isLoadingResults: false });
-      });
+      .catch(resultsError => this.setState({ resultsError }))
+      .finally(() => this.setState({ isLoadingResults: false }));
   }
 
   getDriverStandings = (season) => {
@@ -170,14 +169,12 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         this.setState(prevState => {
           const newStandings = { [season]: standings };
           return {
-            driverStandings: { ...prevState.driverStandings, ...newStandings },
-            isLoadingDrivers: false
+            driverStandings: { ...prevState.driverStandings, ...newStandings }
           };
         });
       })
-      .catch(error => {
-        this.setState({ isLoadingDrivers: false, errorDrivers: error });
-      });
+      .catch(errorDrivers => this.setState({ errorDrivers }))
+      .finally(() => this.setState({ isLoadingDrivers: false }));
   }
 
   getConstructorStandings = (season) => {
@@ -193,17 +190,12 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           return {
             constructorStandings: {
               ...prevState.constructorStandings, ...newStandings
-            },
-            isLoadingConstructors: false
+            }
           };
         });
       })
-      .catch(error => {
-        this.setState({
-          isLoadingConstructors: false,
-          errorConstructors: error
-        });
-      });
+      .catch(errorConstructors => this.setState({ errorConstructors }))
+      .finally(() => this.setState({ isLoadingConstructors: false }));
   }
 
   onClickRace = (raceRound) => () => {
@@ -359,7 +351,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     let upcomingRace = '';
     if (seasonRaces && season === CURRENT_SEASON) {
       for (let i = 0, l = seasonRaces.length, d = new Date(); i < l; i++) {
-        if (d < new Date(seasonRaces[i].date + 'T' + seasonRaces[i].time)) {
+        if (d < getDate(seasonRaces[i].date, seasonRaces[i].time)) {
           upcomingRace = seasonRaces[i].round;
           break;
         }
