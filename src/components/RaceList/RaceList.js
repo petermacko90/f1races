@@ -1,5 +1,6 @@
 import React from 'react';
 import Race from './Race';
+import LoadingIndicator from '../LoadingIndicator';
 import { ThemeConsumer } from '../../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +21,7 @@ const RaceList = ({
               <FontAwesomeIcon icon={faSave} /> Save calendar
             </button>
           }
-          { isLoading && <p className='p10'>Loading...</p> }
+          { isLoading && <LoadingIndicator /> }
           { error && <p className='p10'>{error.message}</p> }
           { races &&
             races.map(race => {
