@@ -1,5 +1,5 @@
 .fastest {
-  color: crimson;
+  color: var(--ferrari);
 }
 
 .results {

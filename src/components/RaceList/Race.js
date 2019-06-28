@@ -1,5 +1,7 @@
 import React from 'react';
 import './Race.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { getDate } from '../../helpers';
 
 const Race = ({
@@ -26,6 +28,9 @@ const Race = ({
         <span className='time'>
           {time && dateTime.toLocaleTimeString()}
         </span>
+      </span>
+      <span className='arrow'>
+        <FontAwesomeIcon icon={faChevronRight} />
       </span>
     </div>
   );
