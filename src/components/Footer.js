@@ -2,7 +2,8 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer>
+    <footer className='mt3'>
+      <hr />
       <div className='p3 tc'>
         Icons made by <a href="https://www.freepik.com/" title="Freepik">
         Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">

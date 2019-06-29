@@ -13,7 +13,7 @@ const RaceList = ({
       {theme =>
         <div className='container'>
           {seasonSelect}
-          { !error && !isLoading &&
+          {races &&
             <button
               onClick={onSaveRaces}
               className={`button ml3 mb3 bg-${theme} b-${theme}`}

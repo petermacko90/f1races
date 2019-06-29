@@ -109,6 +109,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     } else {
       if (!navigator.onLine) {
         toast.error('You are offline :(');
+        this.setState({ error: new Error('No data available') });
         return;
       }
 
@@ -328,6 +329,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     this.setState({ route });
     if (route === 'RaceList' || route === 'Standings') {
       this.setState({ season: CURRENT_SEASON });
+    }
+    if (route === 'RaceList') {
+      this.setState({ error: null });
     }
   }
 
