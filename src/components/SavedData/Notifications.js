@@ -9,10 +9,10 @@ const Notifications = ({ notifications, deleteNotification }) => {
 
   return (
     <div className='container'>
-      <h2 className='ml10 mr10'>Saved Notifications</h2>
+      <h2 className='ml3 mr3'>Saved Notifications</h2>
       {
         notifications.length === 0 ?
-          <p className='p10'>No saved notifications</p>
+          <p className='p3'>No saved notifications</p>
         :
           <div className='responsive-table'>
             <table>

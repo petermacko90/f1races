@@ -9,7 +9,7 @@ const Header = ({ setTheme }) => {
       {theme =>
         <header className={'bg-' + theme}>
           <div className='flex'>
-            <h1 className={'dib p10 ' + theme}>F1 Races</h1>
+            <h1 className={'dib ' + theme}>F1 Races</h1>
             <div className='select-wrapper'>
               <select
                 value={theme}

@@ -4,13 +4,13 @@ export const CURRENT_SEASON = new Date().getFullYear();
 export const teams = [
   { id: 'ferrari', name: 'Ferrari' },
   { id: 'mercedes', name: 'Mercedes' },
-  { id: 'redbull', name: 'Red Bull Racing' },
+  { id: 'redbull', name: 'Red Bull' },
   { id: 'renault', name: 'Renault' },
   { id: 'haas', name: 'Haas' },
   { id: 'racingpoint', name: 'Racing Point' },
   { id: 'tororosso', name: 'Toro Rosso' },
   { id: 'mclaren', name: 'McLaren' },
-  { id: 'alfaromeo', name: 'Alfa Romeo Racing' },
+  { id: 'alfaromeo', name: 'Alfa Romeo' },
   { id: 'williams', name: 'Williams' }
 ];
 

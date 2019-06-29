@@ -4,9 +4,9 @@ import LoadingIndicator from '../LoadingIndicator';
 const DriverStandings = ({ standings, isLoading, error }) => {
   return (
     <Fragment>
-      <h2 className='p10'>Driver Standings</h2>
+      <h2 className='p3'>Driver Standings</h2>
       { isLoading && <LoadingIndicator /> }
-      { error && <p className='p10'>{error.message}</p> }
+      { error && <p className='p3'>{error.message}</p> }
       { standings &&
         <div className='responsive-table'>
           <table>

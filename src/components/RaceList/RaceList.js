@@ -16,13 +16,13 @@ const RaceList = ({
           { !error && !isLoading &&
             <button
               onClick={onSaveRaces}
-              className={`button ml10 mb10 bg-${theme} b-${theme}`}
+              className={`button ml3 mb3 bg-${theme} b-${theme}`}
             >
               <FontAwesomeIcon icon={faSave} /> Save calendar
             </button>
           }
           { isLoading && <LoadingIndicator /> }
-          { error && <p className='p10'>{error.message}</p> }
+          { error && <p className='p3'>{error.message}</p> }
           { races &&
             races.map(race => {
               return (

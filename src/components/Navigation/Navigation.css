@@ -5,11 +5,11 @@ nav {
 nav button {
   background-color: white;
   letter-spacing: 1px;
-  padding: 5px;
+  padding: 0.25rem;
   font-weight: bold;
   border: none;
   cursor: pointer;
-  height: 48px;
+  height: 3rem;
 }
 
 nav button.h-ferrari:hover, nav button.bg-ferrari.active,

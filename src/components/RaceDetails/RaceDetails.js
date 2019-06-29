@@ -20,11 +20,11 @@ const RaceDetails = ({
     <ThemeConsumer>
       {theme =>
         <Fragment>
-          <div className='container p10'>
-            <div className='prev-next mb10 mt10'>
+          <div className='container p3'>
+            <div className='prev-next mb3 mt3'>
               { round !== 1 &&
                 <button
-                  className={`button button-left mr10 bg-${theme} b-${theme}`}
+                  className={`button button-left mr3 bg-${theme} b-${theme}`}
                   onClick={onClickRace(round - 1)}
                 >
                   <FontAwesomeIcon icon={faChevronLeft} /> Previous Race

@@ -30,18 +30,18 @@ class Calendars extends Component {
 
     return (
       <div className='container'>
-        <h2 className='ml10 mr10'>Saved Calendars</h2>
+        <h2 className='ml3 mr3'>Saved Calendars</h2>
         {
           this.state.calendars.length === 0 ?
-            <p className='p10'>No saved calendars</p>
+            <p className='p3'>No saved calendars</p>
           :
-            <ul className='ml10 mr10'>
+            <ul className='ml3 mr3'>
               {
                 sortedCalendars.map(calendar => {
                   return (
                     <li key={calendar}>
                       <button
-                        className='button bg-ferrari b-ferrari mr10 mb10'
+                        className='button bg-ferrari b-ferrari mr3 mb3'
                         title='Delete Calendar'
                         onClick={this.deleteCalendar(calendar)}
                       >

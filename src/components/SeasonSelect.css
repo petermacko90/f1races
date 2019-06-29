@@ -1,9 +1,10 @@
 .season {
-  display: inline-block;
+  display: block;
 }
 
 @media only screen and (min-width: 600px) {
   .season {
+    display: inline-block;
     margin-left: 0;
   }
 }

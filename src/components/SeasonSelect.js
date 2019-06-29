@@ -14,7 +14,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
   return (
     <ThemeConsumer>
       {theme =>
-        <div className='season ml10 mb10'>
+        <div className='season ml3 mb3'>
           { season !== FIRST_SEASON &&
             <button
               onClick={onChangeSeason(-1)}
