@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,7 +8,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
   });
 
   return (
-    <div className='container'>
+    <Fragment>
       <h2 className='ml3 mr3'>Saved Notifications</h2>
       {
         notifications.length === 0 ?
@@ -58,7 +58,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
             </table>
           </div>
       }
-    </div>
+    </Fragment>
   );
 }
 

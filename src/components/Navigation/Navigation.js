@@ -21,17 +21,10 @@ const Navigation = ({ setRoute, route }) => {
       </NavItem>
       <NavItem
         setRoute={setRoute}
-        route='Notifications'
-        active={route === 'Notifications'}
+        route='SavedData'
+        active={route === 'SavedData'}
       >
-        Saved Notifications
-      </NavItem>
-      <NavItem
-        setRoute={setRoute}
-        route='Calendars'
-        active={route === 'Calendars'}
-      >
-        Saved Calendars
+        Saved Data
       </NavItem>
     </nav>
   );

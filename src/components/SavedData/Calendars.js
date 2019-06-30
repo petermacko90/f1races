@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './Calendars.css';
 import { getCalendars } from '../../localStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -29,7 +29,7 @@ class Calendars extends Component {
     });
 
     return (
-      <div className='container'>
+      <Fragment>
         <h2 className='ml3 mr3'>Saved Calendars</h2>
         {
           this.state.calendars.length === 0 ?
@@ -54,7 +54,7 @@ class Calendars extends Component {
               }
             </ul>
         }
-      </div>
+      </Fragment>
     );
   }
 }

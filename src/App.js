@@ -9,7 +9,7 @@ import RaceList from './components/RaceList/RaceList';
 import Standings from './components/Standings/Standings';
 import RaceDetails from './components/RaceDetails/RaceDetails';
 import Notifications from './components/SavedData/Notifications';
-import Calendars from './components/SavedData/Calendars';
+import SavedData from './components/SavedData/SavedData';
 import SeasonSelect from './components/SeasonSelect';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
@@ -375,6 +375,13 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       />
     );
 
+    const savedNotifications = (
+      <Notifications
+        notifications={notifications}
+        deleteNotification={this.deleteNotification}
+      />
+    );
+
     return (
       <ThemeProvider value={theme}>
         <Header setTheme={this.setTheme} />
@@ -390,13 +397,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           draggable={false}
           pauseOnHover
         />
-        { route === 'Notifications' &&
-          <Notifications
-            notifications={notifications}
-            deleteNotification={this.deleteNotification}
-          />
+        { route === 'SavedData' &&
+          <SavedData savedNotifications={savedNotifications} />
         }
-        { route === 'Calendars' && <Calendars /> }
         { route === 'RaceDetails' &&
           <RaceDetails
             race={selectedRace}
