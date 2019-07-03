@@ -5,7 +5,7 @@ import { ThemeConsumer } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
+const SeasonSelect = ({ season, onChangeSeason }) => {
   let seasonOptions = [];
   for (let i = FIRST_SEASON; i <= CURRENT_SEASON; i++) {
     seasonOptions.push(<option key={i} value={i}>Season {i}</option>);
@@ -17,7 +17,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
         <div className='season ml3 mb3'>
           { season !== FIRST_SEASON &&
             <button
-              onClick={onChangeSeason(-1)}
+              onClick={() => onChangeSeason(season - 1)}
               title='Previous season'
               className={`button bg-${theme} b-${theme}`}
             >
@@ -26,7 +26,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
           }
           <select
             value={season}
-            onChange={onSelectSeason}
+            onChange={(e) => onChangeSeason(Number(e.target.value))}
             className={'b-' + theme}
             aria-label='Select season'
           >
@@ -34,7 +34,7 @@ const SeasonSelect = ({ season, onSelectSeason, onChangeSeason }) => {
           </select>
           { season !== CURRENT_SEASON &&
             <button
-              onClick={onChangeSeason(1)}
+              onClick={() => onChangeSeason(season + 1)}
               title='Next season'
               className={`button bg-${theme} b-${theme}`}
             >

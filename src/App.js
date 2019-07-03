@@ -47,6 +47,7 @@ class App extends Component {
       isLoadingConstructors: false,
       errorConstructors: null
     };
+    this.onChangeSeason = this.onChangeSeason.bind(this);
   }
 
   componentDidMount() {
@@ -217,29 +218,20 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     });
   }
 
-  onSelectSeason = (e) => {
-    this.setSeason(Number(e.target.value));
-  }
-
-  onChangeSeason = (change) => () => {
-    const newSeason = Number(this.state.season) + change;
-    if (newSeason >= FIRST_SEASON && newSeason <= CURRENT_SEASON) {
-      this.setSeason(newSeason);
-    }
-  }
-
-  setSeason = (season) => {
+  onChangeSeason(season) {
     const { route, races, driverStandings } = this.state;
-    this.setState({
-      season,
-      error: null
-    });
-    if (!races[season] && route === 'RaceList') {
-      this.getRaces(season);
-    }
-    if (!driverStandings[season] && route === 'Standings') {
-      this.getDriverStandings(season);
-      this.getConstructorStandings(season);
+    if (season >= FIRST_SEASON && season <= CURRENT_SEASON) {
+      this.setState({
+        season,
+        error: null
+      });
+      if (!races[season] && route === 'RaceList') {
+        this.getRaces(season);
+      }
+      if (!driverStandings[season] && route === 'Standings') {
+        this.getDriverStandings(season);
+        this.getConstructorStandings(season);
+      }
     }
   }
 
@@ -370,7 +362,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     const seasonSelect = (
       <SeasonSelect
         season={season}
-        onSelectSeason={this.onSelectSeason}
         onChangeSeason={this.onChangeSeason}
       />
     );
