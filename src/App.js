@@ -315,9 +315,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
   setRoute = (route) => () => {
     this.setState({ route });
-    if (route === 'RaceList' || route === 'Standings') {
-      this.setState({ season: CURRENT_SEASON });
-    }
     if (route === 'RaceList') {
       this.setState({ error: null });
     }
