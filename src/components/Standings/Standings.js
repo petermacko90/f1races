@@ -1,40 +1,52 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import DriverStandings from './DriverStandings';
 import ConstructorStandings from './ConstructorStandings';
+import SeasonSelect from '../SeasonSelect';
+import { FIRST_SEASON, CURRENT_SEASON } from '../../constants';
 
-class Standings extends Component {
-  componentDidMount() {
-    const { season } = this.props;
-    if (!this.props.driverStandings[season]) {
-      this.props.getDriverStandings(season);
+const Standings = ({
+  getDriverStandings, getConstructorStandings,
+  driverStandings, isLoadingDrivers, errorDrivers,
+  constructorStandings, isLoadingConstructors, errorConstructors
+}) => {
+  const [ season, setSeason ] = useState(CURRENT_SEASON);
+
+  useEffect(() => {
+    if (!driverStandings[season]) {
+      getDriverStandings(season);
     }
-    if (!this.props.constructorStandings[season]) {
-      this.props.getConstructorStandings(season);
+  }, [season, driverStandings, getDriverStandings]);
+
+  useEffect(() => {
+    if (!constructorStandings[season]) {
+      getConstructorStandings(season);
+    }
+  }, [season, constructorStandings, getConstructorStandings]);
+
+  function onChangeSeason(season) {
+    if (season >= FIRST_SEASON && season <= CURRENT_SEASON) {
+      setSeason(season);
     }
   }
 
-  render() {
-    const {
-      season, driverStandings, isLoadingDrivers, errorDrivers,
-      constructorStandings, isLoadingConstructors, errorConstructors
-    } = this.props;
-
-    return (
-      <div className='container'>
-        {this.props.seasonSelect}
-        <DriverStandings
-          standings={driverStandings[season]}
-          isLoading={isLoadingDrivers}
-          error={errorDrivers}
-        />
-        <ConstructorStandings
-          standings={constructorStandings[season]}
-          isLoading={isLoadingConstructors}
-          error={errorConstructors}
-        />
-      </div>
-    );
-  }
+  return (
+    <div className='container'>
+      <SeasonSelect
+        season={season}
+        onChangeSeason={(season) => onChangeSeason(season)}
+      />
+      <DriverStandings
+        standings={driverStandings[season]}
+        isLoading={isLoadingDrivers}
+        error={errorDrivers}
+      />
+      <ConstructorStandings
+        standings={constructorStandings[season]}
+        isLoading={isLoadingConstructors}
+        error={errorConstructors}
+      />
+    </div>
+  );
 }
 
 export default Standings;

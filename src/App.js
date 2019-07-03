@@ -6,7 +6,7 @@ import deepmerge from 'deepmerge';
 import Header from './components/Header';
 import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
-import Standings from './components/Standings/StandingsHooks';
+import Standings from './components/Standings/Standings';
 import RaceDetails from './components/RaceDetails/RaceDetails';
 import Notifications from './components/SavedData/Notifications';
 import SavedData from './components/SavedData/SavedData';
@@ -415,7 +415,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         }
         { route === 'Standings' &&
           <Standings
-            season={season}
             driverStandings={driverStandings}
             isLoadingDrivers={isLoadingDrivers}
             errorDrivers={errorDrivers}
@@ -424,7 +423,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             isLoadingConstructors={isLoadingConstructors}
             errorConstructors={errorConstructors}
             getConstructorStandings={this.getConstructorStandings}
-            seasonSelect={seasonSelect}
           />
         }
         <Footer />
