@@ -1,18 +1,16 @@
-import React from 'react';
-import { ThemeConsumer } from '../../ThemeContext';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../../ThemeContext';
 
 const NavItem = ({ setRoute, route, active, children }) => {
+  const theme = useContext(ThemeContext);
+
   return (
-    <ThemeConsumer>
-      {theme =>
-        <button
-          onClick={setRoute(route)}
-          className={`${active ? ('active bg-' + theme) : ''} h-${theme}`}
-        >
-          {children}
-        </button>
-      }
-    </ThemeConsumer>
+    <button
+      onClick={setRoute(route)}
+      className={`${active ? ('active bg-' + theme) : ''} h-${theme}`}
+    >
+      {children}
+    </button>
   );
 }
 
