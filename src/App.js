@@ -219,7 +219,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
   }
 
   onChangeSeason(season) {
-    const { route, races, driverStandings } = this.state;
+    const { route, races } = this.state;
     if (season >= FIRST_SEASON && season <= CURRENT_SEASON) {
       this.setState({
         season,
@@ -227,10 +227,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       });
       if (!races[season] && route === 'RaceList') {
         this.getRaces(season);
-      }
-      if (!driverStandings[season] && route === 'Standings') {
-        this.getDriverStandings(season);
-        this.getConstructorStandings(season);
       }
     }
   }
@@ -319,9 +315,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
   setRoute = (route) => () => {
     this.setState({ route });
-    if (route === 'RaceList' || route === 'Standings') {
-      this.setState({ season: CURRENT_SEASON });
-    }
     if (route === 'RaceList') {
       this.setState({ error: null });
     }
@@ -419,7 +412,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         }
         { route === 'Standings' &&
           <Standings
-            season={season}
             driverStandings={driverStandings}
             isLoadingDrivers={isLoadingDrivers}
             errorDrivers={errorDrivers}
@@ -428,7 +420,6 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             isLoadingConstructors={isLoadingConstructors}
             errorConstructors={errorConstructors}
             getConstructorStandings={this.getConstructorStandings}
-            seasonSelect={seasonSelect}
           />
         }
         <Footer />
