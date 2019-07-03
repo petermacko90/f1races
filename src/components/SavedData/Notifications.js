@@ -3,16 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 const Notifications = ({ notifications, deleteNotification }) => {
-  const sortedNotifications = notifications.slice().sort((a, b) => {
-    return a.notificationDate - b.notificationDate;
-  });
-
   return (
     <Fragment>
       <h2 className='ml3 mr3'>Saved Notifications</h2>
-      {
-        notifications.length === 0 ?
-          <p className='p3'>No saved notifications</p>
+      {notifications.length === 0
+        ? <p className='p3'>No saved notifications</p>
         :
           <div className='responsive-table'>
             <table>
@@ -27,7 +22,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
               </thead>
               <tbody>
                 {
-                  sortedNotifications.map(notification => {
+                  notifications.map(notification => {
                     const {
                       id, title, notified, raceDate, notificationDate
                     } = notification;
@@ -43,7 +38,7 @@ const Notifications = ({ notifications, deleteNotification }) => {
                           </button>
                         </td>
                         <td>{title}</td>
-                        <td>{notified ? 'Yes': 'No'}</td>
+                        <td>{notified ? 'Yes' : 'No'}</td>
                         <td>
                           {raceDate.toLocaleDateString()} {raceDate.toLocaleTimeString()}
                         </td>

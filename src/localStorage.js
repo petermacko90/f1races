@@ -52,13 +52,14 @@ export const loadNotifications = () => {
   try {
     const serializedNotifications = localStorage.getItem('notifications');
     if (serializedNotifications === null) return undefined;
-    return JSON.parse(serializedNotifications, (key, value) => {
+    const notifications = JSON.parse(serializedNotifications, (key, value) => {
       if (key === 'notificationDate' || key === 'raceDate') {
         return new Date(value);
       } else {
         return value;
       }
     });
+    return notifications.sort((a, b) => a.notificationDate - b.notificationDate);
   } catch (error) {
     return undefined;
   }
