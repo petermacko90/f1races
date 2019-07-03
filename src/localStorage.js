@@ -8,16 +8,23 @@ export const getCalendars = () => {
         calendars.push(localStorage.key(i));
       }
     }
-    return calendars;
+    return calendars.sort((a, b) => a.slice(-4) - b.slice(-4));
   } catch (error) {
     return [];
   }
 }
 
+export const removeCalendar = (calendar) => {
+  try {
+    localStorage.removeItem(calendar);
+  } catch (error) {
+    return error;
+  }
+}
+
 export const saveRaces = (races, season) => {
   try {
-    const serializedRaces = JSON.stringify(races);
-    localStorage.setItem('calendar_' + season, serializedRaces);
+    localStorage.setItem('calendar_' + season, JSON.stringify(races));
   } catch (error) {
     return error;
   }
@@ -35,8 +42,7 @@ export const loadRaces = (season) => {
 
 export const saveNotifications = (notifications) => {
   try {
-    const serializedNotifications = JSON.stringify(notifications);
-    localStorage.setItem('notifications', serializedNotifications);
+    localStorage.setItem('notifications', JSON.stringify(notifications));
   } catch (error) {
     return error;
   }

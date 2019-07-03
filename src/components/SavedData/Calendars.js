@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import './Calendars.css';
-import { getCalendars } from '../../localStorage';
+import { getCalendars, removeCalendar } from '../../localStorage';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { toast } from 'react-toastify';
 
 class Calendars extends Component {
   constructor() {
@@ -19,15 +20,15 @@ class Calendars extends Component {
 
   deleteCalendar = (calendar) => () => {
     const calendars = this.state.calendars.filter(c => c !== calendar);
-    this.setState({ calendars });
-    localStorage.removeItem(calendar);
+    const errror = removeCalendar(calendar);
+    if (errror) {
+      toast.error('Error - calendar was not deleted :(');
+    } else {
+      this.setState({ calendars });
+    }
   }
 
   render() {
-    const sortedCalendars = this.state.calendars.slice().sort((a, b) => {
-      return a.slice(-4) - b.slice(-4);
-    });
-
     return (
       <Fragment>
         <h2 className='ml3 mr3'>Saved Calendars</h2>
@@ -37,7 +38,7 @@ class Calendars extends Component {
           :
             <ul className='ml3 mr3'>
               {
-                sortedCalendars.map(calendar => {
+                this.state.calendars.map(calendar => {
                   return (
                     <li key={calendar}>
                       <button
