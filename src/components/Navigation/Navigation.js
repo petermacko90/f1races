@@ -2,26 +2,26 @@ import React from 'react';
 import './Navigation.css';
 import NavItem from './NavItem';
 
-const Navigation = ({ setRoute, route }) => {
+export default function Navigation({ setRoute, route }) {
   return (
     <nav>
       <NavItem
         setRoute={setRoute}
-        route='RaceList'
-        active={route ==='RaceList'}
+        route="RaceList"
+        active={route === 'RaceList'}
       >
         Calendar
       </NavItem>
       <NavItem
         setRoute={setRoute}
-        route='Standings'
+        route="Standings"
         active={route === 'Standings'}
       >
         Standings
       </NavItem>
       <NavItem
         setRoute={setRoute}
-        route='SavedData'
+        route="SavedData"
         active={route === 'SavedData'}
       >
         Saved Data
@@ -29,5 +29,3 @@ const Navigation = ({ setRoute, route }) => {
     </nav>
   );
 }
-
-export default Navigation;

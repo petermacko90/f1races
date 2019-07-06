@@ -16,7 +16,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
 import { ThemeProvider } from './ThemeContext';
 import {
-  FIRST_SEASON, CURRENT_SEASON, notificationOptions
+  FIRST_SEASON, CURRENT_SEASON, NOTIFICATION_OPTIONS
 } from './constants';
 import {
   saveRaces, loadRaces, saveNotifications, loadNotifications,
@@ -47,7 +47,13 @@ class App extends Component {
       isLoadingConstructors: false,
       errorConstructors: null
     };
+    this.addNotification = this.addNotification.bind(this);
+    this.getRaceResults = this.getRaceResults.bind(this);
     this.onChangeSeason = this.onChangeSeason.bind(this);
+    this.onSaveRaces = this.onSaveRaces.bind(this);
+    this.selectRace = this.selectRace.bind(this);
+    this.setNotificationWhen = this.setNotificationWhen.bind(this);
+    this.setRoute = this.setRoute.bind(this);
   }
 
   componentDidMount() {
@@ -133,7 +139,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  getRaceResults = (season, round) => () => {
+  getRaceResults(season, round) {
     if (!navigator.onLine) {
       toast.error('You are offline :(');
       return;
@@ -200,17 +206,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       .finally(() => this.setState({ isLoadingConstructors: false }));
   }
 
-  onClickRace = (raceRound) => () => {
-    this.selectRace(raceRound);
-  }
-
-  onEnterRace = (raceRound) => (e) => {
-    if (e.key === 'Enter') {
-      this.selectRace(raceRound);
-    }
-  }
-
-  selectRace = (raceRound) => {
+  selectRace(raceRound) {
     this.setState({
       selectedRaceRound: Number(raceRound),
       route: 'RaceDetails',
@@ -231,7 +227,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  onSaveRaces = () => {
+  onSaveRaces() {
     const error = saveRaces(this.state.races[this.state.season], this.state.season);
     if (error) {
       toast.error('Error - calendar was not saved :(');
@@ -240,7 +236,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  addNotification = (raceName, raceDate, notificationWhen) => () => {
+  addNotification(raceName, raceDate, notificationWhen) {
     if (!('Notification' in window)) {
       toast.error('This browser does not support notifications :(');
       return;
@@ -264,7 +260,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
 
     const createNotification = () => {
       let body = 'Race Starts in ';
-      body += notificationOptions[notificationWhen] ? notificationOptions[notificationWhen] : notificationOptions['60'];
+      body += NOTIFICATION_OPTIONS[notificationWhen]
+        ? NOTIFICATION_OPTIONS[notificationWhen]
+        : NOTIFICATION_OPTIONS['60'];
 
       const notification = {
         id,
@@ -309,11 +307,11 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  setNotificationWhen = (e) => {
-    this.setState({ notificationWhen: e.target.value });
+  setNotificationWhen(notificationWhen) {
+    this.setState({ notificationWhen });
   }
 
-  setRoute = (route) => () => {
+  setRoute(route) {
     this.setState({ route });
     if (route === 'RaceList') {
       this.setState({ error: null });
@@ -391,7 +389,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             results={raceResults}
             isLoadingResults={isLoadingResults}
             resultsError={resultsError}
-            onClickRace={this.onClickRace}
+            selectRace={this.selectRace}
             getRaceResults={this.getRaceResults}
             addNotification={this.addNotification}
             notificationWhen={notificationWhen}
@@ -404,8 +402,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             upcomingRace={upcomingRace}
             isLoading={isLoading}
             error={error}
-            onClickRace={this.onClickRace}
-            onEnterRace={this.onEnterRace}
+            selectRace={this.selectRace}
             onSaveRaces={this.onSaveRaces}
             seasonSelect={seasonSelect}
           />

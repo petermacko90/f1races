@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { ThemeContext } from '../../ThemeContext';
-import { notificationOptions } from '../../constants';
+import { NOTIFICATION_OPTIONS } from '../../constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
-const AddNotification = ({
+export default function AddNotification({
   addNotification, raceName, dateTime, notificationWhen, setNotificationWhen
-}) => {
+}) {
   const theme = useContext(ThemeContext);
 
   let options = [];
-  for (const [key, value] of Object.entries(notificationOptions)) {
+  for (const [key, value] of Object.entries(NOTIFICATION_OPTIONS)) {
     options.push(<option key={key} value={key}>{value + ' Before'}</option>);
   }
 
@@ -18,20 +18,18 @@ const AddNotification = ({
     <div>
       <button
         className={`button bg-${theme} b-${theme}`}
-        onClick={addNotification(raceName, dateTime, notificationWhen)}
+        onClick={() => addNotification(raceName, dateTime, notificationWhen)}
       >
         <FontAwesomeIcon icon={faBell} /> Add notification
       </button>
       <select
         value={notificationWhen}
-        onChange={setNotificationWhen}
+        onChange={(e) => setNotificationWhen(e.target.value)}
         className={'b-' + theme}
-        aria-label='Select notification time'
+        aria-label="Select notification time"
       >
         {options}
       </select>
     </div>
   );
 }
-
-export default AddNotification;

@@ -14,7 +14,7 @@ export const teams = [
   { id: 'williams', name: 'Williams' }
 ];
 
-export const notificationOptions = {
+export const NOTIFICATION_OPTIONS = {
   '10': '10 Minutes',
   '30': '30 Minutes',
   '60': '1 Hour',
