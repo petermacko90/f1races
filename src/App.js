@@ -54,6 +54,7 @@ class App extends Component {
     this.selectRace = this.selectRace.bind(this);
     this.setNotificationWhen = this.setNotificationWhen.bind(this);
     this.setRoute = this.setRoute.bind(this);
+    this.setTheme = this.setTheme.bind(this);
   }
 
   componentDidMount() {
@@ -73,9 +74,9 @@ class App extends Component {
     clearInterval(this.interval);
   }
 
-  setTheme = (e) => {
-    this.setState({ theme: e.target.value });
-    saveTheme(e.target.value);
+  setTheme(theme) {
+    this.setState({ theme });
+    saveTheme(theme);
   }
 
   checkNotifications = () => {

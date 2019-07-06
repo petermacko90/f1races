@@ -4,11 +4,11 @@ import ConstructorStandings from './ConstructorStandings';
 import SeasonSelect from '../SeasonSelect';
 import { FIRST_SEASON, CURRENT_SEASON } from '../../constants';
 
-const Standings = ({
+export default function Standings({
   getDriverStandings, getConstructorStandings,
   driverStandings, isLoadingDrivers, errorDrivers,
   constructorStandings, isLoadingConstructors, errorConstructors
-}) => {
+}) {
   const [ season, setSeason ] = useState(CURRENT_SEASON);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Standings = ({
   }
 
   return (
-    <div className='container'>
+    <div className="container">
       <SeasonSelect
         season={season}
         onChangeSeason={(season) => onChangeSeason(season)}
@@ -48,5 +48,3 @@ const Standings = ({
     </div>
   );
 }
-
-export default Standings;

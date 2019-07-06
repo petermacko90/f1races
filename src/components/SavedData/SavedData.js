@@ -1,13 +1,11 @@
 import React from 'react';
 import Calendars from './Calendars';
 
-const SavedData = ({ savedNotifications }) => {
+export default function SavedData({ savedNotifications }) {
   return (
-    <div className='container'>
+    <div className="container">
       {savedNotifications}
       <Calendars />
     </div>
   );
 }
-
-export default SavedData;

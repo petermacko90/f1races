@@ -1,7 +1,7 @@
 export const FIRST_SEASON = 1950;
 export const CURRENT_SEASON = new Date().getFullYear();
 
-export const teams = [
+export const TEAMS = [
   { id: 'ferrari', name: 'Ferrari' },
   { id: 'mercedes', name: 'Mercedes' },
   { id: 'redbull', name: 'Red Bull' },

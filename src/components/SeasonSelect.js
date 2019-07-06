@@ -5,7 +5,7 @@ import { ThemeContext } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
-const SeasonSelect = ({ season, onChangeSeason }) => {
+export default function SeasonSelect({ season, onChangeSeason }) {
   const theme = useContext(ThemeContext);
 
   let seasonOptions = [];
@@ -14,35 +14,33 @@ const SeasonSelect = ({ season, onChangeSeason }) => {
   }
 
   return (
-    <div className='season ml3 mb3'>
-      { season !== FIRST_SEASON &&
+    <div className="season ml3 mb3">
+      {season !== FIRST_SEASON && (
         <button
           onClick={() => onChangeSeason(season - 1)}
-          title='Previous season'
+          title="Previous season"
           className={`button bg-${theme} b-${theme}`}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
         </button>
-      }
+      )}
       <select
         value={season}
         onChange={(e) => onChangeSeason(Number(e.target.value))}
         className={'b-' + theme}
-        aria-label='Select season'
+        aria-label="Select season"
       >
         {seasonOptions}
       </select>
-      { season !== CURRENT_SEASON &&
+      {season !== CURRENT_SEASON && (
         <button
           onClick={() => onChangeSeason(season + 1)}
-          title='Next season'
+          title="Next season"
           className={`button bg-${theme} b-${theme}`}
         >
           <FontAwesomeIcon icon={faChevronRight} />
         </button>
-      }
+      )}
     </div>
   );
 }
-
-export default SeasonSelect;

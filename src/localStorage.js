@@ -1,4 +1,4 @@
-import { teams } from './constants';
+import { TEAMS } from './constants';
 
 export const getCalendars = () => {
   try {
@@ -76,8 +76,8 @@ export const saveTheme = (theme) => {
 export const loadTheme = () => {
   try {
     const theme = localStorage.getItem('theme');
-    for (let i = 0, l = teams.length; i < l; i++) {
-      if (teams[i].id === theme) {
+    for (let i = 0, l = TEAMS.length; i < l; i++) {
+      if (TEAMS[i].id === theme) {
         return theme;
       }
     }
