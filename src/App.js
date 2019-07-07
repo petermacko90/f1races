@@ -24,7 +24,7 @@ import {
 } from './localStorage';
 import { getDate } from './helpers';
 
-class App extends Component {
+export default class App extends Component {
   constructor() {
     super();
     this.state = {
@@ -48,6 +48,10 @@ class App extends Component {
       errorConstructors: null
     };
     this.addNotification = this.addNotification.bind(this);
+    this.checkNotifications = this.checkNotifications.bind(this);
+    this.deleteNotification = this.deleteNotification.bind(this);
+    this.getConstructorStandings = this.getConstructorStandings.bind(this);
+    this.getDriverStandings = this.getDriverStandings.bind(this);
     this.getRaceResults = this.getRaceResults.bind(this);
     this.onChangeSeason = this.onChangeSeason.bind(this);
     this.onSaveRaces = this.onSaveRaces.bind(this);
@@ -79,7 +83,7 @@ class App extends Component {
     saveTheme(theme);
   }
 
-  checkNotifications = () => {
+  checkNotifications() {
     const { notifications } = this.state;
     const nowTime = Math.floor(new Date().getTime() / 1000 / 60);
 
@@ -107,7 +111,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     });
   }
 
-  getRaces = (season) => {
+  getRaces(season) {
     const races = loadRaces(season);
     if (races) {
       const newRaces = { [season]: races };
@@ -166,7 +170,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       .finally(() => this.setState({ isLoadingResults: false }));
   }
 
-  getDriverStandings = (season) => {
+  getDriverStandings(season) {
     if (!navigator.onLine) {
       toast.error('You are offline :(');
       return;
@@ -186,7 +190,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       .finally(() => this.setState({ isLoadingDrivers: false }));
   }
 
-  getConstructorStandings = (season) => {
+  getConstructorStandings(season) {
     if (!navigator.onLine) {
       return;
     }
@@ -296,7 +300,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
-  deleteNotification = (id) => {
+  deleteNotification(id) {
     const notifications = this.state.notifications.filter(notification => {
       return notification.id !== id;
     });
@@ -319,6 +323,32 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
     }
   }
 
+  getSelectedRace(selectedRaceRound, races) {
+    if (selectedRaceRound > 0 && races) {
+      const i = races.findIndex(r => Number(r.round) === selectedRaceRound);
+      return races[i];
+    }
+    return null;
+  }
+
+  getUpcomingRace(races, season, currentSeason) {
+    if (races && season === currentSeason) {
+      for (let i = 0, l = races.length, d = new Date(); i < l; i++) {
+        if (d < getDate(races[i].date, races[i].time)) {
+          return races[i].round;
+        }
+      }
+    }
+    return '';
+  }
+
+  getResults(selectedRace, results) {
+    if (selectedRace && results) {
+      return results[selectedRace.round];
+    }
+    return null;
+  }
+
   render() {
     const {
       races, isLoading, error, season, notifications, selectedRaceRound, route,
@@ -327,29 +357,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
       constructorStandings, isLoadingConstructors, errorConstructors
     } = this.state;
     const seasonRaces = races[season];
-
-    let selectedRace = null;
-    if (selectedRaceRound > 0 && races[season]) {
-      const i = races[season].findIndex((race) => {
-        return Number(race.round) === selectedRaceRound;
-      });
-      selectedRace = races[season][i];
-    }
-
-    let upcomingRace = '';
-    if (seasonRaces && season === CURRENT_SEASON) {
-      for (let i = 0, l = seasonRaces.length, d = new Date(); i < l; i++) {
-        if (d < getDate(seasonRaces[i].date, seasonRaces[i].time)) {
-          upcomingRace = seasonRaces[i].round;
-          break;
-        }
-      }
-    }
-
-    let raceResults;
-    if (selectedRace && results[selectedRace.season]) {
-      raceResults = results[selectedRace.season][selectedRace.round];
-    }
+    const selectedRace = this.getSelectedRace(selectedRaceRound, seasonRaces);
 
     const seasonSelect = (
       <SeasonSelect
@@ -370,7 +378,7 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
         <Header setTheme={this.setTheme} />
         <Navigation setRoute={this.setRoute} route={route} />
         <ToastContainer
-          position='bottom-center'
+          position="bottom-center"
           autoClose={5000}
           hideProgressBar
           newestOnTop={false}
@@ -380,14 +388,14 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
           draggable={false}
           pauseOnHover
         />
-        { route === 'SavedData' &&
+        {route === 'SavedData' && (
           <SavedData savedNotifications={savedNotifications} />
-        }
-        { route === 'RaceDetails' &&
+        )}
+        {route === 'RaceDetails' && (
           <RaceDetails
             race={selectedRace}
             raceCount={seasonRaces.length}
-            results={raceResults}
+            results={this.getResults(selectedRace, results[selectedRace.season])}
             isLoadingResults={isLoadingResults}
             resultsError={resultsError}
             selectRace={this.selectRace}
@@ -396,19 +404,19 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             notificationWhen={notificationWhen}
             setNotificationWhen={this.setNotificationWhen}
           />
-        }
-        { route === 'RaceList' &&
+        )}
+        {route === 'RaceList' && (
           <RaceList
             races={seasonRaces}
-            upcomingRace={upcomingRace}
+            upcomingRace={this.getUpcomingRace(seasonRaces, season, CURRENT_SEASON)}
             isLoading={isLoading}
             error={error}
             selectRace={this.selectRace}
             onSaveRaces={this.onSaveRaces}
             seasonSelect={seasonSelect}
           />
-        }
-        { route === 'Standings' &&
+        )}
+        {route === 'Standings' && (
           <Standings
             driverStandings={driverStandings}
             isLoadingDrivers={isLoadingDrivers}
@@ -419,11 +427,9 @@ Race time: ${raceDate.toLocaleDateString()} ${raceDate.toLocaleTimeString()}`
             errorConstructors={errorConstructors}
             getConstructorStandings={this.getConstructorStandings}
           />
-        }
+        )}
         <Footer />
       </ThemeProvider>
     );
   }
 }
-
-export default App;
