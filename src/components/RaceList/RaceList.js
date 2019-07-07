@@ -21,7 +21,7 @@ export default function RaceList({
           <FontAwesomeIcon icon={faSave} /> Save calendar
         </button>
       )}
-      {isLoading && <LoadingIndicator />}
+      {isLoading && <div className="p3"><LoadingIndicator /></div>}
       {error && <p className="p3">{error.message}</p>}
       {races && (
         races.map(race => (

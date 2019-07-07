@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
 import AddNotification from './AddNotification';
+import LoadingIndicator from '../LoadingIndicator';
 import { getDate } from '../../helpers';
 import { ThemeContext } from '../../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faExternalLinkAlt, faChevronLeft, faChevronRight, faSpinner
+  faExternalLinkAlt, faChevronLeft, faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 
 export default function RaceDetails({
@@ -67,10 +68,7 @@ export default function RaceDetails({
             className={`button bg-${theme} b-${theme}`}
             disabled={isLoadingResults}
           >
-            {isLoadingResults
-              ? <><FontAwesomeIcon icon={faSpinner} spin={true} /> Loading...</>
-              : <>Load Results</>
-            }
+            {isLoadingResults ? <LoadingIndicator /> : <>Load Results</>}
           </button>
         )}
         {resultsError && <p>{resultsError.message}</p>}

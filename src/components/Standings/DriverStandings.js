@@ -5,7 +5,7 @@ export default function DriverStandings({ standings, isLoading, error }) {
   return (
     <>
       <h2 className="p3">Driver Standings</h2>
-      {isLoading && <LoadingIndicator />}
+      {isLoading && <div className="p3"><LoadingIndicator /></div>}
       {error && <p className="p3">{error.message}</p>}
       {standings && (
         <div className="responsive-table">
