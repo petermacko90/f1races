@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
-import AddNotification from './AddNotification';
+// import AddNotification from './AddNotification';
 import LoadingIndicator from '../LoadingIndicator';
 import { getDate } from '../../helpers';
 import { ThemeContext } from '../../ThemeContext';
@@ -40,13 +40,13 @@ export default function RaceDetails({
             </button>
           )}
         </div>
-        <AddNotification
+        {/* <AddNotification
           addNotification={addNotification}
           raceName={race.raceName}
           dateTime={dateTime}
           notificationWhen={notificationWhen}
           setNotificationWhen={setNotificationWhen}
-        />
+        /> */}
         <h2>Race Details</h2>
         <p>Race: <a href={race.url} className="break-word" target="_blank" rel="noopener noreferrer">
           {race.raceName} <FontAwesomeIcon icon={faExternalLinkAlt} />

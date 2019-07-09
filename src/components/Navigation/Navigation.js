@@ -19,13 +19,13 @@ export default function Navigation({ setRoute, route }) {
       >
         Standings
       </NavItem>
-      <NavItem
+      {/* <NavItem
         setRoute={setRoute}
         route="SavedData"
         active={route === 'SavedData'}
       >
         Saved Data
-      </NavItem>
+      </NavItem> */}
     </nav>
   );
 }

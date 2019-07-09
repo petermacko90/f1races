@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { ThemeProvider } from './ThemeContext';
-import { fetchRaces } from './api';
+import { fetchRaces, fetchRaceResults } from './api';
 import { saveTheme, loadTheme, loadRaces, saveRaces } from './localStorage';
-import { calendarInitialState, calendarReducer } from './reducers';
+import {
+  calendarInitialState, calendarReducer,
+  resultsInitialState, resultsReducer
+} from './reducers';
 import { getDate } from './helpers';
 import Header from './components/Header';
 import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
+import RaceDetails from './components/RaceDetails/RaceDetails';
 import SeasonSelect from './components/SeasonSelect';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
@@ -28,7 +32,7 @@ export default function App() {
       const races = loadRaces(calendarSeason);
       if (races) {
         calendarDispatch({
-          type: 'LOAD_CALENDAR',
+          type: 'FETCH_SUCCESS',
           payload: { season: calendarSeason, races }
         });
       } else {
@@ -61,8 +65,27 @@ export default function App() {
     if (!calendarState.races[calendarSeason]) getRaces();
   }, [calendarSeason, calendarState.races]);
 
-  // eslint-disable-next-line
   const [selectedRaceRound, setSelectedRaceRound] = useState(0);
+
+  const [resultsState, resultsDispatch] = useReducer(resultsReducer, resultsInitialState);
+
+  async function getRaceResults(season, round) {
+    if (!navigator.onLine) {
+      toast.error('You are offline :(');
+      return;
+    }
+
+    resultsDispatch({ type: 'FETCH_INIT' });
+    try {
+      const results = await fetchRaceResults(season, round);
+      resultsDispatch({
+        type: 'FETCH_SUCCESS',
+        payload: { season, round, results }
+      });
+    } catch(error) {
+      resultsDispatch({ type: 'FETCH_ERROR', payload: error });
+    }
+  }
 
   function setAndSaveTheme(theme) {
     setTheme(theme);
@@ -83,6 +106,12 @@ export default function App() {
   function selectRace(raceRound) {
     setRoute('RaceDetails');
     setSelectedRaceRound(Number(raceRound));
+    resultsDispatch({ type: 'CLEAR_ERROR' });
+  }
+
+  function onChangeCalendarSeason(season) {
+    setCalendarSeason(season);
+    calendarDispatch({ type: 'CLEAR_ERROR' });
   }
 
   function onSaveRaces() {
@@ -93,6 +122,24 @@ export default function App() {
       toast.success('Calendar saved to browser storage');
     }
   }
+
+  function getSelectedRace(selectedRaceRound, races) {
+    if (selectedRaceRound > 0 && races) {
+      const i = races.findIndex(r => Number(r.round) === selectedRaceRound);
+      return races[i];
+    }
+    return null;
+  }
+
+  function getResults(selectedRace, results) {
+    if (selectedRace && results) {
+      return results[selectedRace.round];
+    }
+    return null;
+  }
+
+  const seasonRaces = calendarState.races[calendarSeason];
+  const selectedRace = getSelectedRace(selectedRaceRound, calendarState.races[calendarSeason]);
 
   return (
     <ThemeProvider value={theme}>
@@ -111,8 +158,8 @@ export default function App() {
       />
       {route === 'RaceList' && (
         <RaceList
-          races={calendarState.races[calendarSeason]}
-          upcomingRace={getUpcomingRace(calendarState.races[calendarSeason], calendarSeason, CURRENT_SEASON)}
+          races={seasonRaces}
+          upcomingRace={getUpcomingRace(seasonRaces, calendarSeason, CURRENT_SEASON)}
           isLoading={calendarState.isLoading}
           error={calendarState.error}
           selectRace={selectRace}
@@ -120,9 +167,20 @@ export default function App() {
           seasonSelect={
             <SeasonSelect
               season={calendarSeason}
-              onChangeSeason={setCalendarSeason}
+              onChangeSeason={onChangeCalendarSeason}
             />
           }
+        />
+      )}
+      {route === 'RaceDetails' && (
+        <RaceDetails
+          race={selectedRace}
+          raceCount={seasonRaces.length}
+          results={getResults(selectedRace, resultsState.results[selectedRace.season])}
+          isLoadingResults={resultsState.isLoading}
+          resultsError={resultsState.error}
+          selectRace={selectRace}
+          getRaceResults={getRaceResults}
         />
       )}
       <Footer />
