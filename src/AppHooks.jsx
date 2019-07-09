@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { ThemeProvider } from './ThemeContext';
-import { fetchRaces, fetchRaceResults } from './api';
+import {
+  fetchRaces, fetchRaceResults, fetchDriverStandings, fetchConstructorStandings
+} from './api';
 import { saveTheme, loadTheme, loadRaces, saveRaces } from './localStorage';
 import {
   calendarInitialState, calendarReducer,
-  resultsInitialState, resultsReducer
+  resultsInitialState, resultsReducer,
+  driversInitialState, driversReducer, constructorsReducer, constructorsInitialState
 } from './reducers';
 import { getDate } from './helpers';
 import Header from './components/Header';
 import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
 import RaceDetails from './components/RaceDetails/RaceDetails';
+import Standings from './components/Standings/Standings';
 import SeasonSelect from './components/SeasonSelect';
 import Footer from './components/Footer';
 import { ToastContainer, toast } from 'react-toastify';
@@ -69,6 +73,10 @@ export default function App() {
 
   const [resultsState, resultsDispatch] = useReducer(resultsReducer, resultsInitialState);
 
+  const [standingsSeason, setStandingsSeason] = useState(CURRENT_SEASON);
+  const [driversState, driversDispatch] = useReducer(driversReducer, driversInitialState);
+  const [constructorsState, constructorsDispatch] = useReducer(constructorsReducer, constructorsInitialState);
+
   async function getRaceResults(season, round) {
     if (!navigator.onLine) {
       toast.error('You are offline :(');
@@ -84,6 +92,42 @@ export default function App() {
       });
     } catch(error) {
       resultsDispatch({ type: 'FETCH_ERROR', payload: error });
+    }
+  }
+
+  async function getDriverStandings(season) {
+    if (!navigator.onLine) {
+      toast.error('You are offline :(');
+      return;
+    }
+
+    driversDispatch({ type: 'FETCH_INIT' });
+    try {
+      const standings = await fetchDriverStandings(season);
+      driversDispatch({
+        type: 'FETCH_SUCCESS',
+        payload: { season, standings }
+      });
+    } catch(error) {
+      driversDispatch({ type: 'FETCH_ERROR', payload: error });
+    }
+  }
+
+  async function getConstructorStandings(season) {
+    if (!navigator.onLine) {
+      toast.error('You are offline :(');
+      return;
+    }
+
+    constructorsDispatch({ type: 'FETCH_INIT' });
+    try {
+      const standings = await fetchConstructorStandings(season);
+      constructorsDispatch({
+        type: 'FETCH_SUCCESS',
+        payload: { season, standings }
+      });
+    } catch(error) {
+      constructorsDispatch({ type: 'FETCH_ERROR', payload: error });
     }
   }
 
@@ -181,6 +225,16 @@ export default function App() {
           resultsError={resultsState.error}
           selectRace={selectRace}
           getRaceResults={getRaceResults}
+        />
+      )}
+      {route === 'Standings' && (
+        <Standings
+          season={standingsSeason}
+          setSeason={setStandingsSeason}
+          drivers={driversState}
+          getDriverStandings={getDriverStandings}
+          constructors={constructorsState}
+          getConstructorStandings={getConstructorStandings}
         />
       )}
       <Footer />

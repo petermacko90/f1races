@@ -83,3 +83,81 @@ export const resultsReducer = (state, action) => {
       return state;
   }
 }
+
+export const driversInitialState = {
+  standings: {},
+  isLoading: false,
+  error: null
+};
+
+export const driversReducer = (state, action) => {
+  switch(action.type) {
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case 'FETCH_INIT':
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case 'FETCH_SUCCESS':
+      return {
+        ...state,
+        standings: {
+          ...state.standings,
+          ...{ [action.payload.season]: action.payload.standings }
+        }
+      };
+    case 'FETCH_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    default:
+      return state;
+  }
+}
+
+export const constructorsInitialState = {
+  standings: {},
+  isLoading: false,
+  error: null
+};
+
+export const constructorsReducer = (state, action) => {
+  switch(action.type) {
+    case 'CLEAR_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        error: null
+      };
+    case 'FETCH_INIT':
+      return {
+        ...state,
+        isLoading: true,
+        error: null
+      };
+    case 'FETCH_SUCCESS':
+      return {
+        ...state,
+        standings: {
+          ...state.standings,
+          ...{ [action.payload.season]: action.payload.standings }
+        }
+      };
+    case 'FETCH_ERROR':
+      return {
+        ...state,
+        isLoading: false,
+        error: action.payload
+      };
+    default:
+      return state;
+  }
+}

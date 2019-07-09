@@ -1,49 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import DriverStandings from './DriverStandings';
 import ConstructorStandings from './ConstructorStandings';
 import SeasonSelect from '../SeasonSelect';
-import { FIRST_SEASON, CURRENT_SEASON } from '../../constants';
 
 export default function Standings({
-  getDriverStandings, getConstructorStandings,
-  driverStandings, isLoadingDrivers, errorDrivers,
-  constructorStandings, isLoadingConstructors, errorConstructors
+  season, drivers, constructors,
+  setSeason, getDriverStandings, getConstructorStandings
 }) {
-  const [ season, setSeason ] = useState(CURRENT_SEASON);
-
   useEffect(() => {
-    if (!driverStandings[season]) {
+    if (!drivers.standings[season]) {
       getDriverStandings(season);
     }
-  }, [season, driverStandings, getDriverStandings]);
+  }, [season, drivers.standings, getDriverStandings]);
 
   useEffect(() => {
-    if (!constructorStandings[season]) {
+    if (!constructors.standings[season]) {
       getConstructorStandings(season);
     }
-  }, [season, constructorStandings, getConstructorStandings]);
-
-  function onChangeSeason(season) {
-    if (season >= FIRST_SEASON && season <= CURRENT_SEASON) {
-      setSeason(season);
-    }
-  }
+  }, [season, constructors.standings, getConstructorStandings]);
 
   return (
     <div className="container">
       <SeasonSelect
         season={season}
-        onChangeSeason={(season) => onChangeSeason(season)}
+        onChangeSeason={(season) => setSeason(season)}
       />
       <DriverStandings
-        standings={driverStandings[season]}
-        isLoading={isLoadingDrivers}
-        error={errorDrivers}
+        standings={drivers.standings[season]}
+        isLoading={drivers.isLoading}
+        error={drivers.error}
       />
       <ConstructorStandings
-        standings={constructorStandings[season]}
-        isLoading={isLoadingConstructors}
-        error={errorConstructors}
+        standings={constructors.standings[season]}
+        isLoading={constructors.isLoading}
+        error={constructors.error}
       />
     </div>
   );
