@@ -7,17 +7,16 @@ export default function Standings({
   season, drivers, constructors,
   setSeason, getDriverStandings, getConstructorStandings
 }) {
-  useEffect(() => {
-    if (!drivers.standings[season]) {
-      getDriverStandings(season);
-    }
-  }, [season, drivers.standings, getDriverStandings]);
+  const driverStandingsSeason = drivers.standings[season];
+  const constructorStandingsSeason = constructors.standings[season];
 
   useEffect(() => {
-    if (!constructors.standings[season]) {
-      getConstructorStandings(season);
-    }
-  }, [season, constructors.standings, getConstructorStandings]);
+    if (!driverStandingsSeason) getDriverStandings();
+  }, [driverStandingsSeason, getDriverStandings]);
+
+  useEffect(() => {
+    if (!constructorStandingsSeason) getConstructorStandings();
+  }, [constructorStandingsSeason, getConstructorStandings]);
 
   return (
     <div className="container">

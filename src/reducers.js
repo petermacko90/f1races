@@ -107,6 +107,8 @@ export const driversReducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return {
         ...state,
+        isLoading: false,
+        error: null,
         standings: {
           ...state.standings,
           ...{ [action.payload.season]: action.payload.standings }
@@ -146,6 +148,8 @@ export const constructorsReducer = (state, action) => {
     case 'FETCH_SUCCESS':
       return {
         ...state,
+        isLoading: false,
+        error: null,
         standings: {
           ...state.standings,
           ...{ [action.payload.season]: action.payload.standings }

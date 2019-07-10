@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect, useReducer, useCallback } from 'react';
 import { ThemeProvider } from './ThemeContext';
 import {
   fetchRaces, fetchRaceResults, fetchDriverStandings, fetchConstructorStandings
@@ -95,41 +95,43 @@ export default function App() {
     }
   }
 
-  async function getDriverStandings(season) {
+  const getDriverStandings = useCallback(() => {
     if (!navigator.onLine) {
       toast.error('You are offline :(');
       return;
     }
 
     driversDispatch({ type: 'FETCH_INIT' });
-    try {
-      const standings = await fetchDriverStandings(season);
-      driversDispatch({
-        type: 'FETCH_SUCCESS',
-        payload: { season, standings }
+    fetchDriverStandings(standingsSeason)
+      .then(standings => {
+        driversDispatch({
+          type: 'FETCH_SUCCESS',
+          payload: { season: standingsSeason, standings }
+        });
+      })
+      .catch(error => {
+        driversDispatch({ type: 'FETCH_ERROR', payload: error });
       });
-    } catch(error) {
-      driversDispatch({ type: 'FETCH_ERROR', payload: error });
-    }
-  }
+  }, [standingsSeason]);
 
-  async function getConstructorStandings(season) {
+  const getConstructorStandings = useCallback(() => {
     if (!navigator.onLine) {
       toast.error('You are offline :(');
       return;
     }
 
     constructorsDispatch({ type: 'FETCH_INIT' });
-    try {
-      const standings = await fetchConstructorStandings(season);
-      constructorsDispatch({
-        type: 'FETCH_SUCCESS',
-        payload: { season, standings }
+    fetchConstructorStandings(standingsSeason)
+      .then(standings => {
+        constructorsDispatch({
+          type: 'FETCH_SUCCESS',
+          payload: { season: standingsSeason, standings }
+        });
+      })
+      .catch(error => {
+        constructorsDispatch({ type: 'FETCH_ERROR', payload: error });
       });
-    } catch(error) {
-      constructorsDispatch({ type: 'FETCH_ERROR', payload: error });
-    }
-  }
+  }, [standingsSeason]);
 
   function setAndSaveTheme(theme) {
     setTheme(theme);
