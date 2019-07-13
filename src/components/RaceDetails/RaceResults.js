@@ -6,7 +6,7 @@ import './RaceResults.css';
 export default function RaceResults({ results }) {
   return (
     <div className="results responsive-table">
-      <h2>Results</h2>
+      <h2 className="pl3 pr3">Results</h2>
       <table>
         <thead>
           <tr>

@@ -22,8 +22,8 @@ export default function RaceDetails({
 
   return (
     <>
-      <div className="container p3">
-        <div className="prev-next mb3 mt3">
+      <div className="container responsive-padding">
+        <div className="prev-next mb3">
           {round !== 1 && (
             <button
               className={`button button-left mr3 bg-${theme} b-${theme}`}

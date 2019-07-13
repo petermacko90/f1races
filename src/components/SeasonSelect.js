@@ -15,7 +15,7 @@ export default function SeasonSelect({ season, onChangeSeason }) {
   }
 
   return (
-    <div className="season ml3 mb3">
+    <div className="season mb3">
       {season !== FIRST_SEASON && (
         <button
           onClick={() => onChangeSeason(season - 1)}

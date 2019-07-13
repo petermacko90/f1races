@@ -50,7 +50,7 @@
   color: var(--ferrari);
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 480px) {
   .race {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;

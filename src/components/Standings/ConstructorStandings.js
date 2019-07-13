@@ -5,7 +5,7 @@ import LoadingIndicator from '../LoadingIndicator';
 export default function ConstructorStandings({ standings, isLoading, error }) {
   return (
     <>
-      <h2 className="p3">Constructor Standings</h2>
+      <h2 className="responsive-padding">Constructor Standings</h2>
       {isLoading && <div className="p3"><LoadingIndicator /></div>}
       {error && <p className="p3">{error.message}</p>}
       {standings && (

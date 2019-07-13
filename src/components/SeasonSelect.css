@@ -1,10 +1,16 @@
 .season {
   display: block;
+  margin-left: 1rem;
+}
+
+@media only screen and (min-width: 480px) {
+  .season {
+    display: inline-block;
+  }
 }
 
 @media only screen and (min-width: 600px) {
   .season {
-    display: inline-block;
     margin-left: 0;
   }
 }

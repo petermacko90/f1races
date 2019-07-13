@@ -218,8 +218,28 @@ th, tr:nth-child(even) {
   margin-top: 1rem;
 }
 
+.pl3 {
+  padding-left: 1rem;
+}
+
+.pr3 {
+  padding-right: 1rem;
+}
+
 .p3 {
   padding: 1rem;
+}
+
+.responsive-padding {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .responsive-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .responsive-table {
