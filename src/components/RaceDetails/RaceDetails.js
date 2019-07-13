@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { racePropType, resultPropType } from '../../propTypes';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
-// import AddNotification from './AddNotification';
 import LoadingIndicator from '../LoadingIndicator';
 import { getDate } from '../../helpers';
 import { ThemeContext } from '../../ThemeContext';
@@ -14,7 +13,7 @@ import {
 
 export default function RaceDetails({
   race, raceCount, results, isLoadingResults, resultsError, selectRace,
-  getRaceResults, addNotification, notificationWhen, setNotificationWhen
+  getRaceResults
 }) {
   const theme = useContext(ThemeContext);
 
@@ -42,13 +41,6 @@ export default function RaceDetails({
             </button>
           )}
         </div>
-        {/* <AddNotification
-          addNotification={addNotification}
-          raceName={race.raceName}
-          dateTime={dateTime}
-          notificationWhen={notificationWhen}
-          setNotificationWhen={setNotificationWhen}
-        /> */}
         <h2>Race Details</h2>
         <p>Race: <a href={race.url} className="break-word" target="_blank" rel="noopener noreferrer">
           {race.raceName} <FontAwesomeIcon icon={faExternalLinkAlt} />
