@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className='mt3'>
+    <footer className="mt3">
       <hr />
-      <div className='p3 tc'>
+      <div className="p3 tc">
         Icons made by <a href="https://www.freepik.com/" title="Freepik">
         Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">
         www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"
@@ -14,5 +14,3 @@ const Footer = () => {
     </footer>
   );
 }
-
-export default Footer;

@@ -1,16 +1,13 @@
-import { teams } from './constants';
+import { TEAMS } from './constants';
 
-export const getCalendars = () => {
+export const getIsSavedCalendar = (calendar) => {
   try {
-    let calendars = [];
-    for (let i = 0, l = localStorage.length; i < l; i++) {
-      if (/^calendar_\d{4}$/.test(localStorage.key(i))) {
-        calendars.push(localStorage.key(i));
-      }
+    if (localStorage.getItem(calendar) !== null) {
+      return true;
     }
-    return calendars.sort((a, b) => a.slice(-4) - b.slice(-4));
+    return false;
   } catch (error) {
-    return [];
+    return false;
   }
 }
 
@@ -40,31 +37,6 @@ export const loadRaces = (season) => {
   }
 }
 
-export const saveNotifications = (notifications) => {
-  try {
-    localStorage.setItem('notifications', JSON.stringify(notifications));
-  } catch (error) {
-    return error;
-  }
-}
-
-export const loadNotifications = () => {
-  try {
-    const serializedNotifications = localStorage.getItem('notifications');
-    if (serializedNotifications === null) return undefined;
-    const notifications = JSON.parse(serializedNotifications, (key, value) => {
-      if (key === 'notificationDate' || key === 'raceDate') {
-        return new Date(value);
-      } else {
-        return value;
-      }
-    });
-    return notifications.sort((a, b) => a.notificationDate - b.notificationDate);
-  } catch (error) {
-    return undefined;
-  }
-}
-
 export const saveTheme = (theme) => {
   try {
     localStorage.setItem('theme', theme);
@@ -76,8 +48,8 @@ export const saveTheme = (theme) => {
 export const loadTheme = () => {
   try {
     const theme = localStorage.getItem('theme');
-    for (let i = 0, l = teams.length; i < l; i++) {
-      if (teams[i].id === theme) {
+    for (let i = 0, l = TEAMS.length; i < l; i++) {
+      if (TEAMS[i].id === theme) {
         return theme;
       }
     }

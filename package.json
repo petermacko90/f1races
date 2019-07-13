@@ -8,8 +8,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.7.1",
     "@fortawesome/react-fontawesome": "^0.1.4",
     "deepmerge": "^3.1.0",
-    "react": "^16.6.0",
-    "react-dom": "^16.6.0",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
     "react-scripts": "^3.0.0",
     "react-toastify": "^5.0.0-rc.6"
   },

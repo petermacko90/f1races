@@ -1,42 +1,39 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import './Header.css';
-import { ThemeConsumer } from '../ThemeContext';
-import { teams } from '../constants';
+import { ThemeContext } from '../ThemeContext';
+import { TEAMS } from '../constants';
 
-const Header = ({ setTheme }) => {
+export default function Header({ setTheme }) {
+  const theme = useContext(ThemeContext);
+
   return (
-    <ThemeConsumer>
-      {theme =>
-        <header className={'bg-' + theme}>
-          <div className='flex'>
-            <h1 className={'dib ' + theme}>F1 Races</h1>
-            <div className='select-wrapper'>
-              <select
-                value={theme}
-                onChange={setTheme}
-                className={'b-' + theme}
-                aria-label='Select theme'
+    <header className={'bg-' + theme}>
+      <div className="flex">
+        <h1 className={'dib ' + theme}>F1 Races</h1>
+        <div className="select-wrapper">
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            className={'b-' + theme}
+            aria-label="Select theme"
+          >
+            {TEAMS.map(team => (
+              <option
+                key={team.id}
+                value={team.id}
+                className={'bg-' + team.id}
               >
-                {
-                  teams.map(team => {
-                    return (
-                      <option
-                        key={team.id}
-                        value={team.id}
-                        className={'bg-' + team.id}
-                      >
-                        {team.name}
-                      </option>
-                    );
-                  })
-                }
-              </select>
-            </div>
-          </div>
-        </header>
-      }
-    </ThemeConsumer>
+                {team.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </header>
   );
 }
 
-export default Header;
+Header.propTypes = {
+  setTheme: PropTypes.func.isRequired
+};
