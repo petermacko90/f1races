@@ -14,6 +14,17 @@ export const getCalendars = () => {
   }
 }
 
+export const getIsSavedCalendar = (calendar) => {
+  try {
+    if (localStorage.getItem(calendar) !== null) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    return false;
+  }
+}
+
 export const removeCalendar = (calendar) => {
   try {
     localStorage.removeItem(calendar);

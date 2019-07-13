@@ -32,6 +32,7 @@ export default function App() {
 
   const [calendarSeason, setCalendarSeason] = useState(CURRENT_SEASON);
   const [calendarState, calendarDispatch] = useReducer(calendarReducer, calendarInitialState);
+  const [isSavedCalendarInit, setIsSavedCalendarInit] = useState(false);
   useEffect(() => {
     const getRaces = async () => {
       const races = loadRaces(calendarSeason);
@@ -59,7 +60,8 @@ export default function App() {
           });
 
           if (calendarSeason === CURRENT_SEASON) {
-            saveRaces(races, calendarSeason);
+            const error = saveRaces(races, calendarSeason);
+            if (!error) setIsSavedCalendarInit(true);
           }
         } catch (error) {
           calendarDispatch({ type: 'FETCH_ERROR', payload: error });
@@ -165,8 +167,10 @@ export default function App() {
     const error = saveRaces(calendarState.races[calendarSeason], calendarSeason);
     if (error) {
       toast.error('Error - calendar was not saved :(');
+      return false;
     } else {
       toast.success('Calendar saved to browser storage');
+      return true;
     }
   }
 
@@ -206,6 +210,8 @@ export default function App() {
       {route === 'RaceList' && (
         <RaceList
           races={seasonRaces}
+          season={calendarSeason}
+          isSavedCalendarInit={isSavedCalendarInit}
           upcomingRace={getUpcomingRace(seasonRaces, calendarSeason, CURRENT_SEASON)}
           isLoading={calendarState.isLoading}
           error={calendarState.error}
