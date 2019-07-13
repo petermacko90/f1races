@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import './SeasonSelect.css';
 import { FIRST_SEASON, CURRENT_SEASON } from '../constants';
 import { ThemeContext } from '../ThemeContext';
@@ -44,3 +45,8 @@ export default function SeasonSelect({ season, onChangeSeason }) {
     </div>
   );
 }
+
+SeasonSelect.propTypes = {
+  season: PropTypes.number.isRequired,
+  onChangeSeason: PropTypes.func.isRequired
+};

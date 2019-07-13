@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingIndicator from '../LoadingIndicator';
 
 export default function DriverStandings({ standings, isLoading, error }) {
@@ -45,3 +46,34 @@ export default function DriverStandings({ standings, isLoading, error }) {
     </>
   );
 }
+
+DriverStandings.propTypes = {
+  standings: PropTypes.arrayOf(
+    PropTypes.shape({
+      Constructors: PropTypes.arrayOf(
+        PropTypes.shape({
+          constructorId: PropTypes.string,
+          name: PropTypes.string.isRequired,
+          nationality: PropTypes.string,
+          url: PropTypes.string
+        }).isRequired
+      ).isRequired,
+      Driver: PropTypes.shape({
+        code: PropTypes.string,
+        dateOfBirth: PropTypes.string,
+        driverId: PropTypes.string.isRequired,
+        familyName: PropTypes.string.isRequired,
+        givenName: PropTypes.string.isRequired,
+        nationality: PropTypes.string,
+        permanentNumber: PropTypes.string,
+        url: PropTypes.string
+      }).isRequired,
+      points: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+      positionText: PropTypes.string,
+      wins: PropTypes.string.isRequired
+    }).isRequired
+  ),
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object
+};

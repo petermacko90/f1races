@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Navigation.css';
 import NavItem from './NavItem';
 
@@ -29,3 +30,8 @@ export default function Navigation({ setRoute, route }) {
     </nav>
   );
 }
+
+Navigation.propTypes = {
+  route: PropTypes.string.isRequired,
+  setRoute: PropTypes.func.isRequired
+};

@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { racePropType, resultPropType } from '../../propTypes';
 import './RaceDetails.css';
 import RaceResults from './RaceResults';
 // import AddNotification from './AddNotification';
@@ -77,3 +79,13 @@ export default function RaceDetails({
     </>
   );
 }
+
+RaceDetails.propTypes = {
+  race: PropTypes.shape(racePropType).isRequired,
+  raceCount: PropTypes.number.isRequired,
+  results: PropTypes.arrayOf(PropTypes.shape(resultPropType)),
+  isLoadingResults: PropTypes.bool.isRequired,
+  resultsError: PropTypes.object,
+  selectRace: PropTypes.func.isRequired,
+  getRaceResults: PropTypes.func.isRequired
+};

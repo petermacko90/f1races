@@ -1,4 +1,6 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
+import { racePropType } from '../../propTypes';
 import Race from './Race';
 import LoadingIndicator from '../LoadingIndicator';
 import { ThemeContext } from '../../ThemeContext';
@@ -40,3 +42,13 @@ export default function RaceList({
     </div>
   );
 }
+
+RaceList.propTypes = {
+  races: PropTypes.arrayOf(PropTypes.shape(racePropType)),
+  upcomingRace: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object,
+  selectRace: PropTypes.func.isRequired,
+  onSaveRaces: PropTypes.func.isRequired,
+  seasonSelect: PropTypes.element.isRequired
+};

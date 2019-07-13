@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Race.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -34,3 +35,13 @@ export default function Race({
     </div>
   );
 }
+
+Race.propTypes = {
+  round: PropTypes.string.isRequired,
+  country: PropTypes.string.isRequired,
+  locality: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  time: PropTypes.string,
+  upcomingRace: PropTypes.bool.isRequired,
+  selectRace: PropTypes.func.isRequired
+};

@@ -7,7 +7,8 @@ import { saveTheme, loadTheme, loadRaces, saveRaces } from './localStorage';
 import {
   calendarInitialState, calendarReducer,
   resultsInitialState, resultsReducer,
-  driversInitialState, driversReducer, constructorsReducer, constructorsInitialState
+  driversInitialState, driversReducer,
+  constructorsReducer, constructorsInitialState
 } from './reducers';
 import { getDate } from './helpers';
 import Header from './components/Header';

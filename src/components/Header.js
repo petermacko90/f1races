@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import './Header.css';
 import { ThemeContext } from '../ThemeContext';
 import { TEAMS } from '../constants';
@@ -32,3 +33,7 @@ export default function Header({ setTheme }) {
     </header>
   );
 }
+
+Header.propTypes = {
+  setTheme: PropTypes.func.isRequired
+};

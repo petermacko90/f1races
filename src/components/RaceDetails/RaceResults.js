@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { resultPropType } from '../../propTypes';
 import './RaceResults.css';
 
 export default function RaceResults({ results }) {
@@ -51,3 +53,9 @@ export default function RaceResults({ results }) {
     </div>
   );
 }
+
+RaceResults.propTypes = {
+  results: PropTypes.arrayOf(
+    PropTypes.shape(resultPropType).isRequired
+  ).isRequired
+};

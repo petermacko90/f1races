@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingIndicator from '../LoadingIndicator';
 
 export default function ConstructorStandings({ standings, isLoading, error }) {
@@ -34,3 +35,22 @@ export default function ConstructorStandings({ standings, isLoading, error }) {
     </>
   );
 }
+
+ConstructorStandings.propTypes = {
+  standings: PropTypes.arrayOf(
+    PropTypes.shape({
+      Constructor: PropTypes.shape({
+        constructorId: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        nationality: PropTypes.string,
+        url: PropTypes.string
+      }).isRequired,
+      points: PropTypes.string.isRequired,
+      position: PropTypes.string.isRequired,
+      positionText: PropTypes.string,
+      wins: PropTypes.string.isRequired
+    }).isRequired
+  ),
+  isLoading: PropTypes.bool.isRequired,
+  error: PropTypes.object
+};
