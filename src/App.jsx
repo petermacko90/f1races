@@ -43,7 +43,9 @@ export default function App() {
         });
       } else {
         if (!navigator.onLine) {
-          toast.error('You are offline :(');
+          if (!toast.isActive(1)) {
+            toast.error('You are offline :(', { toastId: 1 });
+          }
           calendarDispatch({
             type: 'FETCH_ERROR',
             payload: new Error('No data available')
@@ -82,7 +84,9 @@ export default function App() {
 
   async function getRaceResults(season, round) {
     if (!navigator.onLine) {
-      toast.error('You are offline :(');
+      if (!toast.isActive(1)) {
+        toast.error('You are offline :(', { toastId: 1 });
+      }
       return;
     }
 
@@ -100,7 +104,9 @@ export default function App() {
 
   const getDriverStandings = useCallback(() => {
     if (!navigator.onLine) {
-      toast.error('You are offline :(');
+      if (!toast.isActive(1)) {
+        toast.error('You are offline :(', { toastId: 1 });
+      }
       return;
     }
 
@@ -119,7 +125,9 @@ export default function App() {
 
   const getConstructorStandings = useCallback(() => {
     if (!navigator.onLine) {
-      toast.error('You are offline :(');
+      if (!toast.isActive(1)) {
+        toast.error('You are offline :(', { toastId: 1 });
+      }
       return;
     }
 
