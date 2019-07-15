@@ -2,19 +2,7 @@
   word-break: break-all;
 }
 
-.button-left, .button-right {
-  float: none;
-}
 
-@media only screen and (min-width: 600px) {
-  .button-left {
-    float: left;
-  }
-
-  .button-right {
-    float: right;
-  }
-}
 
 .prev-next {
   overflow: auto;

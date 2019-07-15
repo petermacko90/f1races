@@ -5,6 +5,7 @@ import { FIRST_SEASON, CURRENT_SEASON } from '../constants';
 import { ThemeContext } from '../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import Button from './Button';
 
 export default function SeasonSelect({ season, onChangeSeason }) {
   const theme = useContext(ThemeContext);
@@ -17,13 +18,12 @@ export default function SeasonSelect({ season, onChangeSeason }) {
   return (
     <div className="season mb3">
       {season !== FIRST_SEASON && (
-        <button
+        <Button
           onClick={() => onChangeSeason(season - 1)}
           title="Previous season"
-          className={`button bg-${theme} b-${theme}`}
         >
           <FontAwesomeIcon icon={faChevronLeft} />
-        </button>
+        </Button>
       )}
       <select
         value={season}
@@ -34,13 +34,12 @@ export default function SeasonSelect({ season, onChangeSeason }) {
         {seasonOptions}
       </select>
       {season !== CURRENT_SEASON && (
-        <button
+        <Button
           onClick={() => onChangeSeason(season + 1)}
           title="Next season"
-          className={`button bg-${theme} b-${theme}`}
         >
           <FontAwesomeIcon icon={faChevronRight} />
-        </button>
+        </Button>
       )}
     </div>
   );

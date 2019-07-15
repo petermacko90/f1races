@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { racePropType, resultPropType } from '../../propTypes';
 import './RaceDetails.css';
+import Button from '../Button';
 import RaceResults from './RaceResults';
 import LoadingIndicator from '../LoadingIndicator';
 import { getDate } from '../../helpers';
-import { ThemeContext } from '../../ThemeContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faExternalLinkAlt, faChevronLeft, faChevronRight
@@ -15,8 +15,6 @@ export default function RaceDetails({
   race, raceCount, results, isLoadingResults, resultsError, selectRace,
   getRaceResults
 }) {
-  const theme = useContext(ThemeContext);
-
   const dateTime = getDate(race.date, race.time);
   const round = Number(race.round);
 
@@ -25,20 +23,20 @@ export default function RaceDetails({
       <div className="container responsive-padding">
         <div className="prev-next mb3">
           {round !== 1 && (
-            <button
-              className={`button button-left mr3 bg-${theme} b-${theme}`}
+            <Button
+              classes="button-left mr3"
               onClick={() => selectRace(round - 1)}
             >
               <FontAwesomeIcon icon={faChevronLeft} /> Previous Race
-            </button>
+            </Button>
           )}
           {round !== raceCount && (
-            <button
-              className={`button button-right bg-${theme} b-${theme}`}
+            <Button
+              classes="button-right"
               onClick={() => selectRace(round + 1)}
             >
               Next Race <FontAwesomeIcon icon={faChevronRight} />
-            </button>
+            </Button>
           )}
         </div>
         <h2>Race Details</h2>
@@ -57,13 +55,12 @@ export default function RaceDetails({
           Date and time: {dateTime.toLocaleDateString()} {race.time && dateTime.toLocaleTimeString()}
         </p>
         {!results && (
-          <button
+          <Button
             onClick={() => getRaceResults(race.season, round)}
-            className={`button bg-${theme} b-${theme}`}
             disabled={isLoadingResults}
           >
             {isLoadingResults ? <LoadingIndicator /> : <>Load Results</>}
-          </button>
+          </Button>
         )}
         {resultsError && <p>{resultsError.message}</p>}
       </div>
