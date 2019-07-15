@@ -22,22 +22,20 @@ export default function RaceDetails({
     <>
       <div className="container responsive-padding">
         <div className="prev-next mb3">
-          {round !== 1 && (
-            <Button
-              classes="button-left mr3"
-              onClick={() => selectRace(round - 1)}
-            >
-              <FontAwesomeIcon icon={faChevronLeft} /> Previous Race
-            </Button>
-          )}
-          {round !== raceCount && (
-            <Button
-              classes="button-right"
-              onClick={() => selectRace(round + 1)}
-            >
-              Next Race <FontAwesomeIcon icon={faChevronRight} />
-            </Button>
-          )}
+          <Button
+            classes="button-left mr3"
+            onClick={() => selectRace(round - 1)}
+            disabled={round === 1}
+          >
+            <FontAwesomeIcon icon={faChevronLeft} /> Previous Race
+          </Button>
+          <Button
+            classes="button-right"
+            onClick={() => selectRace(round + 1)}
+            disabled={round === raceCount}
+          >
+            Next Race <FontAwesomeIcon icon={faChevronRight} />
+          </Button>
         </div>
         <h2>Race Details</h2>
         <p>Race: <a href={race.url} className="break-word" target="_blank" rel="noopener noreferrer">
