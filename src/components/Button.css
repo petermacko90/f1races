@@ -8,9 +8,14 @@
   transition: 0.3s;
 }
 
-.button:hover {
+.button:hover:not(:disabled) {
   cursor: pointer;
   opacity: 0.5;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  filter: brightness(25%);
 }
 
 .button.bg-mercedes, .button.bg-renault, .button.bg-haas,

@@ -17,14 +17,13 @@ export default function SeasonSelect({ season, onChangeSeason }) {
 
   return (
     <div className="season mb3">
-      {season !== FIRST_SEASON && (
-        <Button
-          onClick={() => onChangeSeason(season - 1)}
-          title="Previous season"
-        >
-          <FontAwesomeIcon icon={faChevronLeft} />
-        </Button>
-      )}
+      <Button
+        onClick={() => onChangeSeason(season - 1)}
+        title="Previous season"
+        disabled={season === FIRST_SEASON}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </Button>
       <select
         value={season}
         onChange={(e) => onChangeSeason(Number(e.target.value))}
@@ -33,14 +32,13 @@ export default function SeasonSelect({ season, onChangeSeason }) {
       >
         {seasonOptions}
       </select>
-      {season !== CURRENT_SEASON && (
-        <Button
-          onClick={() => onChangeSeason(season + 1)}
-          title="Next season"
-        >
-          <FontAwesomeIcon icon={faChevronRight} />
-        </Button>
-      )}
+      <Button
+        onClick={() => onChangeSeason(season + 1)}
+        title="Next season"
+        disabled={season === CURRENT_SEASON}
+      >
+        <FontAwesomeIcon icon={faChevronRight} />
+      </Button>
     </div>
   );
 }
