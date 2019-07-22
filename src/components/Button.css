@@ -13,15 +13,16 @@
   opacity: 0.5;
 }
 
-.button:disabled {
-  cursor: not-allowed;
-  filter: brightness(25%);
-}
-
 .button.bg-mercedes, .button.bg-renault, .button.bg-haas,
 .button.bg-racingpoint, .button.bg-tororosso, .button.bg-mclaren,
 .button.bg-williams {
   color: black;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  filter: saturate(25%);
+  color: #bbb;
 }
 
 .button-left, .button-right {
