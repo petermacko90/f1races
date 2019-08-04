@@ -10,7 +10,7 @@ import {
   driversInitialState, driversReducer,
   constructorsReducer, constructorsInitialState
 } from './reducers';
-import { getDate } from './helpers';
+import { getUpcomingRace, getSelectedRace, getResults } from './helpers';
 import Header from './components/Header';
 import Navigation from './components/Navigation/Navigation';
 import RaceList from './components/RaceList/RaceList';
@@ -149,17 +149,6 @@ export default function App() {
     saveTheme(theme);
   }
 
-  function getUpcomingRace(races, season, currentSeason) {
-    if (races && season === currentSeason) {
-      for (let i = 0, l = races.length, d = new Date(); i < l; i++) {
-        if (d < getDate(races[i].date, races[i].time)) {
-          return races[i].round;
-        }
-      }
-    }
-    return '';
-  }
-
   function selectRace(raceRound) {
     setRoute('RaceDetails');
     setSelectedRaceRound(Number(raceRound));
@@ -180,21 +169,6 @@ export default function App() {
       toast.success('Calendar saved to browser storage');
       return true;
     }
-  }
-
-  function getSelectedRace(selectedRaceRound, races) {
-    if (selectedRaceRound > 0 && races) {
-      const i = races.findIndex(r => Number(r.round) === selectedRaceRound);
-      return races[i];
-    }
-    return null;
-  }
-
-  function getResults(selectedRace, results) {
-    if (selectedRace && results) {
-      return results[selectedRace.round];
-    }
-    return null;
   }
 
   const seasonRaces = calendarState.races[calendarSeason];
